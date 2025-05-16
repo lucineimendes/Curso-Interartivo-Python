@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ lesson.title | default('Lição') }} - {{ course.name | default('Curso') }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Início</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('get_courses_list') }}">Cursos</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('get_course_details', course_id=course.id) }}">{{ course.name | default('Curso') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ lesson.title | default('Lição') }}</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ lesson.title | default('Título da Lição Indisponível') }}</h1>
+        </div>
+        <div class="card-body">
+            {% if lesson.content %}
+                <div class="lesson-content">
+                    {{ lesson.content | safe }} {# Cuidado com 'safe' se o conteúdo não for confiável #}
+                </div>
+            {% else %}
+                <p>Conteúdo da lição não disponível.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if exercises and exercises|length > 0 %}
+    <div class="mt-5">
+        <h2>Exercícios da Lição</h2>
+        <div class="list-group">
+            {% for exercise in exercises %}
+            <a href="{{ url_for('exercise_code_editor', course_id=course.id, exercise_id_str=exercise.id) }}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ exercise.title | default('Exercício sem título') }}</h5>
+                    <small class="text-muted">ID: {{ exercise.id }}</small>
+                </div>
+                <p class="mb-1">{{ exercise.description | truncate(150, True) | default('Descrição breve não disponível.') }}</p>
+                {# Você pode adicionar mais detalhes do exercício aqui se desejar, como dificuldade #}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-4" role="alert">
+        Nenhum exercício associado a esta lição no momento.
+    </div>
+    {% endif %}
+
+    <div class="mt-4 d-flex justify-content-between">
+        {# Botão para lição anterior (se houver) - Lógica a ser implementada se necessário #}
+        {# <a href="#" class="btn btn-outline-secondary">&laquo; Lição Anterior</a> #}
+        
+        {% if next_lesson %}
+        <a href="{{ url_for('get_specific_lesson', course_id=course.id, lesson_id_str=next_lesson.id) }}" class="btn btn-primary ms-auto">Próxima Lição &raquo;</a>
+        {% else %}
+        <a href="{{ url_for('get_course_details', course_id=course.id) }}" class="btn btn-secondary ms-auto">Voltar aos Detalhes do Curso</a>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .lesson-content img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock %}

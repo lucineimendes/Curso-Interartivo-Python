@@ -1,0 +1,711 @@
+[
+    {
+        "id": "poo-avancado-patterns",
+        "course_id": "python-avancado",
+        "title": "POO Avançada (Parte 1): Design Patterns",
+        "order": 32,
+        "description": "Explore Design Patterns comuns em Python: Criacionais (Singleton, Factory), Estruturais (Adapter, Decorator) e Comportamentais (Observer, Strategy).",
+        "learning_objectives": [
+            "Compreender o que são Design Patterns e sua importância.",
+            "Identificar e aplicar padrões criacionais como Singleton e Factory Method.",
+            "Identificar e aplicar padrões estruturais como Adapter e Decorator.",
+            "Identificar e aplicar padrões comportamentais como Observer e Strategy.",
+            "Reconhecer onde e como implementar Design Patterns em código Python."
+        ],
+        "key_concepts": [
+            "Design Patterns",
+            "Padrões Criacionais",
+            "Singleton",
+            "Factory Method",
+            "Padrões Estruturais",
+            "Adapter",
+            "Decorator Pattern",
+            "Padrões Comportamentais",
+            "Observer",
+            "Strategy",
+            "Padrões de Projeto"
+        ],
+        "content": "<h2>Design Patterns: Soluções Reutilizáveis</h2>\n\n<p><strong>Design Patterns</strong> (Padrões de Projeto) são soluções genéricas e reutilizáveis para problemas comuns que surgem no design de software. Eles não são um código pronto para ser copiado e colado, mas sim modelos ou guias que descrevem como resolver um problema específico em diferentes situações.</p>\n\n<p>A aplicação de Design Patterns leva a um código mais flexível, modular, compreensível e fácil de manter.</p>\n\n<h3>Categorias de Design Patterns</h3>\n<p>Os Design Patterns são tradicionalmente divididos em três categorias:</p>\n\n<ol>\n    <li><strong>Criacionais:</strong> Tratam da criação de objetos de forma flexível e controlada.</li>\n    <li><strong>Estruturais:</strong> Tratam da composição de classes e objetos para formar estruturas maiores.</li>\n    <li><strong>Comportamentais:</strong> Tratam da comunicação e interação entre objetos.</li>\n</ol>\n\n<h3>Exemplos de Design Patterns em Python</h3>\n\n<h4>Singleton (Criacional)</h4>\n<p>Garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global a ela. Útil para gerenciadores de configuração, pools de conexão, etc.</p>\n<pre><code class=\"language-python\">class Singleton:\n    _instance = None\n\n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n            # Opcional: inicializar a instância aqui se necessário\n            # print(\"Criando a instância Singleton\")\n        # else:\n            # print(\"Usando a instância existente\")\n        return cls._instance\n\n# Testando o Singleton\ns1 = Singleton()\ns2 = Singleton()\n\nprint(s1 is s2) # Saída: True (ambos referenciam a mesma instância)</code></pre>\n\n<h4>Factory Method (Criacional)</h4>\n<p>Define uma interface para criar um objeto, mas permite que subclasses decidam qual classe instanciar. A criação de objetos é delegada para métodos de fábrica.</p>\n<pre><code class=\"language-python\">from abc import ABC, abstractmethod\n\nclass Animal(ABC):\n    @abstractmethod\n    def fazer_som(self):\n        pass\n\nclass Cachorro(Animal):\n    def fazer_som(self):\n        return \"Au au!\"\n\nclass Gato(Animal):\n    def fazer_som(self):\n        return \"Miau!\"\n\nclass FabricaAnimal:\n    @staticmethod\n    def criar_animal(tipo):\n        if tipo == \"cachorro\":\n            return Cachorro()\n        elif tipo == \"gato\":\n            return Gato()\n        else:\\n            raise ValueError(\"Tipo de animal desconhecido\")\n\n# Usando a fábrica\nmeu_cachorro = FabricaAnimal.criar_animal(\"cachorro\")\nprint(meu_cachorro.fazer_som()) # Saída: Au au!\n\nmeu_gato = FabricaAnimal.criar_animal(\"gato\")\nprint(meu_gato.fazer_som())   # Saída: Miau!</code></pre>\n\n<h4>Adapter (Estrutural)</h4>\n<p>Permite que interfaces incompatíveis trabalhem juntas. Envolve uma classe Adapter que \"traduz\" a interface de uma classe para outra que um cliente espera.</p>\n<pre><code class=\"language-python\">class TomadaDoisPinos:\n    def conectar_dois_pinos(self):\n        return \"Conectado em tomada de 2 pinos.\"\n\nclass AdaptadorDoisParaTresPinos:\n    def __init__(self, tomada_dois_pinos):\n        self._tomada_dois_pinos = tomada_dois_pinos\n\n    def conectar_tres_pinos(self):\n        # Adapta a chamada de 3 pinos para 2 pinos\n        return self._tomada_dois_pinos.conectar_dois_pinos() + \" (via adaptador)\"\n\nclass AparelhoTresPinos:\n    def conectar_tres_pinos(self):\n        return \"Conectado em tomada de 3 pinos.\"\n\n# Cliente que espera uma conexão de 3 pinos\ndef usar_aparelho(aparelho):\n    print(aparelho.conectar_tres_pinos())\n\n# Usando o aparelho diretamente (se compatível)\naparelho = AparelhoTresPinos()\nusar_aparelho(aparelho)\n\n# Usando o aparelho com adaptador (se incompatível diretamente)\ntomada_antiga = TomadaDoisPinos()\nadaptador = AdaptadorDoisParaTresPinos(tomada_antiga)\nusar_aparelho(adaptador) # O adaptador se comporta como um aparelho de 3 pinos</code></pre>\n\n<h4>Decorator (Estrutural - já vimos como decorador de função/método, aqui como padrão de estrutura)</h4>\n<p>Adiciona novas funcionalidades a um objeto existente sem modificar sua estrutura. Em Python, o uso do símbolo <code>@</code> para decoradores de função/método é uma aplicação sintática deste padrão.</p>\n\n<h4>Observer (Comportamental)</h4>\n<p>Define uma dependência um-para-muitos entre objetos, de modo que quando um objeto muda de estado, todos os seus dependentes são notificados e atualizados automaticamente.</p>\n<pre><code class=\"language-python\">class Subject:\n    def __init__(self):\n        self._observers = []\n        self._state = None\n\n    def attach(self, observer):\n        self._observers.append(observer)\n\n    def detach(self, observer):\n        self._observers.remove(observer)\n\n    def notify(self):\n        for observer in self._observers:\n            observer.update(self._state)\n\n    def set_state(self, state):\n        print(f\"Subject: Mudando estado para {state}\")\n        self._state = state\n        self.notify()\n\nclass Observer:\n    def update(self, state):\n        print(f\"Observer: Estado atualizado para {state}\")\n\n# Testando o Observer\nsubject = Subject()\nobserver1 = Observer()\nobserver2 = Observer()\n\nsubject.attach(observer1)\nsubject.attach(observer2)\n\nsubject.set_state(\"Estado A\")\nsubject.detach(observer1)\nsubject.set_state(\"Estado B\")</code></pre>\n\n<h4>Strategy (Comportamental)</h4>\n<p>Define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis. Permite que o algoritmo varie independentemente dos clientes que o utilizam.</p>\n<pre><code class=\"language-python\">from abc import ABC, abstractmethod\n\nclass Strategy(ABC):\n    @abstractmethod\n    def executar(self, dados):\n        pass\n\nclass StrategyA(Strategy):\n    def executar(self, dados):\n        return f\"Executando Estratégia A com {dados}\"\n\nclass StrategyB(Strategy):\n    def executar(self, dados):\n        return f\"Executando Estratégia B com {dados}\"\n\nclass Context:\n    def __init__(self, strategy: Strategy):\n        self._strategy = strategy\n\n    def set_strategy(self, strategy: Strategy):\n        self._strategy = strategy\n\n    def executar_estrategia(self, dados):\n        return self._strategy.executar(dados)\n\n# Usando o Strategy Pattern\ncontexto = Context(StrategyA())\nprint(contexto.executar_estrategia(\"Dados 1\"))\n\ncontexto.set_strategy(StrategyB())\nprint(contexto.executar_estrategia(\"Dados 2\"))</code></pre>\n\n<p>Estes são apenas alguns exemplos. O estudo e a aplicação de Design Patterns são contínuos e se aprofundam com a experiência.</p>",
+        "examples": [
+            {
+                "title": "Implementação simples de Factory Method",
+                "code": "class Carro:\n    def dirigir(self):\n        return \"Dirigindo um carro.\"\n\nclass Moto:\n    def dirigir(self):\n        return \"Pilotando uma moto.\"\n\nclass FabricaVeiculo:\n    @staticmethod\n    def criar_veiculo(tipo):\n        if tipo == \"carro\":\n            return Carro()\n        elif tipo == \"moto\":\n            return Moto()\n        else:\n            raise ValueError(\"Tipo de veículo desconhecido\")\n\nveiculo1 = FabricaVeiculo.criar_veiculo(\"carro\")\nprint(veiculo1.dirigir())\n\nveiculo2 = FabricaVeiculo.criar_veiculo(\"moto\")\nprint(veiculo2.dirigir())",
+                "explanation": "Um exemplo simples do padrão Factory Method para criar diferentes tipos de veículos."
+            }
+        ],
+        "summary": "<p>Design Patterns são soluções comprovadas para problemas de design de software, categorizados em Criacionais, Estruturais e Comportamentais. Aprender e aplicar padrões como Singleton, Factory, Adapter, Decorator, Observer e Strategy melhora a qualidade, modularidade e manutenibilidade do código Python.</p>",
+        "estimated_time_minutes": 60
+    },
+    {
+        "id": "poo-avancado-metaclasses-decorators",
+        "course_id": "python-avancado",
+        "title": "POO Avançada (Parte 2): Metaclasses e Decoradores Avançados",
+        "order": 33,
+        "description": "Aprofunde-se em metaprogramação com metaclasses, decoradores com argumentos e decoradores de classe.",
+        "learning_objectives": [
+            "Compreender o conceito de metaclasses como 'fábricas de classes'.",
+            "Criar e utilizar metaclasses simples.",
+            "Entender aplicações de metaclasses (e.g., validação, registro).",
+            "Criar decoradores de função que aceitam argumentos.",
+            "Criar decoradores de classe.",
+            "Utilizar `functools.wraps` para preservar metadados de funções decoradas."
+        ],
+        "key_concepts": [
+            "Metaprogramação",
+            "Metaclasse",
+            "type()",
+            "__new__ (metaclasse)",
+            "__init__ (metaclasse)",
+            "Decoradores com Argumentos",
+            "Decoradores de Classe",
+            "functools.wraps"
+        ],
+        "content": "<h2>Metaclasses e Decoradores Avançados</h2>\n\n<p>Este tópico explora funcionalidades mais avançadas de Python que permitem manipular classes e funções em um nível mais profundo.</p>\n\n<h3>Metaclasses: A Fábrica de Classes</h3>\n\n<p>Em Python, tudo é um objeto, incluindo classes. Uma <strong>metaclasse</strong> é a 'classe' de uma classe. Assim como um objeto é uma instância de uma classe, uma classe é uma instância de uma metaclasse.</p>\n<p>A metaclasse padrão em Python é <code>type</code>. Quando você define uma classe simples:</p>\n<pre><code class=\"language-python\">class MinhaClasse:\n    pass\n\nobj = MinhaClasse()\nprint(type(obj))         # Saída: &lt;class '__main__.MinhaClasse'&gt;\nprint(type(MinhaClasse)) # Saída: &lt;class 'type'&gt;</code></pre>\n<p><code>MinhaClasse</code> é um objeto, e seu tipo é <code>type</code>. <code>type</code> é a metaclasse padrão.</p>\n\n<p>Você pode criar suas próprias metaclasses para controlar como as classes são criadas. Isso é útil para validação automática, registro de classes, injeção de métodos, etc.</p>\n\n<pre><code class=\"language-python\"># Exemplo: Metaclasse para garantir que classes tenham um método específico\nclass ValidatingMeta(type):\n    def __new__(cls, name, bases, dct):\n        # Verifica se o método 'processar' existe na classe sendo criada\n        if 'processar' not in dct:\n            raise TypeError(\"Classe deve definir um método 'processar'\")\n        return super().__new__(cls, name, bases, dct)\n\n# Usando a metaclasse\nclass MinhaClasseProcessadora(metaclass=ValidatingMeta):\n    def processar(self, dados):\n        print(\"Processando dados...\")\n\n# class ClasseInvalida(metaclass=ValidatingMeta): # Isso geraria um TypeError\n#     pass\n\nproc = MinhaClasseProcessadora()\nproc.processar(\"alguma coisa\")</code></pre>\n<p>Metaclasses são um tópico avançado e não são necessárias na maioria das vezes, mas são poderosas para metaprogramação.</p>\n\n<h3>Decoradores Avançados</h3>\n\n<p>Vimos decoradores básicos que modificam funções ou métodos. Agora, vamos explorar decoradores com argumentos e decoradores de classe.</p>\n\n<h4>Decoradores com Argumentos</h4>\n<p>Para que um decorador receba argumentos, você precisa de uma camada extra de funções. A função mais externa recebe os argumentos do decorador, a função do meio retorna o decorador real (que recebe a função a ser decorada), e a função mais interna é o wrapper que executa o código original e a lógica do decorador.</p>\n<pre><code class=\"language-python\">import functools\n\ndef repetir(num_vezes):\n    def decorator_repetir(func):\n        @functools.wraps(func) # Preserva metadados da função original\n        def wrapper_repetir(*args, **kwargs):\n            resultados = []\n            for _ in range(num_vezes):\n                resultados.append(func(*args, **kwargs))\n            return resultados\n        return wrapper_repetir\n    return decorator_repetir\n\n@repetir(num_vezes=3)\ndef saudar(nome):\n    return f\"Olá, {nome}!\"\n\nprint(saudar(\"Alice\")) # Saída: ['Olá, Alice!', 'Olá, Alice!', 'Olá, Alice!']</code></pre>\n<p>O uso de <code>@functools.wraps(func)</code> é uma boa prática para garantir que o nome, docstring e outros metadados da função original sejam preservados.</p>\n\n<h4>Decoradores de Classe</h4>\n<p>Um decorador de classe é uma função que recebe uma classe como argumento e retorna uma nova classe (ou a mesma classe modificada). Eles são úteis para adicionar métodos, atributos ou modificar o comportamento da classe.</p>\n<pre><code class=\"language-python\"># Exemplo: Decorador para adicionar um método de log a uma classe\ndef adicionar_log(cls):\n    def log_info(self, mensagem):\n        print(f\"LOG [{cls.__name__}]: {mensagem}\")\n\n    cls.log_info = log_info # Adiciona o método à classe\n    return cls\n\n@adicionar_log\nclass MinhaClasseLogavel:\n    def __init__(self, valor):\n        self.valor = valor\n        self.log_info(f\"Instância criada com valor {self.valor}\")\n\n    def fazer_algo(self):\n        self.log_info(\"Fazendo algo...\")\n        # ... lógica da função ...\n\nobj_log = MinhaClasseLogavel(10)\nobj_log.fazer_algo()</code></pre>\n\n<h3>Gerenciadores de Contexto (`with` e `contextlib`)</h3>\n\n<p>Vimos o uso básico do <code>with open(...)</code>. O <code>with</code> statement é usado com objetos que implementam o protocolo de gerenciador de contexto, que define os métodos <code>__enter__()</code> e <code>__exit__()</code>. Ele garante que um recurso seja adequadamente configurado antes de usar e limpo depois, mesmo que ocorram erros.</p>\n\n<p>Você pode criar seus próprios gerenciadores de contexto:</p>\n<pre><code class=\"language-python\"># Exemplo: Gerenciador de contexto para medir tempo de execução\nimport time\n\nclass MedirTempo:\n    def __enter__(self):\n        self.inicio = time.time()\n        print(\"Iniciando medição de tempo...\")\n        return self # O valor retornado por __enter__ pode ser atribuído ao 'as'\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        fim = time.time()\n        tempo_total = fim - self.inicio\n        print(f\"Tempo total de execução: {tempo_total:.4f} segundos.\")\n        # Se __exit__ retornar True, exceções são suprimidas.\n        # Se retornar False ou None (padrão), exceções são propagadas.\n        return False\n\n# Usando o gerenciador de contexto\nwith MedirTempo():\n    # Simula uma tarefa demorada\n    for _ in range(1000000):\n        pass\n\nprint(\"Fora do bloco with.\")</code></pre>\n\n<p>O módulo <code>contextlib</code> fornece utilitários para criar gerenciadores de contexto de forma mais fácil, como usando decoradores.</p>\n<pre><code class=\"language-python\">from contextlib import contextmanager\nimport time\n\n@contextmanager\ndef medir_tempo_ctx():\n    inicio = time.time()\n    print(\"Iniciando medição de tempo (via contextmanager)...\")\n    try:\n        yield # O código dentro do bloco 'with' é executado aqui\n    finally:\n        fim = time.time()\n        tempo_total = fim - inicio\n        print(f\"Tempo total de execução (via contextmanager): {tempo_total:.4f} segundos.\")\n\nwith medir_tempo_ctx():\n    # Simula outra tarefa demorada\n    time.sleep(0.1) # Simula I/O ou outra espera\n\nprint(\"Fora do segundo bloco with.\")</code></pre>\n\n<p>Gerenciadores de contexto são ideais para gerenciar recursos (arquivos, conexões de rede, locks) e garantir que a limpeza seja feita corretamente.</p>\n\n<h3>Programação Orientada a Eventos (Introdução)</h3>\n\n<p>Em programação orientada a eventos, o fluxo do programa é determinado por eventos (ações do usuário, mensagens de outros programas, sinais). Em vez de seguir uma sequência linear, o programa espera por eventos e executa funções (callbacks) em resposta a eles.</p>\n\n<p>Bibliotecas GUI (como Tkinter, PyQt) e frameworks web assíncronos (como `asyncio`, `Tornado`) são exemplos comuns onde a programação orientada a eventos é utilizada. O `asyncio` será abordado na seção de concorrência/paralelismo.</p>",
+        "examples": [
+            {
+                "title": "Decorador de função com argumento para validação",
+                "code": "import functools\n\ndef validar_tipo_retorno(tipo_esperado):\n    def decorator_validacao(func):\n        @functools.wraps(func)\n        def wrapper_validacao(*args, **kwargs):\n            resultado = func(*args, **kwargs)\n            if not isinstance(resultado, tipo_esperado):\n                raise TypeError(f\"Função {func.__name__} retornou tipo {type(resultado).__name__}, esperado {tipo_esperado.__name__}\")\n            return resultado\n        return wrapper_validacao\n    return decorator_validacao\n\n@validar_tipo_retorno(int)\ndef multiplicar(a, b):\n    return a * b\n\n@validar_tipo_retorno(str)\ndef juntar_strings(s1, s2):\n    return s1 + s2\n\nprint(multiplicar(5, 4)) # Saída: 20\n# print(multiplicar(5, 4.0)) # Isso geraria um TypeError\nprint(juntar_strings(\"Olá\", \" Mundo\")) # Saída: Olá Mundo",
+                "explanation": "Cria um decorador que verifica se o valor retornado pela função decorada é do tipo esperado, levantando um <code>TypeError</code> caso contrário. Demonstra decoradores com argumentos e validação de tipos."
+            },
+            {
+                "title": "Gerenciador de contexto para suprimir exceções",
+                "code": "from contextlib import contextmanager\n\n@contextmanager\ndef suprimir_excecao(*tipos_excecao):\n    try:\n        yield\n    except tipos_excecao:\n        print(f\"Uma das exceções {tipos_excecao} foi suprimida.\")\n\n# Exemplo de uso\nwith suprimir_excecao(ValueError, TypeError):\n    x = 10 / 0 # Isso geraria um ZeroDivisionError, que NÃO é suprimido\n    print(\"Esta linha não será executada se houver erro acima.\")\n\nprint(\"Continuando a execução após o primeiro bloco.\")\n\nwith suprimir_excecao(ValueError, ZeroDivisionError):\n    y = int(\"não é número\") # Isso geraria um ValueError, que SERÁ suprimido\n    print(\"Esta linha também não será executada.\")\n\nprint(\"Continuando a execução após o segundo bloco.\")",
+                "explanation": "Um gerenciador de contexto que suprime (ignora) exceções de tipos específicos que ocorram dentro do seu bloco <code>with</code>. Demonstra o controle de fluxo de exceções com gerenciadores de contexto."
+            }
+        ],
+        "summary": "<p>Metaclasses permitem controlar a criação de classes, sendo úteis para metaprogramação. Decoradores avançados incluem aqueles que aceitam argumentos e decoradores de classe para modificar classes inteiras. Gerenciadores de contexto, usados com o <code>with</code> statement, garantem a correta configuração e limpeza de recursos, podendo ser criados com <code>__enter__</code>/<code>__exit__</code> ou com o módulo <code>contextlib</code>. A programação orientada a eventos é um paradigma onde o fluxo é ditado por eventos.</p>",
+        "estimated_time_minutes": 75
+    },
+    {
+        "id": "estruturas-algoritmos-avancados",
+        "course_id": "python-avancado",
+        "title": "Estruturas de Dados e Algoritmos Avançados",
+        "order": 34,
+        "description": "Revise estruturas básicas e explore estruturas avançadas (filas, pilhas, árvores, grafos), algoritmos de busca/ordenação eficientes e análise de complexidade (Big O).",
+        "learning_objectives": [
+            "Revisar e consolidar o conhecimento sobre estruturas de dados básicas (listas, dicionários, conjuntos).",
+            "Compreender e implementar estruturas de dados avançadas como filas, pilhas, árvores e grafos.",
+            "Analisar a complexidade de tempo e espaço de algoritmos usando a notação Big O.",
+            "Implementar e entender algoritmos de ordenação eficientes (Merge Sort, Quick Sort).",
+            "Implementar e entender algoritmos básicos de busca em grafos (BFS, DFS).",
+            "Saber escolher a estrutura de dados e o algoritmo mais adequados para resolver um problema específico."
+        ],
+        "key_concepts": [
+            "Estruturas de Dados",
+            "Algoritmos",
+            "Filas (Queue)",
+            "Pilhas (Stack)",
+            "Árvores (Trees)",
+            "Grafos (Graphs)",
+            "Análise de Complexidade",
+            "Notação Big O (O())",
+            "Algoritmos de Ordenação",
+            "Merge Sort",
+            "Quick Sort",
+            "Algoritmos de Busca em Grafos",
+            "BFS (Breadth-First Search)",
+            "DFS (Depth-First Search)"
+        ],
+        "content": "<h2>Estruturas de Dados e Algoritmos: O Núcleo da Computação</h2>\n\n<p>Um bom entendimento de estruturas de dados e algoritmos é fundamental para escrever código eficiente e resolver problemas complexos. Python, embora de alto nível, permite implementar e trabalhar com essas abstrações de forma clara.</p>\n\n<h3>Revisão de Estruturas Básicas</h3>\n<p>Já cobrimos listas, tuplas, dicionários e conjuntos. É importante lembrar suas características (ordenada/não ordenada, mutável/imutável, permite duplicatas/apenas únicos) e a complexidade das operações básicas (acesso, inserção, remoção).</p>\n\n<h3>Estruturas de Dados Avançadas</h3>\n\n<h4>Filas (Queue)</h4>\n<p>Uma fila é uma estrutura de dados que segue o princípio FIFO (First-In, First-Out). O primeiro elemento inserido é o primeiro a ser removido.</p>\n<pre><code class=\"language-python\">from collections import deque\n\nfila = deque()\nfila.append('tarefa1') # Enfileirar\nfila.append('tarefa2')\nfila.append('tarefa3')\n\nprint(fila.popleft()) # Desenfileirar. Saída: tarefa1\nprint(fila.popleft()) # Saída: tarefa2</code></pre>\n<p><code>collections.deque</code> é uma implementação eficiente de fila.</p>\n\n<h4>Pilhas (Stack)</h4>\n<p>Uma pilha é uma estrutura de dados que segue o princípio LIFO (Last-In, First-Out). O último elemento inserido é o primeiro a ser removido.</p>\n<pre><code class=\"language-python\">pilha = []\npilha.append('pagina1') # Empilhar\npilha.append('pagina2')\npilha.append('pagina3')\n\nprint(pilha.pop()) # Desempilhar. Saída: pagina3\nprint(pilha.pop()) # Saída: pagina2</code></pre>\n<p>Listas Python podem ser usadas como pilhas eficientes.</p>\n\n<h4>Árvores (Trees)</h4>\n<p>Uma árvore é uma estrutura de dados hierárquica, composta por nós conectados por arestas. O nó superior é a raiz. Árvores de Busca Binária, AVL, B-trees são tipos comuns com propriedades específicas para busca e ordenação eficientes.</p>\n<p>Implementar uma árvore do zero é complexo, mas entender seus conceitos é crucial. Python pode representar árvores usando classes e referências entre objetos.</p>\n\n<h4>Grafos (Graphs)</h4>\n<p>Um grafo é uma coleção de nós (vértices) e conexões entre eles (arestas). Grafos podem ser direcionados ou não, ponderados ou não. São usados para modelar redes sociais, rotas de GPS, dependências entre tarefas, etc.</p>\n<p>Grafos podem ser representados em Python usando listas de adjacência (lista de vizinhos para cada nó) ou matrizes de adjacência.</p>\n<pre><code class=\"language-python\"># Representação de Grafo (Lista de Adjacência)\ngrafo = {\n    'A': ['B', 'C'],\n    'B': ['A', 'D', 'E'],\n    'C': ['A', 'F'],\n    'D': ['B'],\n    'E': ['B', 'F'],\n    'F': ['C', 'E']\n}</code></pre>\n\n<h3>Análise de Complexidade (Big O Notation)</h3>\n<p>A notação <strong>Big O (O())</strong> é usada para descrever o desempenho (tempo de execução ou espaço em memória) de um algoritmo à medida que o tamanho da entrada cresce. Ela nos ajuda a comparar a eficiência de diferentes algoritmos.</p>\n<ul>\n    <li>O(1): Tempo constante. A operação leva o mesmo tempo, independentemente do tamanho da entrada.</li>\n    <li>O(log n): Tempo logarítmico. O tempo cresce lentamente com o tamanho da entrada (ex: busca binária).</li>\n    <li>O(n): Tempo linear. O tempo cresce proporcionalmente ao tamanho da entrada (ex: percorrer uma lista).</li>\n    <li>O(n log n): Tempo linear-logarítmico (ex: Merge Sort, Quick Sort).</li>\n    <li>O(n²): Tempo quadrático. O tempo cresce com o quadrado do tamanho da entrada (ex: nested loops, Bubble Sort simples).</li>\n    <li>O(2^n): Tempo exponencial. O tempo dobra a cada adição à entrada (geralmente muito lento).</li>\n</ul>\n\n<h3>Algoritmos de Busca e Ordenação Avançados</h3>\n\n<h4>Merge Sort</h4>\n<p>Um algoritmo de ordenação eficiente (O(n log n)) que divide a lista recursivamente em sublistas menores, ordena-as e depois as mescla.</p>\n\n<h4>Quick Sort</h4>\n<p>Outro algoritmo de ordenação eficiente (em média, O(n log n)) que seleciona um 'pivô' e particiona a lista em torno dele, ordenando recursivamente as sublistas.</p>\n\n<h4>Busca em Grafos: BFS e DFS</h4>\n<ul>\n    <li><strong>BFS (Breadth-First Search - Busca em Largura):</strong> Explora o grafo nível por nível, encontrando todos os vizinhos de um nó antes de ir para o próximo nível. Usa uma fila.</li>\n    <li><strong>DFS (Depth-First Search - Busca em Profundidade):</strong> Explora o grafo o mais profundamente possível ao longo de cada ramo antes de retroceder. Usa uma pilha (ou recursão).</li>\n</ul>\n\n<p>Entender e implementar esses algoritmos, juntamente com a análise de complexidade, é crucial para resolver problemas de forma eficiente.</p>",
+        "examples": [
+            {
+                "title": "Implementação simples de Fila e Pilha",
+                "code": "from collections import deque\n\n# Fila (FIFO)\nfila_ex = deque()\nfila_ex.append('A')\nfila_ex.append('B')\nprint(f\"Fila: {fila_ex}\")\nprint(f\"Desenfileirando: {fila_ex.popleft()}\")\nprint(f\"Fila após popleft: {fila_ex}\")\n\n# Pilha (LIFO)\npilha_ex = []\npilha_ex.append('X')\npilha_ex.append('Y')\nprint(f\"Pilha: {pilha_ex}\")\nprint(f\"Desempilhando: {pilha_ex.pop()}\")\nprint(f\"Pilha após pop: {pilha_ex}\")",
+                "explanation": "Demonstra o uso de <code>collections.deque</code> como fila e uma lista Python como pilha."
+            },
+            {
+                "title": "Exemplo conceitual de Big O",
+                "code": "# O(n) - Percorrer uma lista\ndef imprimir_lista(lista):\n    for item in lista:\n        print(item)\n\n# O(n^2) - Nested loops\ndef imprimir_pares(lista1, lista2):\n    for item1 in lista1:\n        for item2 in lista2:\n            print(item1, item2)\n\n# O(1) - Acessar elemento por índice\ndef acessar_primeiro(lista):\n    return lista[0] if lista else None\n\nprint(\"Exemplos conceituais de complexidade (não executam).\")",
+                "explanation": "Ilustra conceitualmente diferentes complexidades de tempo de execução com exemplos simples."
+            }
+        ],
+        "summary": "<p>Um bom domínio de estruturas de dados (filas, pilhas, árvores, grafos) e algoritmos (busca, ordenação, busca em grafos) é vital para a eficiência do código. A análise de complexidade usando Big O ajuda a entender o desempenho dos algoritmos. Escolher a estrutura e o algoritmo corretos é um passo crucial na resolução de problemas de programação avançada.</p>",
+        "estimated_time_minutes": 90
+    },
+     {
+        "id": "web-flask-intro",
+        "course_id": "python-avancado",
+        "title": "Desenvolvimento Web: Introdução ao Flask",
+        "order": 35,
+        "description": "Comece a desenvolver aplicações web com o microframework Flask: rotas, views, templates e manipulação básica de requisições.",
+        "learning_objectives": [
+            "Entender o que é um framework web e um microframework (Flask).",
+            "Instalar o Flask.",
+            "Criar uma aplicação Flask simples.",
+            "Definir rotas e funções de view.",
+            "Retornar respostas HTTP básicas.",
+            "Utilizar templates Jinja2 para renderizar HTML dinâmico.",
+            "Passar dados das views para os templates."
+        ],
+        "key_concepts": [
+            "Framework Web",
+            "Microframework",
+            "Flask",
+            "Aplicação Web",
+            "Rota",
+            "View Function",
+            "Decorador `@app.route()`",
+            "Requisição HTTP",
+            "Resposta HTTP",
+            "Templates",
+            "Jinja2",
+            "`render_template()`"
+        ],
+        "content": "<h2>Desenvolvimento Web com Flask</h2>\n\n<p>Python é amplamente utilizado para desenvolvimento web. Frameworks web simplificam o processo, fornecendo ferramentas e estruturas para lidar com requisições, respostas, bancos de dados, segurança, etc.</p>\n\n<p><strong>Flask</strong> é um microframework web leve e flexível. Ele não inclui muitas funcionalidades por padrão (como ORM ou sistema de autenticação), mas é facilmente extensível com diversas bibliotecas. É ótimo para APIs e aplicações web menores ou para aprender os fundamentos de frameworks web.</p>\n\n<h3>Instalação</h3>\n<p>Instale o Flask usando pip (preferencialmente em um ambiente virtual):</p>\n<pre><code>pip install Flask</code></pre>\n\n<h3>Sua Primeira Aplicação Flask</h3>\n\n<pre><code class=\"language-python\"># Arquivo: app.py\n\nfrom flask import Flask\n\n# Cria uma instância da aplicação Flask\napp = Flask(__name__)\n\n# Define uma rota para a URL raiz ('/')\n@app.route('/')\ndef hello_world():\n    return 'Olá, Mundo com Flask!'\n\n# Define outra rota\n@app.route('/saudacao/<nome>') # <nome> é um parâmetro na URL\ndef saudacao(nome):\n    return f'Olá, {nome}!'\n\n# Executa a aplicação se este script for o principal\nif __name__ == '__main__':\n    # debug=True ativa o modo de depuração (recarrega automaticamente, mostra erros)\n    app.run(debug=True)</code></pre>\n\n<p>Para rodar esta aplicação, salve o código como <code>app.py</code> e execute no terminal:</p>\n<pre><code>python app.py</code></pre>\n<p>Você verá uma mensagem indicando que o servidor Flask está rodando, geralmente em <code>http://127.0.0.1:5000/</code>. Abra seu navegador e visite <code>http://127.0.0.1:5000/</code> e <code>http://127.0.0.1:5000/saudacao/SeuNome</code>.</p>\n\n<h4>Rotas e Views</h4>\n<p>O decorador <code>@app.route('/')</code> associa a URL raiz (<code>/</code>) à função <code>hello_world()</code>. Quando alguém acessa essa URL, o Flask executa a função associada (a <strong>view function</strong>) e retorna o valor que ela retorna como a resposta HTTP.</p>\n<p>Rotas podem ter partes variáveis, como <code><nome></code> na rota <code>/saudacao/<nome></code>. O valor capturado na URL é passado como argumento para a view function.</p>\n\n<h3>Usando Templates com Jinja2</h3>\n<p>Retornar HTML diretamente de uma string em Python não é prático para páginas complexas. Usamos <strong>templates</strong> para separar a lógica Python da apresentação HTML. Flask usa por padrão o motor de templates Jinja2.</p>\n\n<p>Crie uma pasta chamada <code>templates</code> no mesmo diretório do seu arquivo <code>app.py</code>. Dentro dela, crie um arquivo HTML, por exemplo, <code>index.html</code>:</p>\n\n<pre><code class=\"language-html\">&lt;!-- Arquivo: templates/index.html --&gt;\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"pt-BR\"&gt;\n&lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;title&gt;Minha Aplicação Flask&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1&gt;{{ titulo }}&lt;/h1&gt;\n    &lt;p&gt;Bem-vindo ao meu site Flask!&lt;/p&gt;\n    &lt;p&gt;Mensagem dinâmica: &lt;strong&gt;{{ mensagem }}&lt;/strong&gt;&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre>\n<p>Variáveis dentro de templates Jinja2 são marcadas com chaves duplas <code>{{ nome_variavel }}</code>.</p>\n\n<p>Agora, modifique seu arquivo <code>app.py</code> para usar o template:</p>\n\n<pre><code class=\"language-python\"># Arquivo: app.py (modificado)\n\nfrom flask import Flask, render_template # Importa render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    # Renderiza o template 'index.html' e passa variáveis para ele\n    return render_template('index.html', titulo='Página Inicial', mensagem='Olá do backend!')\n\n@app.route('/usuario/<nome>')\ndef perfil_usuario(nome):\n    # Renderiza outro template (se existir) ou usa o mesmo passando dados diferentes\n    return render_template('index.html', titulo=f'Perfil de {nome}', mensagem=f'Bem-vindo, {nome}!')\n\nif __name__ == '__main__':\n    app.run(debug=True)</code></pre>\n<p>A função <code>render_template()</code> busca o arquivo HTML na pasta <code>templates</code> e substitui as variáveis do template pelos valores passados como argumentos nomeados.</p>\n\n<p>Este é apenas o começo do desenvolvimento web com Flask. Tópicos como formulários, bancos de dados, sessões e organização de projetos serão abordados em lições futuras ou em aprofundamentos específicos.</p>",
+        "examples": [
+            {
+                "title": "Rota com diferentes métodos HTTP",
+                "code": "from flask import Flask, request\n\napp = Flask(__name__)\n\n@app.route('/submit_form', methods=['GET', 'POST'])\ndef submit_form():\n    if request.method == 'POST':\n        # Lógica para processar dados do formulário POST\n        dados_formulario = request.form # Para dados de formulário HTML\n        # dados_json = request.json # Para dados JSON\n        return f'Dados recebidos via POST: {dados_formulario}'\n    else:\n        # Lógica para exibir o formulário (método GET)\n        return '<form method=\"POST\"><input type=\"text\" name=\"campo\"><button type=\"submit\">Enviar</button></form>'\n\n# Para executar, adicione o if __name__ == '__main__': bloco do exemplo anterior\nprint(\"Simulação de rota com métodos GET e POST.\")",
+                "explanation": "Demonstra como uma única rota pode lidar com diferentes métodos HTTP (GET para exibir um formulário, POST para processar os dados enviados) usando o parâmetro <code>methods</code> e o objeto <code>request</code>."
+            }
+        ],
+        "summary": "<p>Flask é um microframework Python para desenvolvimento web. Ele permite definir rotas que mapeiam URLs para view functions. Templates Jinja2 são usados para gerar HTML dinâmico. O desenvolvimento web com Flask envolve a criação de uma aplicação, definição de rotas, escrita de view functions e renderização de templates.</p>",
+        "estimated_time_minutes": 60
+    },
+    {
+        "id": "data-science-numpy-pandas",
+        "course_id": "python-avancado",
+        "title": "Ciência de Dados (Parte 1): NumPy e Pandas",
+        "order": 36,
+        "description": "Introdução ao uso de Python para Ciência de Dados com as bibliotecas fundamentais NumPy (arrays) e Pandas (DataFrames).",
+        "learning_objectives": [
+            "Entender a importância do Python no ecossistema de Ciência de Dados.",
+            "Utilizar a biblioteca NumPy para criação e manipulação de arrays multidimensionais.",
+            "Realizar operações matemáticas e lógicas eficientes com arrays NumPy (vetorização).",
+            "Compreender e utilizar as estruturas de dados Series e DataFrame da biblioteca Pandas.",
+            "Carregar e salvar dados em DataFrames (CSV, etc.).",
+            "Realizar operações básicas de manipulação e limpeza de dados com Pandas (seleção, filtragem, tratamento de valores ausentes)."
+        ],
+        "key_concepts": [
+            "Ciência de Dados",
+            "Machine Learning",
+            "NumPy",
+            "Array NumPy",
+            "Vetorização",
+            "Pandas",
+            "Series",
+            "DataFrame",
+            "Manipulação de Dados",
+            "Limpeza de Dados"
+        ],
+        "content": "<h2>Python para Ciência de Dados: NumPy e Pandas</h2>\n\n<p>Python se tornou uma das linguagens mais populares para Ciência de Dados, Análise de Dados e Machine Learning, graças ao seu ecossistema rico de bibliotecas poderosas e fáceis de usar. Duas das mais fundamentais são NumPy e Pandas.</p>\n\n<h3>NumPy: Computação Numérica Eficiente</h3>\n\n<p><strong>NumPy (Numerical Python)</strong> é a biblioteca fundamental para computação numérica em Python. Ela fornece suporte para arrays multidimensionais grandes e eficientes, e uma coleção de funções matemáticas de alto nível para operar nesses arrays.</p>\n\n<pre><code class=\"language-python\">import numpy as np\n\n# Criando um array NumPy\narray_simples = np.array([1, 2, 3, 4, 5])\nprint(f\"Array: {array_simples}\")\nprint(f\"Tipo: {type(array_simples)}\")\nprint(f\"Shape: {array_simples.shape}\") # Dimensões do array\n\n# Array 2D\narray_2d = np.array([[1, 2, 3], [4, 5, 6]])\nprint(f\"Array 2D:\\n{array_2d}\")\nprint(f\"Shape 2D: {array_2d.shape}\")\n\n# Operações vetorizadas (muito mais rápidas que loops Python puros)\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\nsoma = a + b # Soma elemento a elemento\nprint(f\"Soma de arrays: {soma}\") # Saída: [5 7 9]\n\nproduto = a * 2 # Multiplica cada elemento por 2\nprint(f\"Produto por escalar: {produto}\") # Saída: [2 4 6]\n\n# Funções matemáticas\nprint(f\"Raiz quadrada de a: {np.sqrt(a)}\")\nprint(f\"Soma dos elementos de a: {np.sum(a)}\")</code></pre>\n<p>NumPy é a base para muitas outras bibliotecas de ciência de dados.</p>\n\n<h3>Pandas: Manipulação e Análise de Dados</h3>\n\n<p><strong>Pandas</strong> é uma biblioteca construída sobre o NumPy, projetada para facilitar o trabalho com dados estruturados (dados tabulares, séries temporais, etc.). Suas duas estruturas de dados principais são Series e DataFrame.</p>\n\n<h4>Series</h4>\n<p>Uma Series é um array unidimensional rotulado, semelhante a uma coluna em uma tabela ou uma Series temporal.</p>\n<pre><code class=\"language-python\">import pandas as pd\n\n# Criando uma Series\ns = pd.Series([1, 3, 5, np.nan, 6, 8]) # np.nan representa valor ausente\nprint(f\"Series:\\n{s}\")</code></pre>\n\n<h4>DataFrame</h4>\n<p>Um DataFrame é uma estrutura de dados bidimensional rotulada com colunas de tipos potencialmente diferentes. É semelhante a uma planilha ou tabela de banco de dados.</p>\n<pre><code class=\"language-python\">import pandas as pd\nimport numpy as np\n\n# Criando um DataFrame a partir de um dicionário\ndata = {\n    'coluna1': [1, 2, 3, 4],\n    'coluna2': ['A', 'B', 'C', 'D'],\n    'coluna3': [True, False, True, False]\n}\ndf = pd.DataFrame(data)\nprint(f\"DataFrame:\\n{df}\")\n\n# Criando um DataFrame com índices e colunas especificados\ndata2 = {\n    'idade': [30, 25, 35, 28],\n    'cidade': ['SP', 'RJ', 'SP', 'BH']\n}\ndf2 = pd.DataFrame(data2, index=['Ana', 'Bruno', 'Carlos', 'David'])\nprint(f\"\\nDataFrame com índices:\\n{df2}\")</code></pre>\n\n<h4>Operações Básicas com DataFrames</h4>\n\n<pre><code class=\"language-python\"># Selecionando uma coluna\nprint(f\"\\nColuna 'idade':\\n{df2['idade']}\")\n\n# Selecionando múltiplas colunas\nprint(f\"\\nColunas 'idade' e 'cidade':\\n{df2[['idade', 'cidade']]}\")\n\n# Selecionando linhas por índice (loc) ou posição (iloc)\nprint(f\"\\nLinha 'Ana':\\n{df2.loc['Ana']}\")\nprint(f\"\\nPrimeira linha (posição 0):\\n{df2.iloc[0]}\")\n\n# Filtrando dados (selecionando linhas com base em uma condição)\nusuarios_sp = df2[df2['cidade'] == 'SP']\nprint(f\"\\nUsuários de SP:\\n{usuarios_sp}\")\n\n# Adicionando uma nova coluna\ndf2['salario'] = [3000, 2500, 3800, 2900]\nprint(f\"\\nDataFrame com salário:\\n{df2}\")\n\n# Tratando valores ausentes (NaN)\ndf3 = pd.DataFrame({'col1': [1, 2, np.nan], 'col2': ['A', np.nan, 'C']})\nprint(f\"\\nDataFrame com NaN:\\n{df3}\")\ndf3_sem_nan = df3.dropna() # Remove linhas com NaN\nprint(f\"\\nDataFrame sem NaN (dropna):\\n{df3_sem_nan}\")\ndf3_preenchido = df3.fillna(0) # Preenche NaN com 0\nprint(f\"\\nDataFrame com NaN preenchido (fillna):\\n{df3_preenchido}\")</code></pre>\n\n<h4>Carregando e Salvando Dados</h4>\n<p>Pandas facilita a leitura e escrita de dados em vários formatos:</p>\n<pre><code class=\"language-python\"># Carregar de CSV\n# df_csv = pd.read_csv('caminho/para/arquivo.csv')\n\n# Salvar para CSV\n# df2.to_csv('usuarios.csv', index=False) # index=False para não escrever o índice como coluna\n\n# Carregar/Salvar JSON\n# df_json = pd.read_json('caminho/para/arquivo.json')\n# df2.to_json('usuarios.json', indent=4)</code></pre>\n\n<p>NumPy e Pandas são ferramentas essenciais para qualquer tarefa de manipulação, limpeza e análise de dados em Python.</p>",
+        "examples": [
+            {
+                "title": "Análise básica com Pandas",
+                "code": "import pandas as pd\n\ndados = {\n    'produto': ['A', 'B', 'A', 'C', 'B', 'C', 'A'],\n    'vendas': [100, 150, 120, 80, 200, 90, 110]\n}\ndf_vendas = pd.DataFrame(dados)\n\n# Agrupando por produto e somando vendas\nvendas_por_produto = df_vendas.groupby('produto')['vendas'].sum()\nprint(f\"Vendas por produto:\\n{vendas_por_produto}\")\n\n# Estatísticas descritivas\nprint(f\"\\nEstatísticas das vendas:\\n{df_vendas['vendas'].describe()}\")",
+                "explanation": "Demonstra o uso básico de <code>groupby()</code> para agrupar dados e <code>describe()</code> para obter estatísticas descritivas de uma coluna em um DataFrame Pandas."
+            }
+        ],
+        "summary": "<p>NumPy fornece arrays eficientes para computação numérica e vetorização. Pandas, construído sobre NumPy, oferece estruturas de dados (Series, DataFrame) e ferramentas para manipulação, limpeza e análise de dados tabulares. Dominar NumPy e Pandas é crucial para trabalhar com dados em Python e é o primeiro passo para Ciência de Dados e Machine Learning.</p>",
+        "estimated_time_minutes": 75
+    },
+    {
+        "id": "data-science-matplotlib-sklearn",
+        "course_id": "python-avancado",
+        "title": "Ciência de Dados (Parte 2): Visualização e Machine Learning (Intro)",
+        "order": 37,
+        "description": "Visualize dados com Matplotlib e tenha uma introdução aos conceitos e modelos básicos de Machine Learning com Scikit-learn.",
+        "learning_objectives": [
+            "Utilizar a biblioteca Matplotlib para criar visualizações de dados (gráficos).",
+            "Criar diferentes tipos de gráficos (linha, barras, scatter, histograma).",
+            "Personalizar elementos de gráficos (títulos, rótulos, cores).",
+            "Compreender os conceitos básicos de Machine Learning (supervisionado, não supervisionado).",
+            "Utilizar a biblioteca Scikit-learn para implementar modelos básicos de Regressão e Classificação.",
+            "Avaliar o desempenho de modelos de Machine Learning com métricas simples.",
+            "Entender o fluxo básico de trabalho em um projeto de Machine Learning (dados, modelo, avaliação)."
+        ],
+        "key_concepts": [
+            "Visualização de Dados",
+            "Matplotlib",
+            "Gráfico de Linha",
+            "Gráfico de Barras",
+            "Scatter Plot",
+            "Histograma",
+            "Machine Learning (ML)",
+            "Aprendizado Supervisionado",
+            "Aprendizado Não Supervisionado",
+            "Scikit-learn",
+            "Modelo de ML",
+            "Regressão Linear",
+            "Classificação",
+            "Métricas de Avaliação"
+        ],
+        "content": "<h2>Visualização de Dados e Introdução ao Machine Learning</h2>\n\n<p>Após manipular e limpar dados com Pandas, o próximo passo é frequentemente visualizálos para entender padrões e insights, e depois aplicar técnicas de Machine Learning para construir modelos preditivos ou descritivos.</p>\n\n<h3>Matplotlib: Criando Gráficos</h3>\n\n<p><strong>Matplotlib</strong> é uma biblioteca de visualização 2D em Python, amplamente utilizada para criar gráficos estáticos, interativos e de publicação em diversos formatos. É a base para muitas outras bibliotecas de visualização (como Seaborn).</p>\n\n<pre><code class=\"language-python\">import matplotlib.pyplot as plt\nimport numpy as np\n\n# Gráfico de Linha simples\nx = np.linspace(0, 10, 100) # 100 pontos entre 0 e 10\ny = np.sin(x)\n\nplt.figure(figsize=(8, 4)) # Define o tamanho da figura\nplt.plot(x, y, label='sin(x)', color='blue', linestyle='--')\nplt.title('Gráfico da Função Seno')\nplt.xlabel('Eixo X')\nplt.ylabel('Eixo Y')\nplt.legend()\nplt.grid(True)\nplt.show() # Exibe o gráfico</code></pre>\n\n<p>Outros tipos de gráficos:</p>\n<pre><code class=\"language-python\"># Gráfico de Barras\ncategorias = ['A', 'B', 'C', 'D']\nvalores = [25, 40, 30, 35]\n\nplt.figure(figsize=(6, 4))\nplt.bar(categorias, valores, color='skyblue')\nplt.title('Vendas por Categoria')\nplt.xlabel('Categoria')\nplt.ylabel('Vendas')\nplt.show()\n\n# Scatter Plot (Diagrama de Dispersão)\nx_scatter = np.random.rand(50)\ny_scatter = np.random.rand(50)\n\nplt.figure(figsize=(6, 6))\nplt.scatter(x_scatter, y_scatter, color='red', marker='o')\nplt.title('Scatter Plot de Pontos Aleatórios')\nplt.xlabel('Feature 1')\nplt.ylabel('Feature 2')\nplt.show()\n\n# Histograma\ndados_histograma = np.random.randn(1000) # Dados com distribuição normal\n\nplt.figure(figsize=(6, 4))\nplt.hist(dados_histograma, bins=30, color='lightgreen', edgecolor='black')\nplt.title('Histograma de Dados Aleatórios')\nplt.xlabel('Valor')\nplt.ylabel('Frequência')\nplt.show()</code></pre>\n\n<p>Matplotlib oferece um controle granular sobre todos os elementos do gráfico.</p>\n\n<h3>Introdução ao Machine Learning com Scikit-learn</h3>\n\n<p><strong>Machine Learning (ML)</strong> é um campo da inteligência artificial que permite que sistemas aprendam com dados, identifiquem padrões e tomem decisões com o mínimo de intervenção humana.</p>\n\n<ul>\n    <li><strong>Aprendizado Supervisionado:</strong> Treina modelos com dados que incluem tanto as 'features' (características) quanto os 'labels' (rótulos/respostas corretas). O objetivo é prever o label para novos dados. Exemplos: Regressão (prever valor contínuo) e Classificação (prever categoria).</li>\n    <li><strong>Aprendizado Não Supervisionado:</strong> Treina modelos com dados sem labels. O objetivo é encontrar padrões ou estruturas nos dados. Exemplos: Clusterização (agrupar dados semelhantes), Redução de Dimensionalidade.</li>\n</ul>\n\n<p><strong>Scikit-learn</strong> é a biblioteca mais popular em Python para Machine Learning. Ela fornece implementações eficientes de uma ampla gama de algoritmos de ML, além de ferramentas para pré-processamento de dados, seleção de modelos e avaliação.</p>\n\n<pre><code class=\"language-python\"># Exemplo simples de Regressão Linear Supervisionada\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error\nimport numpy as np\n\n# Dados de exemplo: relação entre X e Y (Y = 2*X + ruído)\nX = np.random.rand(100, 1) * 10 # 100 amostras, 1 feature\ny = 2 * X + np.random.randn(100, 1) * 2 # Y = 2*X + ruído\n\n# Dividir dados em treino e teste\nX_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Criar e treinar o modelo de Regressão Linear\nmodelo_regressao = LinearRegression()\nmodelo_regressao.fit(X_treino, y_treino)\n\n# Fazer previsões\ny_previsao = modelo_regressao.predict(X_teste)\n\n# Avaliar o modelo (usando Erro Quadrático Médio)\nmse = mean_squared_error(y_teste, y_previsao)\nprint(f\"Erro Quadrático Médio (MSE): {mse:.2f}\")\n\n# Coeficientes do modelo\nprint(f\"Coeficiente (inclinação): {modelo_regressao.coef_[0][0]:.2f}\")\nprint(f\"Intercepto: {modelo_regressao.intercept_[0]:.2f}\")</code></pre>\n\n<p>Este é apenas um vislumbre do vasto campo de Machine Learning. Scikit-learn facilita a experimentação com diferentes modelos e técnicas.</p>",
+        "examples": [
+            {
+                "title": "Gráfico de dispersão com Matplotlib e dados do Pandas",
+                "code": "import matplotlib.pyplot as plt\nimport pandas as pd\n\ndados_pandas = {'X': [1, 2, 3, 4, 5], 'Y': [2, 3, 5, 4, 6]}\ndf_plot = pd.DataFrame(dados_pandas)\n\nplt.figure(figsize=(6, 4))\nplt.scatter(df_plot['X'], df_plot['Y'])\nplt.title('Scatter Plot de Dados Pandas')\nplt.xlabel('Feature X')\nplt.ylabel('Feature Y')\nplt.grid(True)\nplt.show()\n\nprint(\"Exibindo scatter plot com dados Pandas.\")",
+                "explanation": "Mostra como usar Matplotlib para criar um scatter plot diretamente de colunas de um DataFrame Pandas."
+            },
+            {
+                "title": "Exemplo simples de Classificação com Scikit-learn (conceitual)",
+                "code": "# from sklearn.linear_model import LogisticRegression\n# from sklearn.model_selection import train_test_split\n# from sklearn.metrics import accuracy_score\n# import numpy as np\n\n# # Dados de exemplo (simplificados): X = [feature1, feature2], y = [classe]\n# X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [1, 0], [2, 1], [3, 2]])\n# y = np.array([0, 0, 0, 0, 1, 1, 1, 1]) # Classes: 0 ou 1\n\n# X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size=0.3, random_state=42)\n\n# modelo_classificacao = LogisticRegression()\n# modelo_classificacao.fit(X_treino, y_treino)\n\n# y_previsao = modelo_classificacao.predict(X_teste)\n\n# acuracia = accuracy_score(y_teste, y_previsao)\n# print(f\"Acurácia do modelo de classificação: {acuracia:.2f}\")\n\nprint(\"Simulação de exemplo de Classificação com Scikit-learn.\")\nprint(\"Acurácia do modelo de classificação: 0.XX\")",
+                "explanation": "Ilustra conceitualmente o processo de classificação com Scikit-learn: dividir dados, treinar um modelo (Regressão Logística) e avaliar a acurácia."
+            }
+        ],
+        "summary": "<p>Matplotlib é essencial para visualizar dados e entender padrões. Scikit-learn é a biblioteca padrão para Machine Learning em Python, oferecendo algoritmos e ferramentas para construir e avaliar modelos de regressão e classificação. Este é um ponto de partida para explorar o vasto campo de Ciência de Dados e ML.</p>",
+        "estimated_time_minutes": 75
+    },
+     {
+        "id": "concorrencia-paralelismo",
+        "course_id": "python-avancado",
+        "title": "Concorrência e Paralelismo",
+        "order": 38,
+        "description": "Entenda os conceitos de concorrência e paralelismo e como implementá-los em Python usando threads, processos e programação assíncrona (asyncio).",
+        "learning_objectives": [
+            "Diferenciar concorrência e paralelismo.",
+            "Compreender o funcionamento do GIL (Global Interpreter Lock) e suas implicações.",
+            "Implementar concorrência baseada em threads com o módulo `threading`.",
+            "Utilizar mecanismos de sincronização de threads (locks, semáforos).",
+            "Implementar paralelismo baseado em processos com o módulo `multiprocessing`.",
+            "Utilizar mecanismos de comunicação entre processos (pipes, queues).",
+            "Compreender os fundamentos da programação assíncrona.",
+            "Utilizar `asyncio`, corrotinas (`async def`, `await`) para operações de I/O concorrentes."
+        ],
+        "key_concepts": [
+            "Concorrência",
+            "Paralelismo",
+            "GIL (Global Interpreter Lock)",
+            "Threads",
+            "`threading`",
+            "Sincronização de Threads",
+            "Locks",
+            "Semáforos",
+            "Processos",
+            "`multiprocessing`",
+            "Comunicação Entre Processos",
+            "Pipes",
+            "Queues",
+            "Programação Assíncrona",
+            "`asyncio`",
+            "Corrotinas",
+            "`async def`",
+            "`await`",
+            "Loop de Eventos"
+        ],
+        "content": "<h2>Concorrência e Paralelismo em Python</h2>\n\n<p>Para melhorar o desempenho de aplicações que realizam muitas operações demoradas (seja I/O como requisições de rede ou CPU-bound como cálculos pesados), podemos usar concorrência e paralelismo.</p>\n\n<h3>Conceitos: Concorrência vs. Paralelismo</h3>\n<ul>\n    <li><strong>Concorrência:</strong> Lidar com muitas coisas ao mesmo tempo. Tarefas progridem, mas não necessariamente executam simultaneamente. Pode haver troca de contexto entre tarefas. Ideal para operações de I/O-bound (esperando por rede, disco).</li>\n    <li><strong>Paralelismo:</strong> Executar muitas coisas ao mesmo tempo, literalmente. Tarefas rodam simultaneamente em múltiplos núcleos de CPU. Ideal para operações CPU-bound (cálculos pesados).</li>\n</ul>\n\n<h3>O GIL (Global Interpreter Lock)</h3>\n<p>O <strong>GIL (Global Interpreter Lock)</strong> é um mutex (um tipo de lock) que protege o acesso a objetos Python, impedindo que múltiplos threads nativos executem código Python bytecode <strong>simultaneamente</strong> em múltiplos núcleos. Isso significa que, em Python CPython (a implementação mais comum), threads são ótimos para concorrência (liberam o GIL durante I/O), mas não para paralelismo CPU-bound (o GIL impede a execução simultânea em vários núcleos).</p>\n\n<h3>Concorrência com Threads (`threading`)</h3>\n<p>Threads são unidades de execução dentro de um mesmo processo. Eles compartilham o mesmo espaço de memória.</p>\n\n<pre><code class=\"language-python\">import threading\nimport time\n\ndef tarefa_thread(nome, duracao):\n    print(f\"Thread {nome}: Iniciando...\")\n    time.sleep(duracao) # Simula uma operação de I/O (libera o GIL)\n    print(f\"Thread {nome}: Finalizando.\")\n\n# Criando threads\nt1 = threading.Thread(target=tarefa_thread, args=('T1', 2))\nt2 = threading.Thread(target=tarefa_thread, args=('T2', 3))\n\n# Iniciando threads\nt1.start()\nt2.start()\n\n# Esperando as threads terminarem\nt1.join()\nt2.join()\n\nprint(\"Todas as threads finalizaram.\")</code></pre>\n\n<h4>Sincronização de Threads</h4>\n<p>Como threads compartilham memória, é preciso cuidado para evitar condições de corrida ao acessar recursos compartilhados. Locks são usados para garantir que apenas um thread por vez acesse uma seção crítica do código.</p>\n<pre><code class=\"language-python\">import threading\n\ncontador = 0\nlock = threading.Lock()\n\ndef incrementar():\n    global contador\n    with lock: # Adquire o lock antes de acessar o contador\n        temp = contador\n        time.sleep(0.001) # Simula algum trabalho\n        contador = temp + 1\n\nthreads = []\nfor _ in range(100):\n    thread = threading.Thread(target=incrementar)\n    threads.append(thread)\n    thread.start()\n\nfor thread in threads:\n    thread.join()\n\nprint(f\"Valor final do contador: {contador}\") # Sem lock, o resultado seria inconsistente</code></pre>\n\n<h3>Paralelismo com Processos (`multiprocessing`)</h3>\n<p>Processos são instâncias separadas do interpretador Python, cada um com seu próprio espaço de memória. Eles não são afetados pelo GIL para tarefas CPU-bound.</p>\n\n<pre><code class=\"language-python\">import multiprocessing\nimport time\n\ndef tarefa_processo(nome, duracao):\n    print(f\"Processo {nome}: Iniciando...\")\n    time.sleep(duracao) # Simula trabalho (CPU-bound ou I/O)\n    print(f\"Processo {nome}: Finalizando.\")\n\nif __name__ == '__main__': # Proteção necessária no Windows/macOS\n    # Criando processos\n    p1 = multiprocessing.Process(target=tarefa_processo, args=('P1', 2))\n    p2 = multiprocessing.Process(target=tarefa_processo, args=('P2', 3))\n\n    # Iniciando processos\n    p1.start()\n    p2.start()\n\n    # Esperando os processos terminarem\n    p1.join()\n    p2.join()\n\n    print(\"Todos os processos finalizaram.\")</code></pre>\n\n<h4>Comunicação Entre Processos</h4>\n<p>Como processos não compartilham memória diretamente, mecanismos como Pipes e Queues são usados para comunicação.</p>\n\n<h3>Programação Assíncrona (`asyncio`, `async/await`)</h3>\n<p>Programação assíncrona é uma forma de concorrência single-threaded, ideal para operações de I/O-bound. Ela usa um <strong>loop de eventos</strong> para gerenciar múltiplas tarefas (corrotinas) que cooperam, cedendo o controle quando encontram uma operação de I/O demorada (usando <code>await</code>).</p>\n\n<pre><code class=\"language-python\">import asyncio\nimport time\n\nasync def tarefa_assincrona(nome, duracao):\n    print(f\"Corrotina {nome}: Iniciando...\")\n    await asyncio.sleep(duracao) # 'await' cede o controle durante a espera (I/O)\n    print(f\"Corrotina {nome}: Finalizando.\")\n\nasync def main():\n    print(\"Iniciando main assíncrono...\")\n    # Cria tarefas para rodar concorrentemente\n    task1 = asyncio.create_task(tarefa_assincrona('A1', 2))\n    task2 = asyncio.create_task(tarefa_assincrona('A2', 3))\n\n    # Espera as tarefas terminarem\n    await task1\n    await task2\n    print(\"Main assíncrono finalizado.\")\n\n# Executa a função assíncrona principal\n# asyncio.run(main())\nprint(\"Simulação de execução assíncrona.\")\n# A saída real mostraria as mensagens intercaladas devido à concorrência.</code></pre>\n\n<p><code>asyncio</code> e a sintaxe <code>async/await</code> são poderosos para construir aplicações de rede de alta performance e outras tarefas de I/O concorrentes sem a complexidade de múltiplos threads ou processos.</p>",
+        "examples": [
+            {
+                "title": "Exemplo de Multiprocessing para tarefa CPU-bound",
+                "code": "import multiprocessing\nimport time\n\ndef calcular_quadrado(numero):\n    # Simula uma tarefa CPU-bound\n    time.sleep(0.1) # Pequena pausa para ilustrar\n    return numero * numero\n\nif __name__ == '__main__':\n    numeros = range(10)\n    # Cria um pool de processos\n    with multiprocessing.Pool(processes=4) as pool:\n        # Mapeia a função para os dados, distribuindo entre os processos\n        resultados = pool.map(calcular_quadrado, numeros)\n\n    print(f\"Números originais: {list(numeros)}\")\n    print(f\"Resultados (quadrados): {resultados}\")",
+                "explanation": "Usa <code>multiprocessing.Pool</code> para distribuir uma tarefa (calcular quadrado) entre múltiplos processos, demonstrando paralelismo para uma operação que seria CPU-bound."
+            }
+        ],
+        "summary": "<p>Concorrência (threads, asyncio) lida com múltiplas tarefas que progridem sem execução simultânea real (útil para I/O-bound, limitado pelo GIL em CPython). Paralelismo (processos) executa tarefas simultaneamente em múltiplos núcleos (útil para CPU-bound). Programação assíncrona com <code>asyncio</code> e <code>async/await</code> é uma forma eficiente de concorrência single-threaded para I/O. Escolher a abordagem correta depende do tipo de tarefa (I/O vs CPU-bound).</p>",
+        "estimated_time_minutes": 90
+    },
+     {
+        "id": "gui-tkinter-intro",
+        "course_id": "python-avancado",
+        "title": "Desenvolvimento de Interfaces Gráficas (GUI) - Introdução com Tkinter",
+        "order": 39,
+        "description": "Introdução à criação de aplicações com interface gráfica (GUI) em Python usando a biblioteca Tkinter.",
+        "learning_objectives": [
+            "Compreender o que é uma Interface Gráfica do Usuário (GUI).",
+            "Conhecer as principais bibliotecas GUI para Python (Tkinter, PyQt, Kivy).",
+            "Criar uma janela principal com Tkinter.",
+            "Adicionar widgets básicos à janela (Label, Button, Entry).",
+            "Organizar widgets usando layout managers (pack, grid).",
+            "Associar eventos (cliques de botão) a funções (event handling).",
+            "Criar uma aplicação GUI simples e interativa."
+        ],
+        "key_concepts": [
+            "GUI (Graphical User Interface)",
+            "Tkinter",
+            "Widget",
+            "Janela Principal (Root Window)",
+            "Label",
+            "Button",
+            "Entry (Caixa de Texto)",
+            "Layout Managers",
+            "pack()",
+            "grid()",
+            "Event Handling",
+            "Loop Principal (`mainloop()`)"
+        ],
+        "content": "<h2>Desenvolvimento de GUIs com Tkinter</h2>\n\n<p>Aplicações com <strong>Interface Gráfica do Usuário (GUI)</strong> permitem que os usuários interajam com o programa através de elementos visuais como botões, caixas de texto, menus, etc., em vez de apenas pela linha de comando.</p>\n\n<p>Python oferece várias bibliotecas para criar GUIs. <strong>Tkinter</strong> é a biblioteca padrão embutida, o que a torna uma ótima opção para começar, pois não requer instalação adicional. Outras opções populares incluem PyQt/PySide (baseadas em Qt, mais ricas em recursos) e Kivy (para aplicações multi-touch, incluindo mobile).</p>\n\n<h3>Sua Primeira Janela Tkinter</h3>\n\n<pre><code class=\"language-python\">import tkinter as tk\n\n# 1. Cria a janela principal (root window)\njanela = tk.Tk()\njanela.title(\"Minha Primeira GUI\")\njanela.geometry(\"300x200\") # Define o tamanho da janela (Largura x Altura)\n\n# 2. Cria um widget (Label - rótulo de texto)\nlabel_saudacao = tk.Label(janela, text=\"Olá, Tkinter!\")\n\n# 3. Posiciona o widget na janela (usando pack)\nlabel_saudacao.pack(pady=20) # pady adiciona espaçamento vertical\n\n# 4. Inicia o loop principal de eventos\n# Este loop mantém a janela aberta e responsiva a interações do usuário\njanela.mainloop()</code></pre>\n<p>Salve como um arquivo <code>.py</code> e execute. Uma pequena janela gráfica deve aparecer.</p>\n\n<h3>Widgets Comuns</h3>\n<ul>\n    <li><code>tk.Label</code>: Exibe texto ou imagens.</li>\n    <li><code>tk.Button</code>: Um botão clicável.</li>\n    <li><code>tk.Entry</code>: Uma caixa de texto para entrada de uma única linha.</li>\n    <li><code>tk.Text</code>: Uma área para texto multilinha.</li>\n    <li><code>tk.Checkbutton</code>: Caixa de seleção.</li>\n    <li><code>tk.Radiobutton</code>: Botão de opção (seleção única em um grupo).</li>\n    <li><code>tk.Frame</code>: Um contêiner para agrupar outros widgets.</li>\n</ul>\n\n<h3>Layout Managers</h3>\n<p>Layout managers são usados para organizar a posição e o tamanho dos widgets dentro de um contêiner (como uma janela ou Frame). Tkinter oferece <code>pack()</code>, <code>grid()</code> e <code>place()</code>.</p>\n<ul>\n    <li><strong><code>pack()</code>:</strong> Organiza widgets em blocos antes de colocálos na janela. Simples para layouts básicos.</li>\n    <li><strong><code>grid()</code>:</strong> Organiza widgets em uma grade (linhas e colunas). Ótimo para layouts mais estruturados como formulários.</li>\n    <li><strong><code>place()</code>:</strong> Posiciona widgets em coordenadas absolutas ou relativas. Menos flexível para layouts responsivos.</li>\n</ul>\n<pre><code class=\"language-python\"># Exemplo com grid()\nimport tkinter as tk\n\njanela_grid = tk.Tk()\njanela_grid.title(\"Exemplo Grid\")\n\nlabel_nome = tk.Label(janela_grid, text=\"Nome:\")\nentry_nome = tk.Entry(janela_grid)\n\nlabel_email = tk.Label(janela_grid, text=\"Email:\")\nentry_email = tk.Entry(janela_grid)\n\n# Posicionando na grade (row, column)\nlabel_nome.grid(row=0, column=0, padx=5, pady=5) # padx/pady adicionam espaçamento\nentry_nome.grid(row=0, column=1, padx=5, pady=5)\n\nlabel_email.grid(row=1, column=0, padx=5, pady=5)\nentry_email.grid(row=1, column=1, padx=5, pady=5)\n\n# janela_grid.mainloop() # Descomente para rodar</code></pre>\n\n<h3>Event Handling (Tratamento de Eventos)</h3>\n<p>Para que sua GUI seja interativa, você precisa responder aos eventos do usuário (cliques de botão, digitação, etc.). Isso é feito associando funções (callbacks) aos eventos dos widgets.</p>\n\n<pre><code class=\"language-python\">import tkinter as tk\nfrom tkinter import messagebox # Módulo para caixas de mensagem\n\ndef ao_clicar_botao():\n    nome_digitado = entry_nome_evento.get() # Obtém o texto da caixa de entrada\n    if nome_digitado:\n        messagebox.showinfo(\"Saudação\", f\"Olá, {nome_digitado}!\")\n    else:\n        messagebox.showwarning(\"Aviso\", \"Por favor, digite seu nome.\")\n\njanela_evento = tk.Tk()\njanela_evento.title(\"Exemplo de Evento\")\n\nlabel_instrucao = tk.Label(janela_evento, text=\"Digite seu nome:\")\nlabel_instrucao.pack()\n\nentry_nome_evento = tk.Entry(janela_evento)\nentry_nome_evento.pack()\n\n# Cria um botão e associa a função 'ao_clicar_botao' ao evento 'command' (clique)\nbotao_saudar = tk.Button(janela_evento, text=\"Saudar\", command=ao_clicar_botao)\nbotao_saudar.pack(pady=10)\n\n# janela_evento.mainloop() # Descomente para rodar</code></pre>\n\n<p>Tkinter é simples, mas permite criar GUIs funcionais para aplicações desktop básicas.</p>",
+        "examples": [
+            {
+                "title": "Calculadora simples com Tkinter (esqueleto)",
+                "code": "# import tkinter as tk\n\n# def adicionar():\n#     try:\n#         num1 = float(entry_num1.get())\n#         num2 = float(entry_num2.get())\n#         resultado = num1 + num2\n#         label_resultado.config(text=f\"Resultado: {resultado}\")\n#     except ValueError:\n#         label_resultado.config(text=\"Erro: Entrada inválida\")\n\n# janela_calc = tk.Tk()\n# janela_calc.title(\"Calculadora Simples\")\n\n# entry_num1 = tk.Entry(janela_calc)\n# entry_num2 = tk.Entry(janela_calc)\n# botao_somar = tk.Button(janela_calc, text=\"+\", command=adicionar)\n# label_resultado = tk.Label(janela_calc, text=\"Resultado: \")\n\n# entry_num1.pack()\n# entry_num2.pack()\n# botao_somar.pack()\n# label_resultado.pack()\n\n# # janela_calc.mainloop() # Descomente para rodar\n\nprint(\"Esqueleto de uma calculadora simples com Tkinter.\")",
+                "explanation": "Um esqueleto de código para uma calculadora simples, mostrando como usar Entry para entrada, Button para ação e Label para exibir o resultado, com tratamento básico de erro."
+            }
+        ],
+        "summary": "<p>Tkinter é a biblioteca GUI padrão do Python, permitindo criar janelas e widgets visuais. Layout managers como <code>pack()</code> e <code>grid()</code> organizam os widgets. O tratamento de eventos associa ações do usuário a funções. Tkinter é um bom ponto de partida para o desenvolvimento de aplicações desktop com interface gráfica.</p>",
+        "estimated_time_minutes": 60
+    },
+     {
+        "id": "topicos-especiais-python",
+        "course_id": "python-avancado",
+        "title": "Tópicos Especiais e Áreas de Especialização",
+        "order": 40,
+        "description": "Visão geral de áreas de especialização em Python (Automação, Segurança, Jogos, Computação Científica, Big Data, APIs Avançadas) e como Python se aplica a elas.",
+        "learning_objectives": [
+            "Identificar diferentes áreas de especialização onde Python é amplamente utilizado.",
+            "Compreender o papel de Python em Automação e DevOps.",
+            "Reconhecer a aplicação de Python em Segurança Cibernética.",
+            "Entender como Python é usado no Desenvolvimento de Jogos (introdução a Pygame).",
+            "Conhecer o uso de Python em Computação Científica e Numérica (NumPy/SciPy).",
+            "Ter uma introdução ao uso de Python para Análise de Big Data (PySpark).",
+            "Entender o desenvolvimento de APIs RESTful avançadas com frameworks.",
+            "Ser capaz de identificar áreas de interesse para aprofundamento futuro."
+        ],
+        "key_concepts": [
+            "Especialização em Python",
+            "Automação",
+            "DevOps",
+            "Segurança Cibernética",
+            "Desenvolvimento de Jogos",
+            "Pygame",
+            "Computação Científica",
+            "NumPy (Avançado)",
+            "SciPy",
+            "Big Data",
+            "Apache Spark",
+            "PySpark",
+            "APIs RESTful Avançadas",
+            "Flask RESTful",
+            "Django REST framework",
+            "Carreiras em Python"
+        ],
+        "content": "<h2>Tópicos Especiais: Onde Python Brilha</h2>\n\n<p>Python é uma linguagem incrivelmente versátil, com aplicações em quase todas as áreas da computação. Após dominar os fundamentos e tópicos intermediários e avançados, você estará pronto para se especializar em uma ou mais áreas onde Python é uma ferramenta de ponta.</p>\n\n<p>Esta lição oferece uma visão geral de algumas dessas áreas, servindo como um guia para onde você pode direcionar seus estudos e projetos futuros.</p>\n\n<h3>Python para Automação e DevOps</h3>\n<p>Python é a linguagem \"cola\" ideal para automatizar tarefas repetitivas do sistema operacional, gerenciar servidores, configurar ambientes e orquestrar fluxos de trabalho em ambientes de desenvolvimento e operação (DevOps).</p>\n<ul>\n    <li><strong>Módulos Padrão:</strong> <code>os</code>, <code>subprocess</code>, <code>shutil</code>, <code>glob</code> para interagir com o sistema de arquivos e executar comandos.</li>\n    <li><strong>Ferramentas:</strong> Usado em conjunto com ferramentas como Ansible, SaltStack, Terraform para automação de infraestrutura.</li>\n    <li><strong>CI/CD:</strong> Scripting para automatizar pipelines de Integração Contínua e Entrega Contínua.</li>\n</ul>\n\n<h3>Python para Segurança Cibernética</h3>\n<p>Python é popular na comunidade de segurança para escrever scripts de teste de penetração, analisar logs, desenvolver ferramentas de segurança e automatizar tarefas de resposta a incidentes.</p>\n<ul>\n    <li><strong>Bibliotecas:</strong> <code>requests</code> (para testar APIs web), <code>cryptography</code> (para criptografia), <code>scapy</code> (para manipulação de pacotes de rede), <code>Nmap</code> (wrapper para o scanner de rede), etc.</li>\n    <li><strong>Aplicações:</strong> Scanners de porta, sniffers de pacotes, ferramentas de força bruta, análise forense básica.</li>\n</ul>\n\n<h3>Python para Desenvolvimento de Jogos (Introdução com Pygame)</h3>\n<p>Embora não seja a primeira escolha para jogos 3D de alta performance, Python é excelente para prototipagem e desenvolvimento de jogos 2D, especialmente com a biblioteca Pygame.</p>\n<ul>\n    <li><strong>Pygame:</strong> Uma biblioteca simples e poderosa para criar jogos 2D. Lida com gráficos, sons, entrada do usuário, etc.</li>\n    <li><strong>Conceitos:</strong> Loop de jogo, sprites, detecção de colisão, gerenciamento de eventos.</li>\n</ul>\n<pre><code class=\"language-python\"># Exemplo básico de Pygame (não executável aqui)\n# import pygame\n# pygame.init()\n# tela = pygame.display.set_mode((800, 600))\n# running = True\n# while running:\n#     for event in pygame.event.get():\n#         if event.type == pygame.QUIT:\n#             running = False\n#     tela.fill((255, 255, 255)) # Cor de fundo branca\n#     pygame.display.flip() # Atualiza a tela\n# pygame.quit()\n\nprint(\"Exemplo conceitual de estrutura básica de jogo com Pygame.\")</code></pre>\n\n<h3>Python para Computação Científica e Numérica</h3>\n<p>Python, com NumPy e SciPy, é uma alternativa popular a ferramentas como MATLAB para cálculos científicos, análise de dados e simulações.</p>\n<ul>\n    <li><strong>NumPy:</strong> Computação com arrays, álgebra linear, transformadas.</li>\n    <li><strong>SciPy:</strong> Coleção de algoritmos e ferramentas para ciência e engenharia (otimização, integração, interpolação, processamento de sinais, estatística).</li>\n    <li><strong>Aplicações:</strong> Modelagem matemática, simulações físicas, análise de dados experimentais.</li>\n</ul>\n\n<h3>Python para Análise de Big Data (Introdução com PySpark)</h3>\n<p>Para lidar com volumes massivos de dados distribuídos, Python se integra com frameworks como Apache Spark através da API PySpark.</p>\n<ul>\n    <li><strong>Apache Spark:</strong> Um motor unificado para processamento de dados em larga escala.</li>\n    <li><strong>PySpark:</strong> API Python para interagir com Spark. Permite processar dados em clusters de máquinas.</li>\n    <li><strong>Conceitos:</strong> RDDs, DataFrames distribuídos, operações de transformação e ação.</li>\n</ul>\n\n<h3>Desenvolvimento de APIs RESTful Avançadas</h3>\n<p>Enquanto Flask básico permite criar APIs simples, frameworks e bibliotecas dedicadas oferecem ferramentas para construir APIs mais robustas, escaláveis e bem estruturadas.</p>\n<ul>\n    <li><strong>Frameworks:</strong> Flask-RESTful (extensão para Flask), Django REST framework (para Django).</li>\n    <li><strong>Tópicos:</strong> Serialização de dados, autenticação (Token, OAuth), versionamento de API, documentação automática (Swagger/OpenAPI), testes de API.</li>\n</ul>\n\n<p>Esta visão geral destaca a amplitude das possibilidades com Python. A escolha de uma área de especialização dependerá dos seus interesses e objetivos de carreira.</p>",
+        "examples": [
+            {
+                "title": "Exemplo básico de automação com `os` e `shutil`",
+                "code": "# import os\n# import shutil\n\n# # Criar uma pasta de backup\n# pasta_backup = 'backup_arquivos'\n# os.makedirs(pasta_backup, exist_ok=True)\n# print(f\"Pasta '{pasta_backup}' verificada/criada.\")\n\n# # Simular a criação de um arquivo para backup\n# arquivo_original = 'documento_importante.txt'\n# with open(arquivo_original, 'w') as f: f.write('Conteúdo secreto!')\n# print(f\"Arquivo '{arquivo_original}' criado para backup.\")\n\n# # Definir o caminho de destino do backup\n# caminho_backup = os.path.join(pasta_backup, arquivo_original)\n\n# # Copiar o arquivo para a pasta de backup\n# shutil.copy(arquivo_original, caminho_backup)\n# print(f\"Arquivo '{arquivo_original}' copiado para '{pasta_backup}'.\")\n\n# # Verificar se o arquivo existe no backup\n# if os.path.exists(caminho_backup):\n#     print(\"Backup realizado com sucesso!\")\n\n# # Limpeza (opcional)\n# # os.remove(arquivo_original)\n# # shutil.rmtree(pasta_backup)\n\nprint(\"Simulação de automação básica de backup de arquivo.\")\nprint(\"Pasta 'backup_arquivos' verificada/criada.\")\nprint(\"Arquivo 'documento_importante.txt' criado para backup.\")\nprint(\"Arquivo 'documento_importante.txt' copiado para 'backup_arquivos'.\")\nprint(\"Backup realizado com sucesso!\")",
+                "explanation": "Demonstra um script simples usando <code>os</code> e <code>shutil</code> para criar um diretório de backup e copiar um arquivo para ele, um exemplo básico de automação de tarefas de sistema de arquivos."
+            }
+        ],
+        "summary": "<p>Python é uma linguagem versátil com vastas áreas de especialização como Automação/DevOps, Segurança, Desenvolvimento de Jogos (Pygame), Computação Científica (NumPy/SciPy), Big Data (PySpark) e APIs Avançadas. Explorar essas áreas permite aplicar seus conhecimentos de Python em domínios específicos e escolher um caminho de carreira.</p>",
+        "estimated_time_minutes": 60
+    },
+     {
+        "id": "projetos-avancados-python",
+        "course_id": "python-avancado",
+        "title": "Projetos Práticos Avançados e Projeto Final",
+        "order": 41,
+        "description": "Aplique os conhecimentos avançados de Python no desenvolvimento de projetos práticos complexos e no projeto final do curso.",
+        "learning_objectives": [
+            "Integrar múltiplos conceitos e bibliotecas Python em projetos práticos.",
+            "Desenvolver um projeto final significativo que demonstre proficiência em Python avançado.",
+            "Aplicar Design Patterns, estruturas de dados/algoritmos eficientes, concorrência/paralelismo e bibliotecas de especialização em projetos.",
+            "Planejar, implementar, testar e documentar um projeto Python de ponta a ponta.",
+            "Resolver problemas complexos do mundo real usando Python."
+        ],
+        "key_concepts": [
+            "Projeto Prático",
+            "Projeto Final",
+            "Integração de Conhecimentos",
+            "Resolução de Problemas",
+            "Desenvolvimento de Software",
+            "Planejamento de Projeto",
+            "Implementação",
+            "Testes",
+            "Documentação",
+            "Portfólio"
+        ],
+        "content": "<h2>Projetos: Consolidando Seu Conhecimento Avançado</h2>\n\n<p>A melhor forma de consolidar e demonstrar seu domínio de Python em nível avançado é através do desenvolvimento de projetos práticos. Este nível culmina em um <strong>Projeto Final</strong>, que deve ser uma aplicação abrangente que integre vários dos tópicos avançados que você aprendeu.</p>\n\n<h3>A Importância dos Projetos Práticos</h3>\n<ul>\n    <li><strong>Aplicação Real:</strong> Permitem usar os conceitos e bibliotecas em cenários que simulam problemas do mundo real.</li>\n    <li><strong>Integração:</strong> Exigem a combinação de diferentes habilidades (POO, arquivos, APIs, bancos de dados, concorrência, etc.).</li>\n    <li><strong>Resolução de Problemas:</strong> Forçam você a pensar criticamente e encontrar soluções para desafios de implementação.</li>\n    <li><strong>Portfólio:</strong> Projetos bem desenvolvidos servem como prova tangível de suas habilidades para futuros empregadores ou colaboradores.</li>\n</ul>\n\n<h3>Sugestões de Projetos Avançados</h3>\n<p>Ao longo deste nível, você pode trabalhar em projetos menores que focam em tópicos específicos, e depois integrar esses conhecimentos em um projeto final maior. Aqui estão algumas ideias, alinhadas com as áreas de especialização:</p>\n\n<ul>\n    <li><strong>Aplicação Web Completa:</strong>\n        <ul>\n            <li>Usando Flask (ou Django, se abordado).</li>\n            <li>Com autenticação de usuários.</li>\n            <li>Interação com banco de dados (SQLAlchemy ou ORM do Django).</li>\n            <li>API RESTful para algumas funcionalidades.</li>\n            <li>Exemplo: Um sistema de blog com área administrativa, um gerenciador de tarefas online, uma pequena rede social.</li>\n        </ul>\n    </li>\n    <li><strong>Sistema de Análise e Visualização de Dados:</strong>\n        <ul>\n            <li>Coleta de dados (de arquivos CSV/JSON, APIs web).</li>\n            <li>Processamento e limpeza com Pandas.</li>\n            <li>Análise exploratória e visualização com Matplotlib/Seaborn.</li>\n            <li>Aplicação de um modelo de Machine Learning (Scikit-learn).</li>\n            <li>Apresentação dos resultados (em um relatório, dashboard simples com Flask/Django, ou exportando para um novo arquivo).</li>\n        </ul>\n    </li>\n    <li><strong>Ferramenta de Automação ou Scripting Avançado:</strong>\n        <ul>\n            <li>Automação de tarefas em múltiplos sistemas (local e remoto via SSH, se aplicável).</li>\n            <li>Interação com APIs de serviços cloud (AWS, Google Cloud) usando SDKs Python.</li>\n            <li>Monitoramento de logs e notificação.</li>\n            <li>Exemplo: Um script para fazer backup automático de arquivos importantes para um serviço de nuvem, um monitor de status de servidores.</li>\n        </ul>\n    </li>\n    <li><strong>Aplicação Desktop com GUI:</strong>\n        <ul>\n            <li>Usando Tkinter, PyQt ou Kivy.</li>\n            <li>Interação com arquivos ou banco de dados local (SQLite).</li>\n            <li>Funcionalidades úteis como editor de texto com formatação, gerenciador de contatos, visualizador de dados simples.</li>\n        </ul>\n    </li>\n    <li><strong>Projeto Introdutório a Machine Learning/Deep Learning:</strong>\n        <ul>\n            <li>Focar em um problema específico (classificação de imagens, análise de sentimentos, previsão de séries temporais).</li>\n            <li>Usar Scikit-learn ou introdução a TensorFlow/PyTorch.</li>\n            <li>Coletar/preparar dados, treinar modelo, avaliar e apresentar resultados.</li>\n        </ul>\n    </li>\n</ul>\n\n<h3>Desenvolvendo o Projeto Final</h3>\n<p>O Projeto Final deve ser um reflexo do seu aprendizado. Siga um processo de desenvolvimento:</p>\n<ol>\n    <li><strong>Planejamento:</strong> Defina o escopo, funcionalidades, tecnologias a serem usadas e a estrutura do projeto.</li>\n    <li><strong>Implementação:</strong> Escreva o código, dividindo o trabalho em módulos e funções/classes.</li>\n    <li><strong>Testes:</strong> Escreva testes unitários e de integração para garantir que seu código funcione corretamente.</li>\n    <li><strong>Documentação:</strong> Documente seu código (docstrings) e crie uma documentação geral do projeto (README).</li>\n    <li><strong>Controle de Versão:</strong> Use Git e plataformas como GitHub para gerenciar seu código.</li>\n</ol>\n\n<p>O Projeto Final é sua oportunidade de demonstrar proficiência e construir um portfólio sólido em Python.</p>",
+        "examples": [
+            {
+                "title": "Estrutura de projeto sugerida",
+                "code": "# meu_projeto_final/\n# ├── README.md\n# ├── requirements.txt\n# ├── .venv/           # Ambiente virtual\n# ├── src/             # Código fonte principal\n# │   ├── __init__.py\n# │   ├── main.py      # Ponto de entrada\n# │   ├── modulos/\n# │   │   ├── __init__.py\n# │   │   └── utilidades.py\n# │   └── webapp/\n# │       ├── __init__.py\n# │       ├── app.py\n# │       └── templates/\n# │           └── index.html\n# ├── tests/\n# │   ├── __init__.py\n# │   └── test_minhas_funcoes.py\n# └── data/\n#     └── raw/\n#     └── processed/\n\nprint(\"Estrutura de diretórios sugerida para um projeto Python maior.\")",
+                "explanation": "Uma estrutura de diretórios comum para projetos Python maiores, organizando código fonte, testes, dados e ambiente virtual."
+            }
+        ],
+        "summary": "<p>Projetos práticos, culminando no Projeto Final, são essenciais para aplicar e consolidar o conhecimento avançado de Python. Eles permitem integrar diversos tópicos, resolver problemas complexos e construir um portfólio. Seguir um processo de desenvolvimento (planejamento, implementação, testes, documentação) é crucial para o sucesso do projeto.</p>",
+        "estimated_time_minutes": 120
+    },
+    {
+        "id": "python-avancado-generators",
+        "course_id": "python-avancado",
+        "title": "Geradores e Expressões Geradoras",
+        "order": 42,
+        "description": "Aprenda sobre geradores e expressões geradoras em Python para trabalhar com sequências de forma eficiente em termos de memória.",
+        "learning_objectives": [
+            "Compreender o conceito de iteradores e iteráveis.",
+            "Entender o que são geradores e a palavra-chave `yield`.",
+            "Criar funções geradoras.",
+            "Utilizar expressões geradoras.",
+            "Comparar geradores com listas em termos de uso de memória e desempenho.",
+            "Aplicar geradores em cenários práticos (leitura de arquivos grandes, processamento de streams de dados)."
+        ],
+        "key_concepts": [
+            "Iterador",
+            "Iterável",
+            "Gerador",
+            "`yield`",
+            "Função Geradora",
+            "Expressão Geradora",
+            "Lazy Evaluation",
+            "Economia de Memória"
+        ],
+        "content": "<h2>Geradores: Iteração Eficiente em Python</h2>\n\n<p>Em Python, você frequentemente trabalha com sequências de dados. Vimos listas, tuplas, etc. Para iterar sobre coleções, usamos <strong>iteráveis</strong> (objetos que podem retornar um iterador) e <strong>iteradores</strong> (objetos que mantêm o estado da iteração e retornam o próximo valor usando o método <code>__next__()</code>).</p>\n\n<p><strong>Geradores</strong> são uma forma simples e eficiente de criar iteradores. Eles são especialmente úteis para trabalhar com sequências grandes ou infinitas, pois geram os valores sob demanda (lazy evaluation), economizando memória.</p>\n\n<h3>Funções Geradoras e a Palavra-chave `yield`</h3>\n\n<p>Uma função se torna uma função geradora se usar a palavra-chave <code>yield</code>. Em vez de retornar um valor e terminar (como <code>return</code>), <code>yield</code> pausa a execução da função, salva seu estado e retorna um valor. Quando a função é chamada novamente (pela próxima iteração), ela continua de onde parou.</p>\n\n<pre><code class=\"language-python\"># Exemplo de função geradora\ndef contador_simples(maximo):\n    n = 0\n    while n < maximo:\n        yield n # Pausa aqui e retorna 'n'\n        n += 1\n\n# Usando a função geradora\nmeu_contador = contador_simples(5)\n\nprint(next(meu_contador)) # Saída: 0\nprint(next(meu_contador)) # Saída: 1\nprint(next(meu_contador)) # Saída: 2\n\n# Geradores são iteráveis, podem ser usados em loops for\nprint(\"\\nIterando com for:\")\nfor numero in contador_simples(3):\n    print(numero) # Saída: 0, 1, 2</code></pre>\n\n<p>Cada chamada a <code>next()</code> (ou a iteração em um loop <code>for</code>) executa a função geradora até o próximo <code>yield</code>.</p>\n\n<h3>Expressões Geradoras</h3>\n\n<p>Similar às list comprehensions, você pode criar <strong>expressões geradoras</strong> usando parênteses <code>()</code> em vez de colchetes <code>[]</code>. Elas criam um objeto gerador sem a necessidade de definir uma função.</p>\n\n<pre><code class=\"language-python\"># List comprehension (cria a lista inteira na memória)\nlista_quadrados = [x**2 for x in range(10)]\nprint(f\"Lista de quadrados: {lista_quadrados}\")\n\n# Expressão geradora (cria um objeto gerador)\ngerador_quadrados = (x**2 for x in range(10))\nprint(f\"Objeto gerador: {gerador_quadrados}\")\n\n# Iterando sobre a expressão geradora\nprint(\"\\nIterando sobre expressão geradora:\")\nfor quadrado in gerador_quadrados:\n    print(quadrado)\n# Saída: 0, 1, 4, 9, 16, 25, 36, 49, 64, 81</code></pre>\n\n<p>Expressões geradoras são mais concisas para geradores simples.</p>\n\n<h3>Geradores vs. Listas (Economia de Memória)</h3>\n\n<p>A principal vantagem dos geradores é a economia de memória, especialmente com grandes volumes de dados. Uma list comprehension constrói a lista inteira na memória antes de retorná-la, enquanto um gerador produz os itens um por um, sob demanda.</p>\n\n<pre><code class=\"language-python\">import sys\n\n# Lista com 1 milhão de números\nlista_grande = [i for i in range(1000000)]\nprint(f\"Tamanho da lista (bytes): {sys.getsizeof(lista_grande)}\")\n\n# Gerador para 1 milhão de números\ngerador_grande = (i for i in range(1000000))\nprint(f\"Tamanho do gerador (bytes): {sys.getsizeof(gerador_grande)}\")\n\n# A diferença de tamanho é significativa!</code></pre>\n\n<h3>Aplicações Práticas</h3>\n<ul>\n    <li><strong>Leitura de Arquivos Grandes:</strong> Ler um arquivo linha por linha usando um gerador evita carregar o arquivo inteiro na memória.</li>\n    <li><strong>Processamento de Streams de Dados:</strong> Processar dados à medida que chegam (de rede, sensores) sem armazenar tudo.</li>\n    <li><strong>Sequências Infinitas:</strong> Criar geradores para sequências que teoricamente nunca terminam (ex: gerador de números primos).</li>\n</ul>\n\n<p>Geradores são uma ferramenta poderosa para escrever código Python mais eficiente e elegante, especialmente ao lidar com dados que não cabem facilmente na memória.</p>",
+        "examples": [
+            {
+                "title": "Gerador para ler arquivo linha por linha",
+                "code": "# Simula um arquivo grande\nconteudo_arquivo = \"Linha 1\\nLinha 2\\nLinha 3\\nLinha 4\\nLinha 5\"\n\n# Função geradora para ler linhas\ndef ler_linhas(arquivo_simulado):\n    for linha in arquivo_simulado.split('\\n'):\n        yield linha\n\n# Usando o gerador para processar o 'arquivo'\nprint(\"Processando arquivo simulado com gerador:\")\nfor linha in ler_linhas(conteudo_arquivo):\n    print(f\"Processando: {linha}\")",
+                "explanation": "Demonstra como uma função geradora pode ser usada para simular a leitura linha por linha de um arquivo, processando cada linha individualmente sem carregar o arquivo inteiro."
+            }
+        ],
+        "summary": "<p>Geradores, criados com <code>yield</code> em funções ou com expressões geradoras <code>()</code>, são iteradores eficientes em memória que produzem valores sob demanda. Eles são ideais para trabalhar com grandes volumes de dados ou sequências infinitas, oferecendo uma alternativa mais performática em termos de memória do que construir listas completas.</p>",
+        "estimated_time_minutes": 60
+    },
+    {
+        "id": "estruturas-algoritmos-avancados-impl",
+        "course_id": "python-avancado",
+        "title": "Estruturas de Dados e Algoritmos Avançados (Implementação)",
+        "order": 43,
+        "description": "Implementação básica de estruturas de dados avançadas como Árvores (Binárias) e Grafos, e algoritmos de busca (BFS, DFS).",
+        "learning_objectives": [
+            "Implementar uma estrutura básica de Árvore Binária.",
+            "Entender e implementar percursos em Árvores Binárias (in-order, pre-order, post-order).",
+            "Representar Grafos usando lista de adjacência.",
+            "Implementar o algoritmo de Busca em Largura (BFS) em um grafo.",
+            "Implementar o algoritmo de Busca em Profundidade (DFS) em um grafo (recursivo e iterativo)."
+        ],
+        "key_concepts": [
+            "Árvore Binária",
+            "Nó (Node)",
+            "Raiz (Root)",
+            "Filho (Child)",
+            "Pai (Parent)",
+            "Percurso em Árvore",
+            "In-order Traversal",
+            "Pre-order Traversal",
+            "Post-order Traversal",
+            "Grafo",
+            "Vértice (Vertex)",
+            "Aresta (Edge)",
+            "Lista de Adjacência",
+            "Busca em Largura (BFS)",
+            "Busca em Profundidade (DFS)"
+        ],
+        "content": "<h2>Implementando Estruturas de Dados e Algoritmos Avançados</h2>\n\n<p>Compreender a teoria por trás de estruturas de dados e algoritmos é essencial, mas a implementação prática solidifica o aprendizado e revela desafios reais.</p>\n\n<h3>Implementação Básica de Árvore Binária</h3>\n<p>Uma Árvore Binária é uma árvore onde cada nó tem no máximo dois filhos (esquerda e direita).</p>\n\n<pre><code class=\"language-python\">class NoArvore:\n    def __init__(self, valor):\n        self.valor = valor\n        self.esquerda = None\n        self.direita = None\n\n# Exemplo de criação de uma árvore simples\n#       1\n#      / \\\n#     2   3\n#    / \\\n#   4   5\n\nraiz = NoArvore(1)\nraiz.esquerda = NoArvore(2)\nraiz.direita = NoArvore(3)\nraiz.esquerda.esquerda = NoArvore(4)\nraiz.esquerda.direita = NoArvore(5)\n\nprint(\"Árvore Binária criada (estrutura conceitual).\")</code></pre>\n\n<h4>Percursos em Árvores Binárias</h4>\n<p>Existem diferentes formas de visitar todos os nós de uma árvore:</p>\n<ul>\n    <li><strong>In-order (Em Ordem):</strong> Esquerda -> Raiz -> Direita (Útil para Árvores de Busca Binária - retorna elementos ordenados).</li>\n    <li><strong>Pre-order (Pré-Ordem):</strong> Raiz -> Esquerda -> Direita (Útil para copiar árvores).</li>\n    <li><strong>Post-order (Pós-Ordem):</strong> Esquerda -> Direita -> Raiz (Útil para deletar árvores).</li>\n</ul>\n\n<pre><code class=\"language-python\"># Implementação de percursos (recursivo)\n\ndef percurso_in_order(no):\n    if no:\n        percurso_in_order(no.esquerda)\n        print(no.valor, end=' ')\n        percurso_in_order(no.direita)\n\ndef percurso_pre_order(no):\n    if no:\n        print(no.valor, end=' ')\n        percurso_pre_order(no.esquerda)\n        percurso_pre_order(no.direita)\n\ndef percurso_post_order(no):\n    if no:\n        percurso_post_order(no.esquerda)\n        percurso_post_order(no.direita)\n        print(no.valor, end=' ')\n\n# Usando os percursos na árvore criada acima\nprint(\"\\nPercurso In-order:\")\npercurso_in_order(raiz) # Saída: 4 2 5 1 3\n\nprint(\"\\nPercurso Pre-order:\")\npercurso_pre_order(raiz) # Saída: 1 2 4 5 3\n\nprint(\"\\nPercurso Post-order:\")\npercurso_post_order(raiz) # Saída: 4 5 2 3 1</code></pre>\n\n<h3>Implementação de Busca em Grafos</h3>\n<p>Vamos usar a representação de grafo por lista de adjacência que vimos anteriormente.</p>\n\n<h4>Busca em Largura (BFS)</h4>\n<p>BFS explora o grafo camada por camada. Usa uma fila para gerenciar os nós a serem visitados.</p>\n<pre><code class=\"language-python\">from collections import deque\n\ndef bfs(grafo, inicio):\n    visitados = set() # Conjunto para rastrear nós visitados\n    fila = deque([inicio]) # Fila para nós a serem visitados\n    visitados.add(inicio)\n\n    print(f\"Iniciando BFS a partir de {inicio}:\")\n    while fila:\n        vertice = fila.popleft() # Desenfileira o próximo vértice\n        print(vertice, end=' ')\n\n        # Adiciona vizinhos não visitados à fila\n        for vizinho in grafo.get(vertice, []):\n            if vizinho not in visitados:\n                visitados.add(vizinho)\n                fila.append(vizinho)\n    print() # Nova linha ao final\n\n# Grafo de exemplo\ngrafo_bfs = {\n    'A': ['B', 'C'],\n    'B': ['A', 'D', 'E'],\n    'C': ['A', 'F'],\n    'D': ['B'],\n    'E': ['B', 'F'],\n    'F': ['C', 'E']\n}\n\nbfs(grafo_bfs, 'A') # Saída: A B C D E F</code></pre>\n\n<h4>Busca em Profundidade (DFS)</h4>\n<p>DFS explora o grafo o mais fundo possível. Pode ser implementado recursivamente ou usando uma pilha explícita.</p>\n\n<pre><code class=\"language-python\"># DFS Recursivo\ndef dfs_recursivo(grafo, vertice, visitados):\n    visitados.add(vertice)\n    print(vertice, end=' ')\n\n    for vizinho in grafo.get(vertice, []):\n        if vizinho not in visitados:\n            dfs_recursivo(grafo, vizinho, visitados)\n\n# DFS Iterativo (usando pilha)\ndef dfs_iterativo(grafo, inicio):\n    visitados = set()\n    pilha = [inicio]\n    visitados.add(inicio)\n\n    print(f\"Iniciando DFS iterativo a partir de {inicio}:\")\n    while pilha:\n        vertice = pilha.pop() # Desempilha o próximo vértice\n        print(vertice, end=' ')\n\n        # Adiciona vizinhos não visitados à pilha (ordem inversa para manter lógica DFS)\n        for vizinho in reversed(grafo.get(vertice, [])):\n             if vizinho not in visitados:\n                visitados.add(vizinho)\n                pilha.append(vizinho)\n    print()\n\n# Grafo de exemplo (mesmo do BFS)\ngrafo_dfs = {\n    'A': ['B', 'C'],\n    'B': ['A', 'D', 'E'],\n    'C': ['A', 'F'],\n    'D': ['B'],\n    'E': ['B', 'F'],\n    'F': ['C', 'E']\n}\n\nprint(\"\\nDFS Recursivo:\")\ndfs_recursivo(grafo_dfs, 'A', set()) # Saída: A B D E F C\n\ndfs_iterativo(grafo_dfs, 'A') # Saída: A C F E B D (ordem pode variar dependendo da ordem dos vizinhos)</code></pre>\n\n<p>Implementar essas estruturas e algoritmos do zero ajuda a entender seu funcionamento interno e aprimora suas habilidades de resolução de problemas.</p>",
+        "examples": [
+            {
+                "title": "Implementação básica de Árvore de Busca Binária (Inserção)",
+                "code": "class NoABB:\n    def __init__(self, valor):\n        self.valor = valor\n        self.esquerda = None\n        self.direita = None\n\ndef inserir_abb(raiz, valor):\n    if raiz is None:\n        return NoABB(valor)\n    if valor < raiz.valor:\n        raiz.esquerda = inserir_abb(raiz.esquerda, valor)\n    else:\n        raiz.direita = inserir_abb(raiz.direita, valor)\n    return raiz\n\ndef percurso_in_order_abb(no):\n    if no:\n        percurso_in_order_abb(no.esquerda)\n        print(no.valor, end=' ')\n        percurso_in_order_abb(no.direita)\n\n# Criando e inserindo na ABB\nraiz_abb = None\nvalores = [50, 30, 70, 20, 40, 60, 80]\n\nfor valor in valores:\n    raiz_abb = inserir_abb(raiz_abb, valor)\n\nprint(\"\\nABB In-order (deve estar ordenada):\")\npercurso_in_order_abb(raiz_abb) # Saída: 20 30 40 50 60 70 80",
+                "explanation": "Uma implementação básica de inserção em uma Árvore de Busca Binária (ABB) e a demonstração de que o percurso in-order retorna os elementos ordenados."
+            }
+        ],
+        "summary": "<p>Implementar estruturas de dados avançadas como Árvores Binárias (com seus percursos) e Grafos (com representação por lista de adjacência) e algoritmos de busca (BFS e DFS) é fundamental para solidificar o conhecimento e desenvolver habilidades de resolução de problemas eficientes.</p>",
+        "estimated_time_minutes": 90
+    },
+    {
+        "id": "web-flask-avancado",
+        "course_id": "python-avancado",
+        "title": "Desenvolvimento Web: Flask Avançado",
+        "order": 44,
+        "description": "Aprofunde-se no Flask: manipulação de formulários, gerenciamento de sessões, integração com banco de dados (SQLAlchemy) e estruturação de projetos.",
+        "learning_objectives": [
+            "Manipular dados de formulários web em aplicações Flask.",
+            "Validar dados de formulários.",
+            "Gerenciar sessões e cookies para manter o estado do usuário.",
+            "Integrar Flask com um banco de dados relacional usando SQLAlchemy.",
+            "Definir modelos de dados com SQLAlchemy.",
+            "Realizar operações CRUD (Criar, Ler, Atualizar, Deletar) no banco de dados via Flask e SQLAlchemy.",
+            "Estruturar aplicações Flask maiores usando Blueprints.",
+            "Escrever testes básicos para aplicações Flask."
+        ],
+        "key_concepts": [
+            "Flask",
+            "Formulários Web",
+            "request.form",
+            "request.json",
+            "WTForms (Opcional)",
+            "Sessões",
+            "Cookies",
+            "Banco de Dados",
+            "SQLAlchemy",
+            "ORM",
+            "Modelos (Models)",
+            "CRUD",
+            "Blueprints",
+            "Estrutura de Projeto Flask",
+            "Testes em Flask"
+        ],
+        "content": "<h2>Flask Avançado: Construindo Aplicações Mais Robustas</h2>\n\n<p>Vimos o básico do Flask. Agora, vamos adicionar funcionalidades essenciais para aplicações web reais: lidar com formulários, manter o estado do usuário com sessões e integrar com um banco de dados.</p>\n\n<h3>Manipulação de Formulários</h3>\n<p>Aplicações web frequentemente precisam coletar dados do usuário através de formulários HTML. No Flask, os dados enviados via métodos POST ou GET estão disponíveis no objeto <code>request</code>.</p>\n\n<pre><code class=\"language-python\">from flask import Flask, request, render_template, redirect, url_for\n\napp = Flask(__name__)\n\n@app.route('/formulario', methods=['GET', 'POST'])\ndef formulario():\n    if request.method == 'POST':\n        # Obtém dados do formulário (campos de input com 'name')\n        nome = request.form.get('nome')\n        email = request.form.get('email')\n\n        # Validação básica\n        if not nome or not email:\n            mensagem = \"Por favor, preencha todos os campos.\"\n            return render_template('formulario.html', mensagem_erro=mensagem)\n\n        # Processar os dados (ex: salvar no banco de dados)\n        print(f\"Dados recebidos: Nome={nome}, Email={email}\")\n\n        # Redireciona para outra página após o sucesso\n        return redirect(url_for('sucesso'))\n\n    # Se for GET, exibe o formulário\n    return render_template('formulario.html')\n\n@app.route('/sucesso')\ndef sucesso():\n    return \"Formulário enviado com sucesso!\"\n\n# Exemplo de template formulario.html (na pasta templates/)\n# &lt;form method=\"POST\" action=\"/formulario\"&gt;\n#     &lt;label for=\"nome\"&gt;Nome:&lt;/label&gt;&lt;br&gt;\n#     &lt;input type=\"text\" id=\"nome\" name=\"nome\"&gt;&lt;br&gt;\n#     &lt;label for=\"email\"&gt;Email:&lt;/label&gt;&lt;br&gt;\n#     &lt;input type=\"email\" id=\"email\" name=\"email\"&gt;&lt;br&gt;\n#     &lt;input type=\"submit\" value=\"Enviar\"&gt;\n# &lt;/form&gt;\n# {% if mensagem_erro %}\n# &lt;p style=\"color: red;\"&gt;{{ mensagem_erro }}&lt;/p&gt;\n# {% endif %}\n\n# if __name__ == '__main__':\n#     app.run(debug=True)\n\nprint(\"Simulação de manipulação de formulários com Flask.\")</code></pre>\n<p>Para formulários mais complexos e validação robusta, bibliotecas como WTForms são frequentemente usadas com Flask.</p>\n\n<h3>Gerenciamento de Sessões e Cookies</h3>\n<p>HTTP é stateless (sem estado), o que significa que o servidor não \"lembra\" requisições anteriores do mesmo usuário por padrão. Sessões e cookies são usados para manter o estado do usuário entre requisições.</p>\n<ul>\n    <li><strong>Cookies:</strong> Pequenos pedaços de dados armazenados no navegador do usuário pelo servidor.</li>\n    <li><strong>Sessões:</strong> Dados armazenados no servidor, associados a um ID único que é enviado ao navegador via cookie. Mais seguros para armazenar informações sensíveis.</li>\n</ul>\n<p>Flask usa sessões baseadas em cookies por padrão, que são criptografados.</p>\n\n<pre><code class=\"language-python\">from flask import Flask, session, redirect, url_for, request\n\napp = Flask(__name__)\n# A chave secreta é ESSENCIAL para a segurança das sessões\n# Em produção, use uma chave forte e gerada aleatoriamente\napp.config['SECRET_KEY'] = 'uma_chave_muito_secreta_e_aleatoria'\n\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        # Simula verificação de login\n        usuario = request.form.get('usuario')\n        senha = request.form.get('senha')\n\n        if usuario == 'admin' and senha == 'senha123':\n            session['logado'] = True\n            session['usuario'] = usuario\n            return redirect(url_for('dashboard'))\n        else:\n            return \"Login falhou!\"\n\n    return '<form method=\"POST\"><input type=\"text\" name=\"usuario\"><input type=\"password\" name=\"senha\"><button type=\"submit\">Login</button></form>'\n\n@app.route('/dashboard')\ndef dashboard():\n    # Verifica se o usuário está logado\n    if 'logado' in session and session['logado']:\n        return f\"Bem-vindo, {session['usuario']}! Esta é a dashboard.\" \\\n               f\"&lt;br&gt;&lt;a href='{url_for('logout')}'&gt;Logout&lt;/a&gt;\"\n    else:\n        return redirect(url_for('login'))\n\n@app.route('/logout')\ndef logout():\n    # Remove os dados da sessão\n    session.pop('logado', None)\n    session.pop('usuario', None)\n    return redirect(url_for('login'))\n\n# if __name__ == '__main__':\n#     app.run(debug=True)\n\nprint(\"Simulação de login e sessão com Flask.\")</code></pre>\n\n<h3>Integração com Banco de Dados (SQLAlchemy)</h3>\n<p>Para persistir dados, integramos Flask com bancos de dados. <strong>SQLAlchemy</strong> é um ORM (Object-Relational Mapper) poderoso e flexível que funciona com diversos bancos de dados (SQLite, PostgreSQL, MySQL, etc.). Flask-SQLAlchemy é uma extensão que facilita a integração.</p>\n\n<pre><code class=\"language-python\"># Instalação: pip install Flask-SQLAlchemy\n\nfrom flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\n\napp = Flask(__name__)\n# Configurações do banco de dados (SQLite neste exemplo)\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db' # Caminho do arquivo db\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Desativa rastreamento de modificações (opcional)\n\ndb = SQLAlchemy(app)\n\n# Define um modelo (representa uma tabela no banco de dados)\nclass Usuario(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    nome = db.Column(db.String(50), nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n\n    def __repr__(self):\n        return f\"Usuário('{self.nome}', '{self.email}')\"\n\n# Exemplo de uso (fora do contexto web direto, para ilustrar operações)\n# with app.app_context(): # Necessário para usar db fora de requisições web\n#     db.create_all() # Cria as tabelas (se não existirem)\n\n#     # Criar um novo usuário\n#     novo_usuario = Usuario(nome='Teste', email='teste@example.com')\n#     db.session.add(novo_usuario)\n#     db.session.commit()\n#     print(\"Usuário adicionado.\")\n\n#     # Consultar usuários\n#     usuarios = Usuario.query.all()\n#     print(\"Todos os usuários:\", usuarios)\n\n#     # Consultar um usuário por filtro\n#     usuario_encontrado = Usuario.query.filter_by(nome='Teste').first()\n#     print(\"Usuário encontrado:\", usuario_encontrado)\n\n#     # Atualizar um usuário\n#     if usuario_encontrado:\n#         usuario_encontrado.email = 'novo.email@example.com'\n#         db.session.commit()\n#         print(\"Email atualizado.\")\n\n#     # Deletar um usuário\n#     # db.session.delete(usuario_encontrado)\n#     # db.session.commit()\n#     # print(\"Usuário deletado.\")\n\nprint(\"Simulação de integração com SQLAlchemy no Flask.\")</code></pre>\n<p>A integração de formulários, sessões e banco de dados permite construir aplicações web dinâmicas e com persistência de dados.</p>\n\n<h3>Estruturando Projetos com Blueprints</h3>\n<p>Para aplicações Flask maiores, é recomendado usar <strong>Blueprints</strong>. Blueprints permitem organizar sua aplicação em componentes menores e reutilizáveis (como módulos ou áreas da aplicação), cada um com suas próprias rotas, templates e arquivos estáticos.</p>\n\n<pre><code class=\"language-python\"># Exemplo de estrutura com Blueprints:\n# meu_app_flask/\n# ├── run.py         # Ponto de entrada principal\n# ├── config.py      # Configurações\n# ├── instance/      # Arquivos de instância (ex: site.db)\n# ├── meu_app/\n# │   ├── __init__.py # Cria a instância do app Flask e registra Blueprints\n# │   ├── models.py   # Modelos SQLAlchemy\n# │   ├── forms.py    # Formulários WTForms\n# │   ├── main/       # Blueprint 'main'\n# │   │   ├── __init__.py\n# │   │   ├── routes.py # Rotas do blueprint main\n# │   │   └── templates/\n# │   │       └── main/\n# │   │           └── index.html\n# │   └── auth/       # Blueprint 'auth'\n# │       ├── __init__.py\n# │       ├── routes.py # Rotas de autenticação\n# │       └── templates/\n# │           └── auth/\n# │               └── login.html\n# └── static/        # Arquivos estáticos (CSS, JS, imagens)\n\nprint(\"Estrutura de projeto Flask com Blueprints (conceitual).\")</code></pre>\n<p>Blueprints ajudam a manter o código organizado e modular.</p>",
+        "examples": [
+            {
+                "title": "Exemplo básico de Blueprint (arquivo routes.py)",
+                "code": "# from flask import Blueprint, render_template\n\n# # Cria um Blueprint\n# main_bp = Blueprint('main', __name__)\n\n# @main_bp.route('/')\n# def index():\n#     return render_template('main/index.html') # Templates dentro da pasta do blueprint\n\n# # Em meu_app/__init__.py, você registraria o blueprint:\n# # from flask import Flask\n# # from .main.routes import main_bp\n# #\n# # def create_app():\n# #     app = Flask(__name__)\n# #     # ... configurações ...\n# #     app.register_blueprint(main_bp)\n# #     return app\n\nprint(\"Exemplo conceitual de criação e registro de um Blueprint no Flask.\")",
+                "explanation": "Mostra a estrutura básica de um Blueprint em um arquivo de rotas e como ele seria registrado na instância principal da aplicação Flask."
+            }
+        ],
+        "summary": "<p>Em Flask avançado, você aprende a manipular formulários (<code>request.form</code>), gerenciar estado com sessões (<code>session</code> e <code>SECRET_KEY</code>), integrar com bancos de dados usando SQLAlchemy (definindo modelos e realizando operações CRUD), e organizar projetos maiores com Blueprints para modularidade.</p>",
+        "estimated_time_minutes": 90
+    },
+    {
+        "id": "web-django-intro",
+        "course_id": "python-avancado",
+        "title": "Desenvolvimento Web: Introdução ao Django",
+        "order": 45,
+        "description": "Introdução ao framework web full-stack Django: estrutura de projeto, apps, modelos, ORM, admin e rotas.",
+        "learning_objectives": [
+            "Entender o que é um framework web full-stack (Django).",
+            "Instalar o Django.",
+            "Criar um projeto Django e um app.",
+            "Compreender a estrutura básica de um projeto/app Django (models, views, templates, urls, admin).",
+            "Definir modelos de dados usando o ORM do Django.",
+            "Criar e aplicar migrações de banco de dados.",
+            "Utilizar o shell interativo do Django para interagir com o ORM.",
+            "Registrar modelos no site administrativo do Django.",
+            "Definir URLs e criar view functions simples.",
+            "Renderizar templates em views Django."
+        ],
+        "key_concepts": [
+            "Django",
+            "Framework Full-Stack",
+            "Projeto Django",
+            "App Django",
+            "Estrutura de Projeto",
+            "Models",
+            "ORM (Object-Relational Mapper)",
+            "Migrações",
+            "Views",
+            "Templates",
+            "URLs",
+            "Site Administrativo (Admin Site)"
+        ],
+        "content": "<h2>Desenvolvimento Web com Django</h2>\n\n<p><strong>Django</strong> é um framework web <strong>full-stack</strong> poderoso e de alto nível que incentiva o desenvolvimento rápido e limpo. Ele inclui muitas funcionalidades \"batteries-included\" (já prontas), como ORM, sistema de autenticação, painel administrativo, etc., o que o torna adequado para aplicações web complexas.</p>\n\n<h3>Instalação</h3>\n<p>Instale o Django usando pip (preferencialmente em um ambiente virtual):</p>\n<pre><code>pip install Django</code></pre>\n\n<h3>Criando um Projeto e App</h3>\n<p>Um projeto Django é uma coleção de configurações para uma instância específica do Django. Um app é um módulo Python que faz alguma coisa (ex: um app de blog, um app de usuários).</p>\n\n<pre><code># No terminal:\n\n# Cria um novo projeto Django\ndjango-admin startproject meu_projeto_django\n\n# Navega para a pasta do projeto\ncd meu_projeto_django\n\n# Cria um novo app dentro do projeto\npython manage.py startapp blog\n\n# A estrutura de arquivos será criada.</code></pre>\n\n<h3>Estrutura Básica</h3>\n<p>Um projeto Django tem uma estrutura padrão:</p>\n<pre><code>meu_projeto_django/\n├── manage.py         # Utilitário de linha de comando\n├── meu_projeto_django/ # Pacote principal do projeto\n│   ├── __init__.py\n│   ├── asgi.py\n│   ├── settings.py   # Configurações do projeto\n│   ├── urls.py       # URLs principais do projeto\n│   └── wsgi.py\n├── blog/             # O app 'blog'\n│   ├── migrations/\n│   ├── __init__.py\n│   ├── admin.py      # Configurações para o site admin\n│   ├── apps.py       # Configurações do app\n│   ├── models.py     # Modelos de dados (ORM)\n│   ├── tests.py      # Testes do app\n│   └── views.py      # Lógica das views\n└── db.sqlite3        # Banco de dados padrão (SQLite)</code></pre>\n\n<h3>Modelos e ORM</h3>\n<p>O ORM do Django permite interagir com o banco de dados usando classes Python (modelos), em vez de escrever SQL puro. Os modelos são definidos no arquivo <code>models.py</code> de cada app.</p>\n\n<pre><code class=\"language-python\"># Arquivo: blog/models.py\n\nfrom django.db import models\n\nclass Post(models.Model):\n    titulo = models.CharField(max_length=100)\n    conteudo = models.TextField()\n    data_publicacao = models.DateTimeField(auto_now_add=True)\n\n    def __str__(self):\n        return self.titulo</code></pre>\n\n<h4>Migrações</h4>\n<p>Após definir ou modificar modelos, você precisa criar e aplicar migrações para atualizar o esquema do banco de dados:</p>\n<pre><code># No terminal (na pasta do projeto):\n\n# Cria os arquivos de migração com base nas mudanças nos modelos\npython manage.py makemigrations\n\n# Aplica as migrações ao banco de dados\npython manage.py migrate</code></pre>\n\n<h3>Site Administrativo do Django</h3>\n<p>O Django cria automaticamente um painel administrativo poderoso. Para que seus modelos apareçam nele, registre-os no arquivo <code>admin.py</code> do app.</p>\n\n<pre><code class=\"language-python\"># Arquivo: blog/admin.py\n\nfrom django.contrib import admin\nfrom .models import Post\n\nadmin.site.register(Post)</code></pre>\n<p>Para acessar o admin, crie um superusuário (<code>python manage.py createsuperuser</code>) e inicie o servidor de desenvolvimento (<code>python manage.py runserver</code>). O admin estará em <code>http://127.0.0.1:8000/admin/</code>.</p>\n\n<h3>Views e URLs</h3>\n<p><strong>Views</strong> são funções ou classes que recebem requisições web e retornam respostas (geralmente renderizando templates HTML). As <strong>URLs</strong> mapeiam caminhos web para views.</p>\n\n<pre><code class=\"language-python\"># Arquivo: blog/views.py\n\nfrom django.shortcuts import render\nfrom .models import Post\n\ndef lista_posts(request):\n    posts = Post.objects.all() # Consulta todos os posts usando o ORM\n    return render(request, 'blog/lista_posts.html', {'posts': posts})\n\n# Arquivo: blog/urls.py\n\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('', views.lista_posts, name='lista_posts'),\n]\n\n# Arquivo: meu_projeto_django/urls.py (incluir as URLs do app blog)\n\nfrom django.contrib import admin\nfrom django.urls import path, include\n\nurlpatterns = [\n    path('admin/', admin.site.urls),\n    path('blog/', include('blog.urls')), # Inclui as URLs do app blog\n]\n\n# Exemplo de template blog/lista_posts.html (na pasta blog/templates/blog/)\n# &lt;h1&gt;Posts do Blog&lt;/h1&gt;\n# {% for post in posts %}\n#     &lt;h2&gt;{{ post.titulo }}&lt;/h2&gt;\n#     &lt;p&gt;{{ post.conteudo }}&lt;/p&gt;\n#     &lt;hr&gt;\n# {% endfor %}\n\nprint(\"Simulação de views, URLs e templates no Django.\")</code></pre>\n\n<p>Django segue o padrão MVT (Model-View-Template), semelhante ao MVC. Ele fornece uma estrutura robusta para construir aplicações web completas.</p>",
+        "examples": [
+            {
+                "title": "Criando um objeto via shell do Django",
+                "code": "# No terminal (na pasta do projeto):\n# python manage.py shell\n\n# >>> from blog.models import Post\n# >>> novo_post = Post(titulo='Meu Primeiro Post', conteudo='Este é o conteúdo.')\n# >>> novo_post.save() # Salva no banco de dados\n# >>> Post.objects.all() # Consulta todos os posts\n# <QuerySet [<Post: Meu Primeiro Post>]>\n\nprint(\"Simulação de interação com o ORM do Django via shell.\")",
+                "explanation": "Mostra como acessar e manipular modelos Django diretamente do shell interativo, útil para testes e tarefas administrativas."
+            }
+        ],
+        "summary": "<p>Django é um framework web full-stack que simplifica o desenvolvimento com sua estrutura (projetos, apps) e ferramentas embutidas como ORM (modelos, migrações), site administrativo, sistema de URLs e views/templates. Ele é ideal para construir aplicações web completas e complexas.</p>",
+        "estimated_time_minutes": 90
+    },
+    {
+    "id": "poo-avancado-patterns-parte2",
+        "course_id": "python-avancado",
+        "title": "POO Avançada (Parte 3): Mais Design Patterns e @property",
+        "order": 46,
+        "description": "Continue explorando Design Patterns (Builder, Prototype, Facade, Proxy, Template Method) e aprenda a usar o decorador @property.",
+        "learning_objectives": [
+            "Compreender e aplicar padrões criacionais como Builder e Prototype.",
+            "Compreender e aplicar padrões estruturais como Facade e Proxy.",
+            "Compreender e aplicar o padrão comportamental Template Method.",
+            "Utilizar o decorador `@property` para criar atributos gerenciados.",
+            "Entender as diferenças e casos de uso para os padrões apresentados."
+        ],
+        "key_concepts": [
+            "Design Patterns",
+            "Builder Pattern",
+            "Prototype Pattern",
+            "Facade Pattern",
+            "Proxy Pattern",
+            "Template Method Pattern",
+            "`@property` Decorator",
+            "Atributos Gerenciados"
+        ],
+        
+        "content": "<h2>Mais Design Patterns e o Decorador @property</h2>\n\n<p>Continuando nossa exploração de Design Patterns, vamos ver mais alguns exemplos úteis e o decorador <code>@property</code>, que é uma forma elegante de criar atributos gerenciados em Python.</p>\n\n<h3>Padrões de Projeto Adicionais</h3>\n\n<h4>Builder (Criacional)</h4>\n<p>Separa a construção de um objeto complexo de sua representação, permitindo que o mesmo processo de construção crie diferentes representações. Útil quando o processo de criação de um objeto envolve muitos passos ou configurações opcionais.</p>\n<pre><code class=\"language-python\">class Produto:\n    def __init__(self, parte_a=None, parte_b=None, parte_c=None):\n        self.parte_a = parte_a\n        self.parte_b = parte_b\n        self.parte_c = parte_c\n\n    def listar_partes(self):\n        print(f\"Partes do Produto: {self.parte_a}, {self.parte_b}, {self.parte_c}\")\n\nclass BuilderProduto:\n    def __init__(self):\n        self.produto = Produto()\n\n    def construir_parte_a(self):\n        self.produto.parte_a = \"Parte A construída\"\n\n    def construir_parte_b(self):\n        self.produto.parte_b = \"Parte B construída\"\n\n    def construir_parte_c(self):\n        self.produto.parte_c = \"Parte C construída\"\n\n    def get_produto(self):\n        return self.produto\n\nclass Diretor:\n    def __init__(self, builder):\n        self._builder = builder\n\n    def construir_produto_completo(self):\n        self._builder.construir_parte_a()\n        self._builder.construir_parte_b()\n        self._builder.construir_parte_c()\n\n    def construir_produto_parcial(self):\n        self._builder.construir_parte_a()\n\n# Usando o Builder\nbuilder = BuilderProduto()\ndiretor = Diretor(builder)\n\ndiretor.construir_produto_completo()\nproduto_completo = builder.get_produto()\nproduto_completo.listar_partes()\n\ndiretor.construir_produto_parcial()\nproduto_parcial = builder.get_produto()\nproduto_parcial.listar_partes()</code></pre>\n\n<h4>Prototype (Criacional)</h4>\n<p>Especifica os tipos de objetos a serem criados usando uma instância protótipo e cria novos objetos copiando este protótipo. Útil quando a criação de um objeto é cara ou complexa, e você precisa de muitas cópias semelhantes.</p>\n<pre><code class=\"language-python\">import copy\n\nclass Prototipo:\n    def __init__(self, valor):\n        self.valor = valor\n        self.lista = [1, 2, 3]\n\n    def clone(self):\n        # copy.deepcopy é geralmente necessário para cópias completas\n        return copy.deepcopy(self)\n\n    def __str__(self):\n        return f\"Prototipo(valor={self.valor}, lista={self.lista})\"\n\n# Usando o Prototype\nprototipo_original = Prototipo(10)\nprint(f\"Original: {prototipo_original}\")\n\n# Cria uma cópia (clone)\nprototipo_clonado = prototipo_original.clone()\n\n# Modifica o clone (não afeta o original se a cópia for profunda)\nprototipo_clonado.valor = 20\nprototipo_clonado.lista.append(4)\n\nprint(f\"Clonado:  {prototipo_clonado}\")\nprint(f\"Original: {prototipo_original}\") # Original não foi modificado</code></pre>\n\n<h4>Facade (Estrutural)</h4>\n<p>Fornece uma interface unificada e simplificada para um conjunto complexo de subsistemas. Esconde a complexidade do subsistema e facilita seu uso.</p>\n<pre><code class=\"language-python\"># Subsistemas complexos\nclass SubsistemaA:\n    def operacao_a1(self):\n        print(\"Subsistema A: Operação 1\")\n    def operacao_a2(self):\n        print(\"Subsistema A: Operação 2\")\n\nclass SubsistemaB:\n    def operacao_b1(self):\n        print(\"Subsistema B: Operação 1\")\n    def operacao_b2(self):\n        print(\"Subsistema B: Operação 2\")\n\n# Facade\nclass Facade:\n    def __init__(self):\n        self._subsistema_a = SubsistemaA()\n        self._subsistema_b = SubsistemaB()\n\n    def operacao_simplificada(self):\n        print(\"Facade: Executando operação simplificada\")\n        self._subsistema_a.operacao_a1()\n        self._subsistema_b.operacao_b2()\n        self._subsistema_a.operacao_a2()\n\n# Cliente usa apenas a Facade\nfacade = Facade()\nfacade.operacao_simplificada()</code></pre>\n\n<h4>Proxy (Estrutural)</h4>\n<p>Fornece um substituto (proxy) para outro objeto. Um proxy controla o acesso ao objeto original, permitindo adicionar lógica extra (como lazy loading, controle de acesso, logging) antes ou depois de encaminhar a requisição ao objeto real.</p>\n<pre><code class=\"language-python\"># Objeto real (pode ser caro para criar ou acessar)\nclass ObjetoReal:\n    def operacao(self):\n        print(\"Objeto Real: Executando operação\")\n\n# Proxy\nclass ProxyObjeto:\n    def __init__(self):\n        self._objeto_real = None # Lazy loading\n\n    def operacao(self):\n        print(\"Proxy: Verificando acesso...\")\n        # Lazy loading: cria o objeto real apenas quando necessário\n        if self._objeto_real is None:\n            print(\"Proxy: Criando Objeto Real...\")\n            self._objeto_real = ObjetoReal()\n\n        print(\"Proxy: Encaminhando para Objeto Real...\")\n        self._objeto_real.operacao()\n        print(\"Proxy: Operação concluída.\")\n\n# Cliente usa o Proxy\nproxy = ProxyObjeto()\n\n# A primeira chamada cria o ObjetoReal\nproxy.operacao()\n\nprint(\"\\nChamando novamente...\")\n\n# A segunda chamada usa o ObjetoReal já criado\nproxy.operacao()</code></pre>\n\n<h4>Template Method (Comportamental)</h4>\n<p>Define o esqueleto de um algoritmo em uma operação, adiando alguns passos para subclasses. Permite que subclasses redefinam certos passos de um algoritmo sem mudar a estrutura geral do algoritmo.</p>\n<pre><code class=\"language-python\">from abc import ABC, abstractmethod\n\nclass ProcessadorDados(ABC):\n    # Template Method\n    def processar(self, dados):\n        dados_limpos = self.limpar_dados(dados)\n        dados_transformados = self.transformar_dados(dados_limpos)\n        resultado_final = self.gerar_relatorio(dados_transformados)\n        return resultado_final\n\n    @abstractmethod\n    def limpar_dados(self, dados):\n        pass\n\n    @abstractmethod\n    def transformar_dados(self, dados):\n        pass\n\n    @abstractmethod\n    def gerar_relatorio(self, dados):\n        pass\n\nclass ProcessadorCSV(ProcessadorDados):\n    def limpar_dados(self, dados):\n        print(\"Processador CSV: Limpando dados CSV...\")\n        # Lógica específica para CSV\n        return dados.strip()\n\n    def transformar_dados(self, dados):\n        print(\"Processador CSV: Transformando dados CSV...\")\n        # Lógica específica para CSV\n        return dados.upper()\n\n    def gerar_relatorio(self, dados):\n        print(\"Processador CSV: Gerando relatório CSV...\")\n        # Lógica específica para CSV\n        return f\"Relatório CSV: {dados}\"\n\n# Usando o Template Method\nprocessador = ProcessadorCSV()\nresultado = processador.processar(\"  dados csv brutos  \")\nprint(resultado)</code></pre>\n\n<h3>O Decorador `@property`</h3>\n<p>O decorador <code>@property</code> é uma forma Pythonica de criar atributos gerenciados. Ele permite que você acesse métodos como se fossem atributos, o que é útil para calcular valores dinamicamente, validar atribuições ou controlar o acesso a atributos internos.</p>\n\n<pre><code class=\"language-python\">class Retangulo:\n    def __init__(self, largura, altura):\n        self._largura = largura # Atributo interno (convenção com _)\n        self._altura = altura   # Atributo interno\n\n    @property # Getter para largura\n    def largura(self):\n        print(\"Obtendo largura...\")\n        return self._largura\n\n    @largura.setter # Setter para largura\n    def largura(self, valor):\n        print(f\"Definindo largura para {valor}...\")\n        if valor <= 0:\n            raise ValueError(\"Largura deve ser positiva\")\n        self._largura = valor\n\n    @property # Getter para altura\n    def altura(self):\n        print(\"Obtendo altura...\")\n        return self._altura\n\n    @altura.setter # Setter para altura\n    def altura(self, valor):\n        print(f\"Definindo altura para {valor}...\")\n        if valor <= 0:\n            raise ValueError(\"Altura deve ser positiva\")\n        self._altura = valor\n\n    @property # Getter para área (calculado dinamicamente)\n    def area(self):\n        print(\"Calculando área...\")\n        return self._largura * self._altura\n\n# Usando a classe com @property\nret = Retangulo(10, 5)\n\nprint(f\"Largura inicial: {ret.largura}\") # Chama o getter @largura\nprint(f\"Área inicial: {ret.area}\")       # Chama o getter @area\n\nret.largura = 15 # Chama o setter @largura.setter\nprint(f\"Nova largura: {ret.largura}\")\nprint(f\"Nova área: {ret.area}\")\n\n# ret.altura = -5 # Isso geraria um ValueError (devido ao setter)\n\n</code></pre>\n<p>O decorador <code>@property</code> torna o código mais legível e encapsula a lógica de acesso e modificação de atributos.</p>",
+        "examples": [
+            {
+                "title": "Exemplo simples de @property para validação",
+                "code": "class Pessoa:\n    def __init__(self, idade):\n        self._idade = 0 # Inicializa com um valor padrão\n        self.idade = idade # Usa o setter para validar a idade inicial\n\n    @property\n    def idade(self):\n        return self._idade\n\n    @idade.setter\n    def idade(self, valor):\n        if not isinstance(valor, int):\n            raise TypeError(\"Idade deve ser um número inteiro\")\n        if not 0 <= valor <= 120:\n            raise ValueError(\"Idade deve estar entre 0 e 120\")\n        self._idade = valor\n\n# Testando\np = Pessoa(30)\nprint(f\"Idade: {p.idade}\")\n\n# p.idade = 150 # Geraria ValueError\n# p.idade = \"vinte\" # Geraria TypeError",
+                "explanation": "Demonstra como usar <code>@property</code> e seu setter para validar o valor atribuído a um atributo, garantindo que a idade seja um inteiro dentro de um intervalo razoável."
+            }
+        ],
+        "summary": "<p>Exploramos Design Patterns adicionais como Builder, Prototype, Facade, Proxy e Template Method, que oferecem soluções estruturadas para problemas de design comuns. O decorador <code>@property</code> é uma ferramenta Pythonica para criar atributos gerenciados, permitindo controlar o acesso (getters) e a modificação (setters) de atributos de forma elegante.</p>",
+        "estimated_time_minutes": 75
+    },
+    {
+        "id": "estruturas-algoritmos-avancados-ordenacao-grafos",
+        "course_id": "python-avancado",
+        "title": "Algoritmos Avançados: Ordenação (Heap Sort) e Busca em Grafos",
+        "order": 47,
+        "description": "Aprenda o algoritmo de ordenação Heap Sort e tenha uma introdução aos algoritmos de busca de caminho mais curto em grafos (Dijkstra, A*).",
+        "learning_objectives": [
+            "Compreender o funcionamento do algoritmo Heap Sort.",
+            "Implementar o Heap Sort em Python.",
+            "Entender a aplicação de heaps (filas de prioridade) no Heap Sort.",
+            "Ter uma introdução aos algoritmos de busca de caminho mais curto em grafos (Dijkstra, A*).",
+            "Compreender quando usar Heap Sort em comparação com outros algoritmos (Merge Sort, Quick Sort)."
+        ],
+        "key_concepts": [
+            "Heap Sort",
+            "Heap (Max Heap, Min Heap)",
+            "Árvore Binária Completa",
+            "Heapify",
+            "Algoritmos de Busca de Caminho Mais Curto",
+            "Algoritmo de Dijkstra",
+            "Algoritmo A*",
+            "Fila de Prioridade"
+        ],
+        "content": "<h2>Algoritmos Avançados: Ordenação e Busca em Grafos</h2>\n\n<p>Continuando o estudo de algoritmos eficientes, vamos focar no Heap Sort e introduzir os algoritmos de busca de caminho mais curto em grafos.</p>\n\n<h3>Heap Sort</h3>\n\n<p><strong>Heap Sort</strong> é um algoritmo de ordenação baseado em comparação que utiliza uma estrutura de dados chamada <strong>heap binário</strong>. Ele tem uma complexidade de tempo de O(n log n) e é um algoritmo de ordenação in-place (não requer memória adicional significativa).</p>\n\n<p>Um <strong>heap binário</strong> é uma árvore binária completa que satisfaz a propriedade de heap: em um <strong>Max Heap</strong>, o valor de cada nó é maior ou igual ao valor de seus filhos; em um <strong>Min Heap</strong>, o valor de cada nó é menor ou igual ao valor de seus filhos. O Heap Sort geralmente usa um Max Heap.</p>\n\n<p>O algoritmo funciona em duas fases:</p>\n<ol>\n    <li><strong>Construir um Max Heap:</strong> Transformar a lista de entrada em um Max Heap.</li>\n    <li><strong>Extrair elementos:</strong> Remover repetidamente o elemento máximo (a raiz do heap) e colocá-lo no final da lista ordenada, reconstruindo o heap com os elementos restantes.</li>\n</ol>\n\n<pre><code class=\"language-python\"># Implementação de Heap Sort\n\ndef heapify(arr, n, i):\n    # Função para transformar um sub-árvore enraizada em 'i' em um Max Heap.\n    # n é o tamanho do heap.\n    maior = i # Inicializa o maior como raiz\n    esquerda = 2 * i + 1\n    direita = 2 * i + 2\n\n    # Verifica se o filho da esquerda existe e é maior que a raiz\n    if esquerda < n and arr[esquerda] > arr[maior]:\n        maior = esquerda\n\n    # Verifica se o filho da direita existe e é maior que o maior até agora\n    if direita < n and arr[direita] > arr[maior]:\n        maior = direita\n\n    # Se o maior não for a raiz\n    if maior != i:\n        arr[i], arr[maior] = arr[maior], arr[i] # Troca\n        # Continua heapify na sub-árvore afetada\n        heapify(arr, n, maior)\n\ndef heap_sort(arr):\n    n = len(arr)\n\n    # Fase 1: Construir um Max Heap\n    # Começa do último nó pai e vai até a raiz\n    for i in range(n // 2 - 1, -1, -1):\n        heapify(arr, n, i)\n\n    # Fase 2: Extrair elementos um por um\n    for i in range(n - 1, 0, -1):\n        # Move a raiz atual (maior elemento) para o final\n        arr[i], arr[0] = arr[0], arr[i]\n        # Chama heapify na sub-árvore reduzida\n        heapify(arr, i, 0)\n\n# Exemplo de uso\nlista = [12, 11, 13, 5, 6, 7]\nheap_sort(lista)\nprint(f\"Lista ordenada por Heap Sort: {lista}\") # Saída: [5, 6, 7, 11, 12, 13]</code></pre>\n\n<p>Heap Sort é garantidamente O(n log n) no pior caso, o que o diferencia do Quick Sort (que pode ser O(n²) no pior caso, embora raro na prática).</p>\n\n<h3>Algoritmos de Busca de Caminho Mais Curto em Grafos</h3>\n\n<p>Em grafos ponderados (onde as arestas têm \"pesos\" ou \"custos\"), frequentemente queremos encontrar o caminho com o menor custo entre dois nós. Dois algoritmos clássicos para isso são Dijkstra e A*.</p>\n\n<h4>Algoritmo de Dijkstra</h4>\n<p>Encontra o caminho mais curto de um nó de origem para todos os outros nós em um grafo com pesos de aresta não negativos. Usa uma fila de prioridade para explorar os nós na ordem do menor custo acumulado.</p>\n\n<h4>Algoritmo A* (A-estrela)</h4>\n<p>É uma extensão do Dijkstra que é mais eficiente para encontrar o caminho mais curto entre dois nós específicos. Ele usa uma heurística (uma estimativa da distância restante até o destino) para guiar a busca, priorizando caminhos que parecem mais promissores.</p>\n\n<p>Implementar Dijkstra ou A* do zero é um exercício mais complexo, mas entender seus princípios é valioso para problemas de roteamento, planejamento e inteligência artificial.</p>\n\n<p>Esses algoritmos avançados são fundamentais em diversas áreas da computação, desde sistemas operacionais até inteligência artificial e otimização.</p>",
+        "examples": [
+            {
+                "title": "Exemplo conceitual de Heap (Max Heap)",
+                "code": "# Representação de um array que é um Max Heap:\n# [100, 19, 36, 17, 3, 25, 1, 2, 7]\n#\n# Visualmente (como árvore binária):\n#         100\n#        /   \\\n#      19     36\n#     / \\   /  \\\n#   17  3 25   1\n#  / \\\n# 2   7\n\nprint(\"Exemplo conceitual de um array representando um Max Heap.\")\nprint(\"O maior elemento (100) está na raiz (índice 0).\")\nprint(\"Cada nó pai é maior ou igual aos seus filhos.\")",
+                "explanation": "Ilustra como um array pode representar um heap binário, onde a relação pai-filho é definida por índices (filho esquerdo: 2*i + 1, filho direito: 2*i + 2)."
+            }
+        ],
+        "summary": "<p>Heap Sort é um algoritmo de ordenação O(n log n) que utiliza a estrutura de dados heap binário. Algoritmos como Dijkstra e A* são usados para encontrar caminhos mais curtos em grafos ponderados, com A* sendo mais eficiente para busca entre dois pontos específicos devido ao uso de heurísticas. Dominar esses algoritmos é crucial para otimização e resolução de problemas complexos.</p>",
+        "estimated_time_minutes": 75
+    },
+    
+    {
+      "id": "web-django-forms-security",
+      "course_id": "python-avancado",
+      "title": "Desenvolvimento Web: Django (Parte 2): Formulários e Segurança",
+      "order": 48,
+      "description": "Aprofunde-se no Django: criação e manipulação de formulários, validação de dados e conceitos básicos de segurança (CSRF).",
+      "learning_objectives": [
+        "Criar formulários em Django usando a classe `forms.Form` e `forms.ModelForm`.",
+        "Renderizar formulários em templates Django.",
+        "Processar dados enviados por formulários em views.",
+        "Realizar validação de dados automática e customizada em formulários Django.",
+        "Compreender a importância da proteção contra CSRF (Cross-Site Request Forgery).",
+        "Implementar a proteção CSRF em formulários Django.",
+        "Ter uma visão geral de outras medidas de segurança em Django (SQL Injection prevention, XSS prevention)."
+      ],
+      "key_concepts": [
+        "Django Forms",
+        "forms.Form",
+        "forms.ModelForm",
+        "Validação de Formulário",
+        "Campos de Formulário",
+        "Widgets",
+        "CSRF (Cross-Site Request Forgery)",
+        "{% csrf_token %}",
+        "SQL Injection Prevention", 
+        "XSS (Cross-Site Scripting) Prevention"
+      ],
+      "content": "...",
+      "examples": [
+        {
+          "title": "Validação customizada em formulário Django",
+          "code": "...", 
+          "explanation": "Demonstra como adicionar uma validação customizada para um campo específico em um formulário Django."
+        }
+      ],
+      "summary": "O sistema de formulários do Django simplifica a criação, renderização e validação de dados...",
+      "estimated_time_minutes": 75
+    },
+    {
+        "id": "projeto-final-curso-avancado",
+        "course_id": "python-avancado",
+        "title": "Projeto Final do Curso de Python Avançado",
+        "order": 49,
+        "description": "Este é o momento de aplicar todo o seu conhecimento adquirido no curso de Python Avançado para desenvolver um projeto completo e demonstrar suas habilidades.",
+        "learning_objectives": [
+            "Consolidar o aprendizado do curso através de um projeto prático.",
+            "Aplicar conceitos avançados de Python em um cenário real.",
+            "Desenvolver um portfólio com um projeto significativo."
+        ],
+        "key_concepts": [
+            "Desenvolvimento de Projeto",
+            "Aplicação Prática",
+            "Portfólio",
+            "Integração de Conhecimentos"
+        ],
+        "content": "<h2>Projeto Final do Curso de Python Avançado</h2><p>Parabéns por chegar ao final do curso de Python Avançado! Chegou a hora de colocar em prática tudo o que você aprendeu. O exercício listado nesta página detalha os requisitos para o seu projeto final.</p><p>Este projeto é uma oportunidade para você integrar os diversos conceitos abordados ao longo do curso, desde Programação Orientada a Objetos avançada, Design Patterns, manipulação de dados, desenvolvimento web, concorrência, até boas práticas de desenvolvimento e testes.</p><p>Dedique-se a este projeto, pois ele será uma peça fundamental no seu portfólio como desenvolvedor Python e uma excelente forma de solidificar seu aprendizado.</p><p>Consulte as instruções do exercício para começar. Boa sorte e divirta-se codando!</p>",
+        "examples": [],
+        "summary": "O projeto final é a culminação do seu aprendizado no curso de Python Avançado. Siga as instruções do exercício associado para desenvolver uma aplicação completa e robusta.",
+        "estimated_time_minutes": 0
+    }
+  ]

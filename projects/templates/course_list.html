@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Cursos Disponíveis{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Cursos Disponíveis</h1>
+
+<div class="row">
+    {% for course in courses %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <p class="card-text">{{ course.short_description }}</p>
+                
+                {% if course.level %}
+                <p><span class="badge bg-primary">{{ course.level }}</span></p>
+                {% endif %}
+                
+                {% if course.duration %}
+                <p><small class="text-muted">Duração: {{ course.duration }}</small></p>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('course_detail', course_id=course.id) }}" class="btn btn-primary">Ver Detalhes</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            Nenhum curso disponível no momento. Volte em breve!
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

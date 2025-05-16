@@ -1,0 +1,464 @@
+[
+    {
+        "id": "ex-dicionarios-1",
+        "lesson_id": "dicionarios-python-basico",
+        "title": "Contagem de palavras",
+        "description": "Escreva um programa que conta a frequência de cada palavra em um texto.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Use um dicionário para armazenar a frequência de cada palavra.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "texto = 'ola mundo ola'\npalavras = texto.split()\ncontagem = {}\nfor palavra in palavras:\n    if palavra in contagem:\n        contagem[palavra] += 1\n    else:\n        contagem[palavra] = 1\nprint(contagem)",
+        "test_code": "import ast\n\ntry:\n    resultado_str = output.strip()\n    resultado_dict = ast.literal_eval(resultado_str)\n    dict_esperado = {'ola': 2, 'mundo': 1}\n\n    if not isinstance(resultado_dict, dict):\n        print('FALHA: A saída não foi reconhecida como um dicionário válido')\n    elif resultado_dict == dict_esperado:\n        print('SUCESSO: O dicionário de contagem de palavras foi gerado corretamente!')\n    else:\n        print(f'FALHA: Dicionário incorreto. Esperado: {dict_esperado}, Obtido: {resultado_dict}')\nexcept (ValueError, SyntaxError):\n    print('FALHA: A saída não é uma representação válida de dicionário Python')\nexcept Exception as e:\n    print(f'ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}')",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-dicionarios-2",
+        "lesson_id": "dicionarios-python-avancado",
+        "title": "Invertendo um dicionário",
+        "description": "Inverta as chaves e os valores de um dicionário.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Crie um novo dicionário com os valores originais como chaves e as chaves originais como valores.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "dicionario = {'a': 1, 'b': 2, 'c': 3}\ninvertido = {valor: chave for chave, valor in dicionario.items()}\nprint(invertido)",
+        "test_code": "import ast\n\ntry:\n    resultado_str = output.strip()\n    resultado_dict = ast.literal_eval(resultado_str)\n    dict_esperado = {1: 'a', 2: 'b', 3: 'c'}\n\n    if not isinstance(resultado_dict, dict):\n        print(f\"FALHA: A saída ('{resultado_str}') não foi reconhecida como um dicionário. Esperado um formato como {{'chave': valor}}.\")\n    elif resultado_dict == dict_esperado:\n        print(f\"SUCESSO: O dicionário invertido ({dict_esperado}) foi gerado corretamente!\")\n    else:\n        print(f\"FALHA: O dicionário gerado está incorreto. Esperado: {dict_esperado}, Obtido: {resultado_dict}.\")\nexcept (ValueError, SyntaxError):\n    print(f\"FALHA: A saída ('{resultado_str}') não é uma representação de dicionário Python válida. Verifique a formatação.\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-dicionarios-3",
+        "lesson_id": "dicionarios-python-avancado",
+        "title": "Unindo dois dicionários",
+        "description": "Una dois dicionários em um único dicionário.",
+        "difficulty": "Fácil",
+        "order": 3,
+        "instructions": "Use o método update() para unir os dicionários.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "dicionario1 = {'a': 1, 'b': 2}\ndicionario2 = {'c': 3, 'd': 4}\ndicionario1.update(dicionario2)\nprint(dicionario1)",
+        "test_code": "import ast\n\ntry:\n    resultado_str = output.strip()\n    resultado_dict = ast.literal_eval(resultado_str)\n    dict_esperado = {'a': 1, 'b': 2, 'c': 3, 'd': 4}\n\n    if not isinstance(resultado_dict, dict):\n        print(f\"FALHA: A saída ('{resultado_str}') não foi reconhecida como um dicionário. Esperado um formato como {{'chave': valor}}.\")\n    elif resultado_dict == dict_esperado:\n        print(f\"SUCESSO: O dicionário unido ({dict_esperado}) foi gerado corretamente!\")\n    else:\n        print(f\"FALHA: O dicionário gerado está incorreto. Esperado: {dict_esperado}, Obtido: {resultado_dict}.\")\nexcept (ValueError, SyntaxError):\n    print(f\"FALHA: A saída ('{resultado_str}') não é uma representação de dicionário Python válida. Verifique a formatação.\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-funcoes-2",
+        "lesson_id": "funcoes-python-definicao-chamada",
+        "title": "Fatorial",
+        "description": "Crie uma função que calcula o fatorial de um número.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Use recursão ou um loop for para calcular o fatorial.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "def fatorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * fatorial(n-1)\nprint(fatorial(5))",
+        "test_code": "assert int(output.strip()) == 120",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-funcoes-3",
+        "lesson_id": "funcoes-python-definicao-chamada",
+        "title": "Sequência de Fibonacci",
+        "description": "Crie uma função que gera a sequência de Fibonacci até um determinado número de termos.",
+        "difficulty": "Difícil",
+        "order": 3,
+        "instructions": "Use um loop for para gerar a sequência.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "def fibonacci(n):\n    a, b = 0, 1\n    for i in range(n):\n        print(a, end=' ')\n        a, b = b, a + b\nfibonacci(10)",
+        "test_code": "assert output.strip() == '0 1 1 2 3 5 8 13 21 34'",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-arquivos-1",
+        "lesson_id": "arquivos-pastas-python",
+        "title": "Escrever e Ler Lista de Compras",
+        "description": "Escreva um programa que cria uma lista de compras, salva cada item em uma nova linha de um arquivo chamado 'compras.txt', e depois lê e imprime o conteúdo do arquivo.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Defina uma lista de strings. Use o modo 'w' para escrever e 'r' para ler. Use um loop para escrever cada item.",
+        "initial_code": "itens_compra = ['Maçã', 'Banana', 'Leite', 'Pão']\nnome_arquivo = 'compras.txt'\n\n# 1. Escreva os itens da lista 'itens_compra' no arquivo 'compras.txt',\n#    um item por linha.\n\n# 2. Leia o conteúdo do arquivo 'compras.txt' e imprima-o na tela.",
+        "solution_code": "itens_compra = ['Maçã', 'Banana', 'Leite', 'Pão']\nnome_arquivo = 'compras.txt'\n\nwith open(nome_arquivo, 'w') as f:\n    for item in itens_compra:\n        f.write(item + '\\n')\n\nprint(f'Conteúdo do arquivo {nome_arquivo}:')\nwith open(nome_arquivo, 'r') as f:\n    conteudo = f.read()\n    print(conteudo)",
+        "test_code": "assert 'Maçã\\nBanana\\nLeite\\nPão\\n' in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-1",
+        "lesson_id": "poo-classes-objetos-python",
+        "title": "Classe Produto",
+        "description": "Crie uma classe `Produto` com atributos para nome, preço e quantidade em estoque. Adicione um método para calcular o valor total em estoque e outro para exibir as informações do produto.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Defina a classe `Produto`, o construtor `__init__`, um método `valor_total_estoque()` e um método `mostrar_info()`.",
+        "initial_code": "class Produto:\n    def __init__(self, nome, preco, quantidade):\n        self.nome = nome\n        self.preco = preco\n        self.quantidade = quantidade\n\n    # def valor_total_estoque(self):\n        # Deve retornar preco * quantidade\n        # pass\n\n    # def mostrar_info(self):\n        # Deve imprimir nome, preço, quantidade e valor total em estoque\n        # pass\n\n# Crie uma instância da classe Produto\n# produto1 = Produto('Caneta', 1.50, 100)\n# produto1.mostrar_info()",
+        "solution_code": "class Produto:\n    def __init__(self, nome, preco, quantidade):\n        self.nome = nome\n        self.preco = preco\n        self.quantidade = quantidade\n\n    def valor_total_estoque(self):\n        return self.preco * self.quantidade\n\n    def mostrar_info(self):\n        total_estoque = self.valor_total_estoque()\n        print(f'Produto: {self.nome}')\n        print(f'Preço Unitário: R${self.preco:.2f}')\n        print(f'Quantidade em Estoque: {self.quantidade}')\n        print(f'Valor Total em Estoque: R${total_estoque:.2f}')\n\nproduto1 = Produto('Caneta Azul', 1.50, 100)\nproduto1.mostrar_info()",
+        "test_code": "assert 'Produto: Caneta Azul' in output and 'Preço Unitário: R$1.50' in output and 'Quantidade em Estoque: 100' in output and 'Valor Total em Estoque: R$150.00' in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-excecoes-1",
+        "lesson_id": "tratamento-excecoes",
+        "title": "Acesso Seguro a Lista",
+        "description": "Crie uma função que tenta acessar um elemento de uma lista por seu índice. A função deve tratar `IndexError` se o índice for inválido e retornar uma mensagem apropriada.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use um bloco `try-except` para capturar `IndexError`. A função deve aceitar a lista e o índice como parâmetros.",
+        "initial_code": "def acessar_elemento(lista, indice):\n    # Implemente o acesso com tratamento de exceção\n    pass\n\nminha_lista = [10, 20, 30]\n# Teste a função com um índice válido e um inválido\n# print(acessar_elemento(minha_lista, 1))  # Válido\n# print(acessar_elemento(minha_lista, 5))  # Inválido",
+        "solution_code": "def acessar_elemento(lista, indice):\n    try:\n        elemento = lista[indice]\n        return f'Elemento no índice {indice}: {elemento}'\n    except IndexError:\n        return f'Erro: Índice {indice} está fora do intervalo da lista.'\n\nminha_lista = [10, 20, 30]\nprint(acessar_elemento(minha_lista, 1))\nprint(acessar_elemento(minha_lista, 5))",
+        "test_code": "assert 'Elemento no índice 1: 20' in output and 'Erro: Índice 5 está fora do intervalo da lista.' in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-heranca-1",
+        "lesson_id": "poo-heranca-polimorfismo",
+        "title": "Sistema de Figuras Geométricas",
+        "description": "Crie uma classe base `FiguraGeometrica` com um método `area()`. Crie subclasses `Retangulo` e `Circulo` que herdam de `FiguraGeometrica` e implementam seus próprios métodos `area()`. Demonstre o polimorfismo.",
+        "difficulty": "Difícil",
+        "order": 1,
+        "instructions": "A classe base `area()` pode levantar `NotImplementedError`. As subclasses devem ter construtores apropriados (ex: `Retangulo(base, altura)`, `Circulo(raio)`).",
+        "initial_code": "import math\n\nclass FiguraGeometrica:\n    def area(self):\n        raise NotImplementedError('Subclasses devem implementar este método')\n\n# Crie a classe Retangulo aqui\n# class Retangulo(FiguraGeometrica):\n#     ...\n\n# Crie a classe Circulo aqui\n# class Circulo(FiguraGeometrica):\n#     ...\n\n# Crie instâncias e teste o polimorfismo\n# figuras = [Retangulo(10, 5), Circulo(7)]\n# for fig in figuras:\n#     print(f'A área da figura é: {fig.area():.2f}')",
+        "solution_code": "import math\n\nclass FiguraGeometrica:\n    def area(self):\n        raise NotImplementedError('Subclasses devem implementar este método')\n\nclass Retangulo(FiguraGeometrica):\n    def __init__(self, base, altura):\n        self.base = base\n        self.altura = altura\n    \n    def area(self):\n        return self.base * self.altura\n\nclass Circulo(FiguraGeometrica):\n    def __init__(self, raio):\n        self.raio = raio\n    \n    def area(self):\n        return math.pi * (self.raio ** 2)\n\nfiguras = [Retangulo(10, 5), Circulo(7)]\nfor fig in figuras:\n    print(f'A área da figura é: {fig.area():.2f}')",
+        "test_code": "assert 'A área da figura é: 50.00' in output and 'A área da figura é: 153.94' in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-conjuntos-1",
+        "lesson_id": "conjuntos-python",
+        "title": "Removendo Duplicatas com Set",
+        "description": "Dada a lista `[10, 20, 20, 30, 40, 40, 40, 50]`, use um conjunto para remover os elementos duplicados e imprima o conjunto resultante.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Crie a lista, converta-a para um conjunto e depois imprima o conjunto.",
+        "initial_code": "lista_com_duplicatas = [10, 20, 20, 30, 40, 40, 40, 50]\n# Converta para conjunto e imprima\n# conjunto_unico = ...\n# print(conjunto_unico)",
+        "solution_code": "lista_com_duplicatas = [10, 20, 20, 30, 40, 40, 40, 50]\nconjunto_unico = set(lista_com_duplicatas)\nprint(conjunto_unico)",
+        "test_code": "import ast\ntry:\n    result_set = ast.literal_eval(output.strip())\n    expected_set = {10, 20, 30, 40, 50}\n    assert isinstance(result_set, set), \"A saída não é um conjunto.\"\n    assert result_set == expected_set, f\"Conjunto incorreto. Esperado: {expected_set}, Obtido: {result_set}\"\nexcept: assert False, \"Erro ao avaliar a saída como um conjunto.\"",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-conceitos-1",
+        "lesson_id": "poo-intro-conceitos",
+        "title": "Conceitos de POO: Classe e Objeto",
+        "description": "Descreva em poucas palavras o que é uma 'Classe' e o que é um 'Objeto' no contexto da Programação Orientada a Objetos. Imprima cada descrição em uma nova linha.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use a função `print()` para cada descrição. Ex: `print(\"Classe é: ...\")`",
+        "initial_code": "# print(\"Classe é: [sua definição aqui]\")\n# print(\"Objeto é: [sua definição aqui]\")",
+        "solution_code": "print(\"Classe é: Um molde ou projeto para criar objetos, definindo seus atributos e métodos.\")\nprint(\"Objeto é: Uma instância específica de uma classe, com seus próprios valores para os atributos.\")",
+        "test_code": "assert \"Classe é:\" in output and \"Objeto é:\" in output and \"molde\" in output.lower() and \"instância\" in output.lower()",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-heranca-2",
+        "lesson_id": "poo-heranca-python",
+        "title": "Herança Simples: Veículo e Carro",
+        "description": "Crie uma classe `Veiculo` com um construtor que aceita `marca`. Crie uma subclasse `Carro` que herda de `Veiculo` e adiciona um atributo `modelo` em seu construtor. Ambas devem ter um método `info()` que imprime suas informações. Instancie `Carro` e chame `info()`.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Use `super().__init__(marca)` no construtor de `Carro`. O método `info()` de `Carro` pode chamar `super().info()` e adicionar o modelo.",
+        "initial_code": "class Veiculo:\n    def __init__(self, marca):\n        self.marca = marca\n    def info(self):\n        print(f\"Marca: {self.marca}\")\n\n# Crie a classe Carro aqui, herdando de Veiculo\n# class Carro(Veiculo):\n#     def __init__(self, marca, modelo):\n#         # Chame o construtor da superclasse\n#         # Defina o atributo modelo\n#         pass\n#     def info(self):\n#         # Chame o info da superclasse\n#         # Imprima o modelo\n#         pass\n\n# meu_carro = Carro(\"Ford\", \"Ka\")\n# meu_carro.info()",
+        "solution_code": "class Veiculo:\n    def __init__(self, marca):\n        self.marca = marca\n    def info(self):\n        print(f\"Marca: {self.marca}\")\n\nclass Carro(Veiculo):\n    def __init__(self, marca, modelo):\n        super().__init__(marca)\n        self.modelo = modelo\n    \n    def info(self):\n        super().info()\n        print(f\"Modelo: {self.modelo}\")\n\nmeu_carro = Carro(\"Ford\", \"Ka\")\nmeu_carro.info()",
+        "test_code": "lines = output.strip().split('\\n')\nassert len(lines) == 2, \"Esperado duas linhas de saída.\"\nassert \"Marca: Ford\" in lines[0]\nassert \"Modelo: Ka\" in lines[1]",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-modulos-pacotes-1",
+        "lesson_id": "modulos-pacotes-python",
+        "title": "Importando de um Pacote (Simulado)",
+        "description": "Este exercício é conceitual. Imprima uma mensagem que simule a importação de uma função `calcular_total` de um pacote `vendas` e submódulo `faturamento`, e depois como você a usaria.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use `print()` para mostrar a linha de importação e uma linha de exemplo de uso da função.",
+        "initial_code": "# Simule a importação e uso\n# print(\"from vendas.faturamento import calcular_total\")\n# print(\"total_venda = calcular_total(itens_carrinho)\")",
+        "solution_code": "print(\"from vendas.faturamento import calcular_total\")\nprint(\"total_venda = calcular_total(itens_carrinho)\")",
+        "test_code": "assert \"from vendas.faturamento import calcular_total\" in output and \"total_venda = calcular_total(itens_carrinho)\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-csv-json-1",
+        "lesson_id": "formatos-arquivos-csv-json",
+        "title": "Lendo uma String JSON",
+        "description": "Dada a string JSON `{\"id\": 101, \"produto\": \"Teclado\", \"disponivel\": true}`, converta-a para um dicionário Python usando o módulo `json` e imprima o nome do produto.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Importe o módulo `json`. Use `json.loads()` para converter a string para um dicionário. Acesse a chave 'produto' e imprima seu valor.",
+        "initial_code": "import json\n\njson_string = '{\"id\": 101, \"produto\": \"Teclado\", \"disponivel\": true}'\n# Converta a string para um dicionário Python\n# dados = ...\n# Imprima o nome do produto\n# print(dados['produto'])",
+        "solution_code": "import json\n\njson_string = '{\"id\": 101, \"produto\": \"Teclado\", \"disponivel\": true}'\ndados = json.loads(json_string)\nprint(dados['produto'])",
+        "test_code": "assert output.strip() == \"Teclado\"",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-regex-1",
+        "lesson_id": "expressoes-regulares-python",
+        "title": "Encontrando E-mails com Regex",
+        "description": "Use o módulo `re` e a função `re.findall()` para encontrar todos os endereços de e-mail válidos na string: 'Contate suporte@example.com ou vendas@test.org para mais informações.'",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Um padrão Regex simples para e-mail pode ser `r'[\\w.-]+@[\\w.-]+\\.\\w+'`. Imprima a lista de e-mails encontrados.",
+        "initial_code": "import re\n\ntexto = 'Contate suporte@example.com ou vendas@test.org para mais informações.'\n# Defina o padrão de e-mail\n# padrao_email = ...\n# Encontre todos os e-mails\n# emails_encontrados = ...\n# print(emails_encontrados)",
+        "solution_code": "import re\n\ntexto = 'Contate suporte@example.com ou vendas@test.org para mais informações.'\npadrao_email = r'[\\w.-]+@[\\w.-]+\\.\\w+'\nemails_encontrados = re.findall(padrao_email, texto)\nprint(emails_encontrados)",
+        "test_code": "import ast\nexpected_list = ['suporte@example.com', 'vendas@test.org']\nassert ast.literal_eval(output.strip()) == expected_list",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-apis-1",
+        "lesson_id": "apis-requisicoes-web-python",
+        "title": "Simulando Requisição GET e Status Code",
+        "description": "Este exercício é conceitual. Imprima uma mensagem que simule uma requisição GET bem-sucedida para uma API (ex: 'https://api.exemplo.com/usuarios') e o status code HTTP que indicaria sucesso (200 OK).",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use `print()` para mostrar a URL da requisição simulada e o status code esperado.",
+        "initial_code": "# Simule a requisição e o status code\n# print(\"GET para https://api.exemplo.com/usuarios\")\n# print(\"Status Code: 200 OK\")",
+        "solution_code": "print(\"GET para https://api.exemplo.com/usuarios\")\nprint(\"Status Code: 200 OK\")",
+        "test_code": "assert \"GET para https://api.exemplo.com/usuarios\" in output and \"Status Code: 200 OK\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-db-sqlite-1",
+        "lesson_id": "bancos-dados-intro-python",
+        "title": "Comando SQL INSERT (Simulado)",
+        "description": "Este exercício é conceitual. Imprima um comando SQL `INSERT` que adicionaria um usuário com nome 'Ana' e idade 30 à tabela 'usuarios'.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use `print()` para mostrar o comando SQL completo.",
+        "initial_code": "# Imprima o comando SQL INSERT\n# print(\"INSERT INTO usuarios (nome, idade) VALUES ('Ana', 30);\")",
+        "solution_code": "print(\"INSERT INTO usuarios (nome, idade) VALUES ('Ana', 30);\")",
+        "test_code": "expected_sql = \"INSERT INTO usuarios (nome, idade) VALUES ('Ana', 30);\"\nassert output.strip() == expected_sql",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-testes-pytest-1",
+        "lesson_id": "testes-python-intro",
+        "title": "Escrevendo uma Função e seu Teste (Simulado)",
+        "description": "Defina uma função simples `multiplicar(a, b)` que retorna o produto de `a` e `b`. Em seguida, escreva uma função de teste `test_multiplicar()` que usa `assert` para verificar se `multiplicar(3, 4)` é igual a `12`. Imprima uma mensagem de sucesso se o teste passar.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Defina ambas as funções. Na `test_multiplicar()`, use `assert multiplicar(3, 4) == 12`. Para simular a execução do teste, chame `test_multiplicar()` e imprima 'Teste passou!' se o assert não falhar.",
+        "initial_code": "# Defina a função multiplicar(a, b)\n\n# Defina a função test_multiplicar()\n\n# Chame test_multiplicar() para simular a execução do teste\n# try:\n#     test_multiplicar()\n#     print(\"Teste de multiplicar passou!\")\n# except AssertionError:\n#     print(\"Teste de multiplicar FALHOU!\")",
+        "solution_code": "def multiplicar(a, b):\n    return a * b\n\ndef test_multiplicar():\n    assert multiplicar(3, 4) == 12\n\ntry:\n    test_multiplicar() # Chama a função de teste\n    print(\"Teste de multiplicar passou!\") # Imprime se o assert não falhar\nexcept AssertionError:\n    print(\"Teste de multiplicar FALHOU!\")",
+        "test_code": "assert \"Teste de multiplicar passou!\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-atributos-classe-instancia-1",
+        "lesson_id": "poo-classes-objetos-python",
+        "title": "Atributos de Classe e Instância",
+        "description": "Crie uma classe `Contador` com um atributo de classe `total_instancias` que incrementa a cada nova instância. Cada instância deve ter um atributo `id_instancia` único.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Use um atributo de classe para contar instâncias. No `__init__`, incremente o contador de classe e atribua o valor atual do contador ao `id_instancia` do objeto.",
+        "initial_code": "class Contador:\n    total_instancias = 0 # Atributo de classe\n\n    def __init__(self):\n        # Incremente total_instancias da classe Contador\n        # Atribua o valor atual de total_instancias para self.id_instancia\n        pass\n\n# Crie algumas instâncias\n# c1 = Contador()\n# c2 = Contador()\n# c3 = Contador()\n\n# Imprima o id_instancia de cada um e o total_instancias da classe\n# print(f\"ID C1: {c1.id_instancia}\")\n# print(f\"ID C2: {c2.id_instancia}\")\n# print(f\"ID C3: {c3.id_instancia}\")\n# print(f\"Total de instâncias criadas: {Contador.total_instancias}\")",
+        "solution_code": "class Contador:\n    total_instancias = 0 # Atributo de classe\n\n    def __init__(self):\n        Contador.total_instancias += 1\n        self.id_instancia = Contador.total_instancias\n\nc1 = Contador()\nc2 = Contador()\nc3 = Contador()\n\nprint(f\"ID C1: {c1.id_instancia}\")\nprint(f\"ID C2: {c2.id_instancia}\")\nprint(f\"ID C3: {c3.id_instancia}\")\nprint(f\"Total de instâncias criadas: {Contador.total_instancias}\")",
+        "test_code": "assert \"ID C1: 1\" in output and \"ID C2: 2\" in output and \"ID C3: 3\" in output and \"Total de instâncias criadas: 3\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-os-manipulacao-diretorios-1",
+        "lesson_id": "arquivos-pastas-python",
+        "title": "Listando Arquivos em um Diretório (Simulado)",
+        "description": "Simule a listagem de arquivos (não diretórios) de uma lista de nomes de itens. Imprima apenas os nomes que representariam arquivos.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Dada uma lista de strings `itens_diretorio` e uma lista `eh_arquivo_flags` (booleanos indicando se o item correspondente é arquivo), itere sobre `itens_diretorio` e imprima o nome do item se o flag correspondente em `eh_arquivo_flags` for True.",
+        "initial_code": "import os # Embora não usemos os.path.isfile diretamente no código do aluno para este exercício simulado\n\nitens_diretorio = ['documento.txt', 'pasta_fotos', 'script.py', 'outro_diretorio']\n# Suponha que os.path.isfile retornaria o seguinte para cada item:\neh_arquivo_flags = [True, False, True, False]\n\nprint(\"Arquivos encontrados:\")\n# Itere sobre itens_diretorio usando um índice para acessar eh_arquivo_flags\n# Se o flag for True, imprima o nome do item.",
+        "solution_code": "import os\n\nitens_diretorio = ['documento.txt', 'pasta_fotos', 'script.py', 'outro_diretorio']\neh_arquivo_flags = [True, False, True, False]\n\nprint(\"Arquivos encontrados:\")\nfor i in range(len(itens_diretorio)):\n    if eh_arquivo_flags[i]:\n        print(itens_diretorio[i])",
+        "test_code": "expected_output = \"Arquivos encontrados:\\ndocumento.txt\\nscript.py\"\nassert output.strip() == expected_output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-conceitos-2",
+        "lesson_id": "poo-intro-conceitos",
+        "title": "Identificando Atributos e Métodos",
+        "description": "Dada a descrição de um objeto do mundo real (ex: 'Bicicleta'), liste 3 possíveis atributos (características) e 2 possíveis métodos (ações).",
+        "difficulty": "Fácil",
+        "order": 2,
+        "instructions": "Use a função print() para listar os atributos e métodos, um por linha.",
+        "initial_code": "# Objeto: Bicicleta\nprint(\"Atributos da Bicicleta:\")\n# print(\"- ... (ex: cor)\")\n# print(\"- ...\")\n# print(\"- ...\")\nprint(\"\\nMétodos da Bicicleta:\")\n# print(\"- ...() (ex: pedalar)\")\n# print(\"- ...()\")",
+        "solution_code": "print(\"Objeto: Bicicleta\")\nprint(\"Atributos da Bicicleta:\")\nprint(\"- cor (ex: 'vermelha')\")\nprint(\"- numero_marchas (ex: 18)\")\nprint(\"- tipo_pneu (ex: 'montanha')\")\nprint(\"\\nMétodos da Bicicleta:\")\nprint(\"- pedalar()\")\nprint(\"- frear()\")",
+        "test_code": "assert \"Atributos da Bicicleta:\" in output and \"Métodos da Bicicleta:\" in output and \"cor\" in output.lower() and \"pedalar()\" in output.lower() and \"frear()\" in output.lower()",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-heranca-3",
+        "lesson_id": "poo-heranca-python",
+        "title": "Herança Múltipla (Conceitual)",
+        "description": "Explique brevemente o que é herança múltipla em Programação Orientada a Objetos e mencione um possível problema associado a ela, como o 'problema do diamante'.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Use a função print() para sua explicação, cobrindo a definição e o problema.",
+        "initial_code": "# print(\"Herança Múltipla é o conceito onde...\")\n# print(\"\\nUm problema comum associado é o 'problema do diamante', que ocorre quando...\")",
+        "solution_code": "print(\"Herança Múltipla é o conceito onde uma classe (subclasse) pode herdar atributos e métodos de duas ou mais superclasses diretamente.\")\nprint(\"\\nUm problema comum associado é o 'problema do diamante' (diamond problem). Isso ocorre quando uma classe herda de duas superclasses que, por sua vez, herdam de uma mesma superclasse ainda mais acima. Se o método da superclasse mais alta é sobrescrito nas duas classes intermediárias e a subclasse final não o sobrescreve, pode haver ambiguidade sobre qual implementação do método deve ser usada. Python resolve isso usando uma ordem de resolução de métodos (MRO) bem definida (C3 Linearization).\")",
+        "test_code": "assert \"Herança Múltipla\" in output and \"duas ou mais superclasses\" in output and (\"diamante\" in output.lower() or \"diamond problem\" in output.lower()) and (\"ambiguidade\" in output.lower() or \"mro\" in output.lower() or \"ordem de resolução\" in output.lower())",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-modulos-pacotes-2",
+        "lesson_id": "modulos-pacotes-python",
+        "title": "Importação Relativa em Pacotes (Conceitual)",
+        "description": "Suponha a seguinte estrutura de pacote: `meu_app/` contendo `processador.py` e uma subpasta `utils/` com `formatador.py`. Como você importaria uma função `formatar_dados()` de `formatador.py` para dentro de `processador.py` usando uma importação relativa?",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Imprima a linha de código Python que realizaria essa importação relativa.",
+        "initial_code": "# Estrutura do pacote:\n# meu_app/\n# ├── __init__.py\n# ├── processador.py\n# └── utils/\n#     ├── __init__.py\n#     └── formatador.py  (contém a função formatar_dados())\n\n# Dentro de meu_app/processador.py, como importar formatar_dados() de utils/formatador.py?\n# print(\"from .utils.formatador import formatar_dados\")",
+        "solution_code": "print(\"Para importar 'formatar_dados' de 'meu_app/utils/formatador.py' para dentro de 'meu_app/processador.py', a linha de importação relativa seria:\")\nprint(\"from .utils.formatador import formatar_dados\")",
+        "test_code": "assert \"from .utils.formatador import formatar_dados\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-poo-str-len-1",
+        "lesson_id": "poo-polimorfismo-abstracao-python",
+        "title": "Métodos Especiais __str__ e __len__",
+        "description": "Crie uma classe `ListaDeTarefas` que armazene tarefas em uma lista interna. Implemente o método especial `__str__` para retornar uma representação amigável da lista de tarefas e `__len__` para retornar o número total de tarefas.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "A classe deve ter um construtor que inicializa uma lista vazia. Implemente `__str__` para retornar algo como 'Lista com X tarefas' e `__len__` para retornar `len(self.tarefas)`.",
+        "initial_code": "class ListaDeTarefas:\n    def __init__(self):\n        self.tarefas = []\n\n    def adicionar_tarefa(self, tarefa):\n        self.tarefas.append(tarefa)\n\n    # Implemente __str__ aqui\n    # def __str__(self):\n    #     pass\n\n    # Implemente __len__ aqui\n    # def __len__(self):\n    #     pass\n\n# Teste a classe\n# minha_lista = ListaDeTarefas()\n# minha_lista.adicionar_tarefa(\"Estudar Python\")\n# minha_lista.adicionar_tarefa(\"Fazer exercício\")\n# print(minha_lista) # Deve chamar __str__\n# print(len(minha_lista)) # Deve chamar __len__",
+        "solution_code": "class ListaDeTarefas:\n    def __init__(self):\n        self.tarefas = []\n\n    def adicionar_tarefa(self, tarefa):\n        self.tarefas.append(tarefa)\n\n    def __str__(self):\n        return f'Lista com {len(self.tarefas)} tarefas'\n\n    def __len__(self):\n        return len(self.tarefas)\n\nminha_lista = ListaDeTarefas()\nminha_lista.adicionar_tarefa(\"Estudar Python\")\nminha_lista.adicionar_tarefa(\"Fazer exercício\")\nprint(minha_lista)\nprint(len(minha_lista))",
+        "test_code": "assert \"Lista com 2 tarefas\" in output and \"2\" in output.strip().split('\\n')[-1]",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-modulos-import-especifico-1",
+        "lesson_id": "modulos-python-basico",
+        "title": "Importando Funções Específicas",
+        "description": "Simule a importação apenas das funções `sqrt` e `pi` do módulo `math` e use-as para calcular a área de um círculo com raio 3.",
+        "difficulty": "Fácil",
+        "order": 3,
+        "instructions": "Use a sintaxe `from math import ...`. Calcule a área (pi * raio²) e imprima o resultado.",
+        "initial_code": "# Importe sqrt e pi do módulo math aqui\n# from math import ...\n\nraio = 3\n# Calcule a área usando pi\n# area = ...\n# print(f\"Área do círculo: {area}\")",
+        "solution_code": "from math import sqrt, pi\n\nraio = 3\narea = pi * (raio ** 2)\nprint(f\"Área do círculo: {area:.2f}\")",
+        "test_code": "assert \"Área do círculo: 28.27\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-csv-dictreader-1",
+        "lesson_id": "formatos-arquivos-csv-json",
+        "title": "Lendo CSV como Dicionários (Simulado)",
+        "description": "Simule a leitura de dados CSV com cabeçalho usando `csv.DictReader`. Imprima os dados de cada linha como um dicionário Python.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "Simule o conteúdo de um arquivo CSV com cabeçalho. Use `io.StringIO` para tratá-lo como um arquivo. Use `csv.DictReader` e itere sobre ele, imprimindo cada linha.",
+        "initial_code": "import csv\nimport io\n\ncsv_data = \"id,nome,idade\\n1,Alice,30\\n2,Bob,25\"\n\n# Use io.StringIO para simular um arquivo em memória\n# arquivo_simulado = io.StringIO(csv_data)\n\n# Use csv.DictReader para ler o arquivo simulado\n# leitor_dict = csv.DictReader(arquivo_simulado)\n\n# Itere sobre o leitor_dict e imprima cada linha (que será um dicionário)\n# for linha in leitor_dict:\n#     print(linha)",
+        "solution_code": "import csv\nimport io\n\ncsv_data = \"id,nome,idade\\n1,Alice,30\\n2,Bob,25\"\n\narquivo_simulado = io.StringIO(csv_data)\n\nleitor_dict = csv.DictReader(arquivo_simulado)\n\nprint(\"Dados lidos como dicionários:\")\nfor linha in leitor_dict:\n    print(linha)",
+        "test_code": "assert \"{'id': '1', 'nome': 'Alice', 'idade': '30'}\" in output and \"{'id': '2', 'nome': 'Bob', 'idade': '25'}\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-apis-processar-lista-1",
+        "lesson_id": "apis-requisicoes-web-python",
+        "title": "Processando Lista de Itens de API (Simulado)",
+        "description": "Simule uma resposta de API que retorna uma lista de objetos JSON (ex: lista de usuários). Itere sobre a lista simulada e imprima o nome de cada usuário.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "Defina uma lista de dicionários Python que represente a resposta JSON. Itere sobre essa lista e acesse a chave 'nome' de cada dicionário, imprimindo o valor.",
+        "initial_code": "# Simule a resposta JSON da API (uma lista de dicionários)\n# resposta_api_simulada = [\n#     {'id': 1, 'nome': 'Usuario A', 'email': 'a@ex.com'},\n#     {'id': 2, 'nome': 'Usuario B', 'email': 'b@ex.com'},\n#     {'id': 3, 'nome': 'Usuario C', 'email': 'c@ex.com'}\n# ]\n\nprint(\"Nomes dos usuários da API (simulado):\")\n# Itere sobre a lista e imprima o nome de cada usuário\n# for usuario in resposta_api_simulada:\n#     print(usuario['nome'])",
+        "solution_code": "resposta_api_simulada = [\n    {'id': 1, 'nome': 'Usuario A', 'email': 'a@ex.com'},\n    {'id': 2, 'nome': 'Usuario B', 'email': 'b@ex.com'},\n    {'id': 3, 'nome': 'Usuario C', 'email': 'c@ex.com'}\n]\n\nprint(\"Nomes dos usuários da API (simulado):\")\nfor usuario in resposta_api_simulada:\n    print(usuario['nome'])",
+        "test_code": "assert \"Nomes dos usuários da API (simulado):\" in output and \"Usuario A\" in output and \"Usuario B\" in output and \"Usuario C\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-sqlite-update-1",
+        "lesson_id": "bancos-dados-intro-python",
+        "title": "Atualizando Dados com SQLite (Simulado)",
+        "description": "Simule a conexão a um banco SQLite e a execução de um comando `UPDATE` para mudar a idade de um usuário específico. Imprima o comando SQL simulado e uma mensagem de sucesso.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "Imprima o comando Python que usaria `cursor.execute()` com um comando `UPDATE` e placeholders `?`. Imprima também a mensagem de sucesso após o `conn.commit()` simulado.",
+        "initial_code": "import sqlite3 # A importação é parte do exercício\n\nprint(\"--- Código Python Simulado com sqlite3 ---\")\n# print(\"conn = sqlite3.connect(':memory:')\")\n# print(\"cursor = conn.cursor()\")\n# print(\"cursor.execute(\\\"CREATE TABLE IF NOT EXISTS usuarios (nome TEXT, idade INTEGER)\\\")\") # Setup simulado\n# print(\"cursor.execute(\\\"INSERT INTO usuarios VALUES ('Pedro', 29)\\\")\") # Setup simulado\n# print(\"conn.commit()\") # Setup simulado\n\n# Simule o comando UPDATE para mudar a idade de 'Pedro' para 30\n# print(\"cursor.execute(\\\"UPDATE usuarios SET idade = ? WHERE nome = ?\\\", (30, 'Pedro'))\")\n# print(\"conn.commit()\")\n\nprint(\"\\n--- Saída Esperada ---\")\n# print(\"Idade de Pedro atualizada para 30 (simulado).\")",
+        "solution_code": "import sqlite3\n\nprint(\"--- Código Python Simulado com sqlite3 ---\")\nprint(\"conn = sqlite3.connect(':memory:')\")\nprint(\"cursor = conn.cursor()\")\nprint(\"cursor.execute('CREATE TABLE IF NOT EXISTS usuarios (nome TEXT, idade INTEGER)')\")\nprint(\"cursor.execute(\\\"INSERT INTO usuarios VALUES ('Pedro', 29)\\\")\")\nprint(\"conn.commit()\")\n\n# Simula o comando UPDATE\nprint(\"cursor.execute(\\\"UPDATE usuarios SET idade = ? WHERE nome = ?\\\", (30, 'Pedro'))\")\nprint(\"conn.commit()\")\n\nprint(\"\\n--- Saída Esperada ---\")\nprint(\"Idade de Pedro atualizada para 30 (simulado).\")",
+        "test_code": "assert \"UPDATE usuarios SET idade = ? WHERE nome = ?\" in output and \"Idade de Pedro atualizada para 30 (simulado).\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-testes-pytest-1",
+        "lesson_id": "testes-python-intro",
+        "title": "Escrevendo uma Função e seu Teste (Simulado)",
+        "description": "Defina uma função simples `multiplicar(a, b)` que retorna o produto de `a` e `b`. Em seguida, escreva uma função de teste `test_multiplicar()` que usa `assert` para verificar se `multiplicar(3, 4)` é igual a `12`. Imprima uma mensagem de sucesso se o teste passar.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Defina ambas as funções. Na `test_multiplicar()`, use `assert multiplicar(3, 4) == 12`. Para simular a execução do teste, chame `test_multiplicar()` e imprima 'Teste passou!' se o assert não falhar.",
+        "initial_code": "# Defina a função multiplicar(a, b)\n\n# Defina a função test_multiplicar()\n\n# Chame test_multiplicar() para simular a execução do teste\n# try:\n#     test_multiplicar()\n#     print(\"Teste de multiplicar passou!\")\n# except AssertionError:\n#     print(\"Teste de multiplicar FALHOU!\")",
+        "solution_code": "def multiplicar(a, b):\n    return a * b\n\ndef test_multiplicar():\n    assert multiplicar(3, 4) == 12\n\ntry:\n    test_multiplicar()\n    print(\"Teste de multiplicar passou!\")\nexcept AssertionError:\n    print(\"Teste de multiplicar FALHOU!\")",
+        "test_code": "assert \"Teste de multiplicar passou!\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-testes-multi-input-1",
+        "lesson_id": "testes-python-intro",
+        "title": "Testando Função com Múltiplos Inputs (Simulado)",
+        "description": "Defina uma função `calcular_media(a, b, c)` que retorna a média de três números. Escreva uma função de teste `test_calcular_media()` que usa `assert` para verificar se `calcular_media(10, 20, 30)` é igual a `20.0`. Imprima uma mensagem de sucesso se o teste passar.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "Defina a função `calcular_media`. Crie a função de teste `test_calcular_media()` e use `assert` para verificar o resultado. Chame a função de teste e imprima a mensagem de sucesso.",
+        "initial_code": "# Defina a função calcular_media(a, b, c)\n\n# Defina a função test_calcular_media()\n\n# Chame test_calcular_media() para simular a execução do teste\n# try:\n#     test_calcular_media()\n#     print(\"Teste de calcular_media passou!\")\n# except AssertionError:\n#     print(\"Teste de calcular_media FALHOU!\")",
+        "solution_code": "def calcular_media(a, b, c):\n    return (a + b + c) / 3\n\ndef test_calcular_media():\n    assert calcular_media(10, 20, 30) == 20.0\n    assert calcular_media(1, 1, 1) == 1.0\n    assert calcular_media(0, 0, 0) == 0.0\n\ntry:\n    test_calcular_media()\n    print(\"Teste de calcular_media passou!\")\nexcept AssertionError as e:\n    print(f\"Teste de calcular_media FALHOU: {e}\")",
+        "test_code": "assert \"Teste de calcular_media passou!\" in output",
+        "level": "intermediário"
+        
+    },
+    {
+        "id": "ex-polimorfismo-instrumentos-1",
+        "lesson_id": "poo-polimorfismo-abstracao-python",
+        "title": "Polimorfismo com Instrumentos Musicais",
+        "description": "Crie diferentes classes de instrumentos musicais (ex: `Violao`, `Piano`, `Bateria`) que compartilhem um método `tocar_som()`. Crie uma função `apresentar_instrumento(instrumento)` que chame o método `tocar_som()` do instrumento passado como argumento, demonstrando o polimorfismo.",
+        "difficulty": "Médio",
+        "order": 4,
+        "instructions": "Cada classe de instrumento deve ter seu próprio método `tocar_som()` que imprime uma mensagem específica (ex: 'Violão: Plim plim!', 'Piano: Dó Ré Mi!', 'Bateria: Tum Tá Tum!'). A função `apresentar_instrumento` deve funcionar com qualquer objeto dessas classes.",
+        "initial_code": "# Defina as classes Violao, Piano, Bateria aqui\n# class Violao:\n#     def tocar_som(self):\n#         print(\"Violão: Plim plim!\")\n\n# class Piano:\n#     ...\n\n# class Bateria:\n#     ...\n\n# Defina a função apresentar_instrumento(instrumento) aqui\n# def apresentar_instrumento(instrumento):\n#     # Chame o método tocar_som() do instrumento\n#     pass\n\n# Crie instâncias e teste\n# violao = Violao()\n# piano = Piano()\n# bateria = Bateria()\n\n# apresentar_instrumento(violao)\n# apresentar_instrumento(piano)\n# apresentar_instrumento(bateria)",
+        "solution_code": "class Violao:\n    def tocar_som(self):\n        print(\"Violão: Plim plim!\")\n\nclass Piano:\n    def tocar_som(self):\n        print(\"Piano: Dó Ré Mi!\")\n\nclass Bateria:\n    def tocar_som(self):\n        print(\"Bateria: Tum Tá Tum!\")\n\ndef apresentar_instrumento(instrumento):\n    instrumento.tocar_som()\n\nviolao = Violao()\npiano = Piano()\nbateria = Bateria()\n\napresentar_instrumento(violao)\napresentar_instrumento(piano)\napresentar_instrumento(bateria)",
+       "test_code": "assert \"Violão: Plim plim!\" in output and \"Piano: Dó Ré Mi!\" in output and \"Bateria: Tum Tá Tum!\" in output",
+       "level": "intermediário"
+       
+   },
+   {
+       "id": "ex-abstracao-veiculo-motorizado-1",
+       "lesson_id": "poo-polimorfismo-abstracao-python",
+      "title": "Abstração com Veículos Motorizados",
+      "description": "Crie uma classe abstrata `VeiculoMotorizado` com métodos abstratos `ligar_motor()` e `desligar_motor()`. Em seguida, crie subclasses concretas `Carro` e `Moto` que implementem esses métodos abstratos.",
+       "difficulty": "Médio",
+       "order": 5,
+        "instructions": "Use o módulo `abc` e os decoradores `@ABC` e `@abstractmethod`. As subclasses `Carro` e `Moto` devem fornecer implementações específicas para `ligar_motor()` e `desligar_motor()`, imprimindo mensagens como 'Motor do carro ligado.' ou 'Motor da moto desligado.'.",
+        "initial_code": "from abc import ABC, abstractmethod\n\n# Defina a classe abstrata VeiculoMotorizado aqui\n# class VeiculoMotorizado(ABC):\n#     @abstractmethod\n#     def ligar_motor(self):\n#         pass\n#\n#     @abstractmethod\n#     def desligar_motor(self):\n#         pass\n\n# Defina a subclasse Carro aqui\n# class Carro(VeiculoMotorizado):\n#     def ligar_motor(self):\n#         # Imprima a mensagem para ligar motor do carro\n#         pass\n#     def desligar_motor(self):\n#         # Imprima a mensagem para desligar motor do carro\n#         pass\n\n# Defina a subclasse Moto aqui\n# class Moto(VeiculoMotorizado):\n#     ...\n\n# Crie instâncias e teste os métodos\n# meu_carro = Carro()\n# minha_moto = Moto()\n\n# meu_carro.ligar_motor()\n# minha_moto.ligar_motor()\n# meu_carro.desligar_motor()\n# minha_moto.desligar_motor()",
+       "solution_code": "from abc import ABC, abstractmethod\n\nclass VeiculoMotorizado(ABC):\n    @abstractmethod\n    def ligar_motor(self):\n        pass\n\n    @abstractmethod\n    def desligar_motor(self):\n        pass\n\nclass Carro(VeiculoMotorizado):\n    def ligar_motor(self):\n        print(\"Motor do carro ligado.\")\n\n    def desligar_motor(self):\n        print(\"Motor do carro desligado.\")\n\nclass Moto(VeiculoMotorizado):\n    def ligar_motor(self):\n        print(\"Motor da moto ligado.\")\n\n    def desligar_motor(self):\n        print(\"Motor da moto desligado.\")\n\nmeu_carro = Carro()\nminha_moto = Moto()\n\nmeu_carro.ligar_motor()\nminha_moto.ligar_motor()\nmeu_carro.desligar_motor()\nminha_moto.desligar_motor()",
+       "test_code": "assert \"Motor do carro ligado.\" in output and \"Motor da moto ligado.\" in output and \"Motor do carro desligado.\" in output and \"Motor da moto desligado.\" in output",
+       "level": "intermediário"
+       
+     },
+     {
+             "id": "ex-projeto-final-gestao-1",
+             "lesson_id": "projeto-final-curso-intermediario",
+             "title": "Projeto Final: Aplicação de Gestão de Dados",
+        "description": "<p>Crie uma aplicação completa em Python que simule um sistema de gerenciamento de informações para uma empresa fictícia, integrando POO, módulos, arquivos, banco de dados, Regex, APIs e testes.</p><h3>Requisitos Detalhados do Projeto:</h3><h4>1. Programação Orientada a Objetos (POO):</h4><ul><li>Defina classes para representar as entidades principais do sistema: <code>Cliente</code>, <code>Produto</code> e <code>Pedido</code>.</li><li>Cada classe deve ter atributos relevantes (ex: <code>Cliente</code> pode ter <code>nome</code>, <code>email</code>, <code>telefone</code>; <code>Produto</code> pode ter <code>id_produto</code>, <code>nome</code>, <code>preco</code>, <code>estoque</code>; <code>Pedido</code> pode ter <code>id_pedido</code>, <code>cliente</code>, <code>lista_de_produtos</code>, <code>data</code>, <code>status</code>).</li><li>Implemente métodos para manipular os dados dessas classes (ex: <code>Pedido.adicionar_item()</code>, <code>Produto.atualizar_estoque()</code>).</li><li>Utilize herança se apropriado (ex: <code>ProdutoFisico</code> e <code>ProdutoDigital</code> herdando de <code>Produto</code>).</li><li>Aplique encapsulamento para proteger os dados internos das classes.</li></ul><h4>2. Módulos e Pacotes:</h4><ul><li>Organize seu código em uma estrutura de pacotes e módulos. Por exemplo, crie um pacote principal para sua aplicação (ex: <code>gestor_empresa</code>).</li><li>Dentro do pacote, crie módulos para diferentes responsabilidades (ex: <code>modelos.py</code> para as classes, <code>db_manager.py</code> para interações com o banco de dados, <code>file_handler.py</code> para CSV/JSON, <code>api_client.py</code> para a API externa, <code>validators.py</code> para Regex).</li></ul><h4>3. Manipulação de Arquivos (CSV, JSON):</h4><ul><li>Implemente funcionalidades para exportar dados de clientes, produtos e pedidos para arquivos CSV.</li><li>Implemente funcionalidades para importar dados de clientes e produtos a partir de arquivos CSV para o sistema.</li><li>Considere usar JSON para salvar/carregar configurações da aplicação ou para exportar/importar dados de pedidos com uma estrutura mais complexa.</li></ul><h4>4. Expressões Regulares (Regex):</h4><ul><li>Crie funções de validação que utilizem expressões regulares para:<ul><li>Formato de e-mail de clientes.</li><li>Formato de telefone de clientes (considere um formato padrão, ex: (XX) XXXXX-XXXX).</li><li>Opcional: Formato de IDs de produtos ou códigos de pedidos, se você definir um padrão específico.</li></ul></li></ul><h4>5. Requisições Web e APIs:</h4><ul><li>Escolha uma API pública gratuita (ex: cotação de moedas, dados de CEP como ViaCEP, uma API de produtos fictícios como FakeStoreAPI).</li><li>Integre sua aplicação com esta API. Por exemplo:<ul><li>Ao cadastrar um cliente, use uma API de CEP para autocompletar o endereço.</li><li>Ao visualizar um produto, busque informações adicionais ou um preço de referência de uma API externa.</li></ul></li></ul><h4>6. Banco de Dados (SQLite):</h4><ul><li>Configure e conecte sua aplicação a um banco de dados SQLite (<code>sqlite3</code>).</li><li>Defina o esquema do banco de dados: crie tabelas para <code>Cliente</code>, <code>Produto</code>, <code>Pedido</code> e uma tabela de junção para os itens de um pedido (<code>ItensPedido</code>, relacionando Pedidos e Produtos com quantidade).</li><li>Implemente funções CRUD (Create, Read, Update, Delete) para cada uma das entidades principais.</li><li>Utilize consultas SQL parametrizadas para interagir com o banco de dados de forma segura.</li></ul><h4>7. Testes Unitários:</h4><ul><li>Escreva testes unitários usando <code>unittest</code> ou <code>pytest</code> para as principais funções de lógica de negócio.</li><li>Teste as validações (Regex), os métodos das suas classes POO e as interações com o banco de dados (pode-se usar um banco de dados em memória para os testes).</li></ul><h4>8. Ambiente Virtual e Entrega:</h4><ul><li>Desenvolva seu projeto dentro de um ambiente virtual Python (<code>venv</code>).</li><li>Gere um arquivo <code>requirements.txt</code> com todas as dependências do projeto (<code>pip freeze &gt; requirements.txt</code>).</li><li>O projeto final deve ser entregue como um repositório Git (ex: no GitHub, GitLab), contendo todo o código fonte, o arquivo <code>requirements.txt</code>, e um arquivo <code>README.md</code> que explique:<ul><li>Como configurar e executar o projeto.</li><li>A estrutura do projeto.</li><li>As principais decisões de design tomadas.</li><li>Quaisquer limitações ou funcionalidades futuras planejadas.</li></ul></li></ul><p><strong>Dica:</strong> Comece pela modelagem das classes e do banco de dados. Em seguida, implemente as funcionalidades CRUD básicas. Depois, adicione a manipulação de arquivos, validações com Regex, integração com API e, finalmente, os testes unitários. Use o Git desde o início!</p>",
+             "difficulty": "Projeto",
+             "order": 2,
+        "instructions": "Siga os requisitos detalhados na descrição para desenvolver seu projeto final. O desenvolvimento completo será feito no seu ambiente local e entregue via repositório Git.",
+             "initial_code": "# Projeto Final: Aplicação de Gestão de Dados\n\n# 1. Comece definindo a estrutura básica das suas classes POO (Cliente, Produto, Pedido).\n# Exemplo:\n# class Cliente:\n#     def __init__(self, nome, email, telefone):\n#         self.nome = nome\n#         self.email = email\n#         self.telefone = telefone\n#     def __str__(self):\n#         return f\"Cliente: {self.nome} ({self.email})\"\n\n# class Produto:\n#     def __init__(self, id_produto, nome, preco, estoque=0):\n#         self.id_produto = id_produto\n#         self.nome = nome\n#         self.preco = preco\n#         self.estoque = estoque\n#     def __str__(self):\n#         return f\"Produto: {self.nome} (R${self.preco:.2f}) - Estoque: {self.estoque}\"\n\n# class Pedido:\n#     def __init__(self, id_pedido, cliente, data):\n#         self.id_pedido = id_pedido\n#         self.cliente = cliente\n#         self.data = data\n#         self.itens = [] # Lista de tuplas (produto, quantidade)\n#         self.status = \"Pendente\"\n#     def __str__(self):\n#         return f\"Pedido {self.id_pedido} - Cliente: {self.cliente.nome} - Status: {self.status}\"\n\n# 2. Após definir as classes, imprima a mensagem abaixo para este exercício.\n# O desenvolvimento completo do projeto será feito no seu ambiente local.\n\nprint(\"Estrutura inicial do Projeto de Gestão de Dados definida. Pronto para desenvolvimento completo.\")",
+             "solution_code": "# A solução para este exercício é o projeto completo desenvolvido pelo aluno,\n# seguindo todos os requisitos detalhados nas instruções.\n# O projeto deve ser entregue em um repositório Git conforme especificado.",
+             "test_code": "assert \"Estrutura inicial do Projeto de Gestão de Dados definida. Pronto para desenvolvimento completo.\" in output.strip(), \"Certifique-se de imprimir a mensagem de confirmação correta após definir suas estruturas iniciais para este exercício de projeto.\"",
+         "level": "intermediário"
+         
+         }
+        ]

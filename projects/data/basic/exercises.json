@@ -1,0 +1,297 @@
+[
+
+    {
+        "id": "ex-introducao-1",
+        "lesson_id": "ola-mundo-python",
+        "title": "Olá, Mundo!",
+        "description": "Escreva um programa que imprima 'Olá, Mundo!' na tela.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use a função print() para exibir a mensagem.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "print('Olá, Mundo!')",
+        "test_code": "assert output.strip() == 'Olá, Mundo!'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-variaveis-1",
+        "lesson_id": "variaveis-tipos-dados-numericos",
+        "title": "Calculando a idade",
+        "description": "Crie variáveis para o ano atual e o ano de nascimento e calcule a idade.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use variáveis para armazenar os anos e calcule a diferença.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "ano_atual = 2024\nano_nascimento = 1990\nidade = ano_atual - ano_nascimento\nprint(idade)",
+        "test_code": "try:\n    resultado_str = output.strip()\n    resultado_int = int(resultado_str)\n    idade_esperada = 2024 - 1990 # Conforme solution_code\n    if resultado_int == idade_esperada:\n        print(f\"SUCESSO: Cálculo da idade ({idade_esperada}) correto!\")\n    else:\n        print(f\"FALHA: Cálculo da idade incorreto. Esperado: {idade_esperada}, Obtido: {resultado_int}.\")\nexcept ValueError:\n    print(f\"FALHA: O resultado impresso ('{resultado_str}') não é um número inteiro válido. Certifique-se de imprimir apenas a idade calculada.\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-variaveis-2",
+        "lesson_id": "tipos-dados-string-booleano",
+        "title": "Concatenando strings",
+        "description": "Crie variáveis para nome e sobrenome e concatene-as para formar o nome completo.",
+        "difficulty": "Fácil",
+        "order": 2,
+        "instructions": "Use variáveis para armazenar nome e sobrenome e use o operador + para concatenar.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "nome = 'João'\nsobrenome = 'Silva'\nnome_completo = nome + ' ' + sobrenome\nprint(nome_completo)",
+        "test_code": "assert output.strip() == 'João Silva'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-estruturas-1",
+        "lesson_id": "condicionais-if-elif-else",
+        "title": "Verificação de número par",
+        "description": "Escreva um programa que verifica se um número é par ou ímpar.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Use o operador % para verificar se o número é divisível por 2.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "numero = 10\nif numero % 2 == 0:\n    print('Par')\nelse:\n    print('Ímpar')",
+        "test_code": "try:\n    resultado_str = output.strip().lower()\n    # Para o número 10 (da solution_code), o esperado é 'par'\n    esperado_str = 'par'\n    if resultado_str == esperado_str:\n        print(f\"SUCESSO: Verificação de número par correta! (Entrada: 10, Saída: '{output.strip()}')\")\n    else:\n        print(f\"FALHA: Saída incorreta para o número 10. Esperado: '{esperado_str.capitalize()}', Obtido: '{output.strip()}'.\")\nexcept AttributeError: # Caso output não seja uma string ou algo que tenha strip/lower\n    print(f\"ERRO: A saída do seu programa não parece ser um texto simples. Saída obtida: {output}\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-estruturas-2",
+        "lesson_id": "operadores-python",
+        "title": "Calculadora de IMC",
+        "description": "Escreva um programa que calcula o IMC com base no peso e altura.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Use as fórmulas para calcular o IMC e imprima o resultado.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "peso = 70\naltura = 1.75\nimc = peso / (altura ** 2)\nprint(imc)",
+        "test_code": "assert abs(float(output) - 22.857) < 0.001",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-estruturas-3",
+        "lesson_id": "loop-while",
+        "title": "Jogo de adivinhação",
+        "description": "Crie um jogo onde o usuário tenta adivinhar um número secreto.",
+        "difficulty": "Difícil",
+        "order": 3,
+        "instructions": "Use um loop while para permitir que o usuário tente várias vezes.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "numero_secreto = 7\nchute = int(input('Adivinhe o número: '))\nif chute == numero_secreto:\n    print('Acertou!')\nelse:\n    print('Errou!')",
+        "test_code": "assert 'Acertou!' in output or 'Errou!' in output",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-listas-1",
+        "lesson_id": "listas-python-basico",
+        "title": "Soma dos elementos",
+        "description": "Escreva um programa que calcula a soma dos elementos de uma lista.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use um loop for para iterar sobre os elementos da lista e somá-los.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "lista = [1, 2, 3, 4, 5]\nsoma = 0\nfor elemento in lista:\n    soma += elemento\nprint(soma)",
+        "test_code": "try:\n    resultado_str = output.strip()\n    resultado_int = int(resultado_str)\n    soma_esperada = 15 # Para a lista [1, 2, 3, 4, 5]\n    if resultado_int == soma_esperada:\n        print(f\"SUCESSO: A soma dos elementos ({soma_esperada}) foi calculada corretamente!\")\n    else:\n        print(f\"FALHA: A soma calculada está incorreta. Para a lista [1, 2, 3, 4, 5], o esperado era {soma_esperada}, mas foi obtido {resultado_int}.\")\nexcept ValueError:\n    print(f\"FALHA: A saída ('{resultado_str}') não é um número inteiro válido. Certifique-se de imprimir apenas o valor numérico da soma.\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-listas-2",
+        "lesson_id": "listas-python-basico",
+        "title": "Maior elemento",
+        "description": "Encontre o maior elemento de uma lista.",
+        "difficulty": "Médio",
+        "order": 2,
+        "instructions": "Use um loop for para encontrar o maior elemento.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "lista = [5, 2, 8, 1, 9]\nmaior = lista[0]\nfor elemento in lista:\n    if elemento > maior:\n        maior = elemento\nprint(maior)",
+        "test_code": "assert int(output.strip()) == 9",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-listas-3",
+        "lesson_id": "listas-tuplas",
+        "title": "listas-python-avancado",
+        "description": "Remova as duplicatas de uma lista.",
+        "difficulty": "Médio",
+        "order": 3,
+        "instructions": "Use um loop for e uma lista auxiliar para remover as duplicatas.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "lista = [1, 2, 2, 3, 4, 4, 5]\nsem_duplicatas = []\nfor elemento in lista:\n    if elemento not in sem_duplicatas:\n        sem_duplicatas.append(elemento)\nprint(sem_duplicatas)",
+        "test_code": "import ast\n\ntry:\n    resultado_str = output.strip()\n    resultado_lista = ast.literal_eval(resultado_str)\n    lista_esperada = [1, 2, 3, 4, 5]\n\n    if not isinstance(resultado_lista, list):\n        print(f\"FALHA: A saída ('{resultado_str}') não foi reconhecida como uma lista válida. Esperado um formato como [1, 2, 3].\")\n    elif resultado_lista == lista_esperada:\n        print(f\"SUCESSO: A lista sem duplicatas ({lista_esperada}) foi gerada corretamente!\")\n    else:\n        print(f\"FALHA: A lista gerada está incorreta. Esperado: {lista_esperada}, Obtido: {resultado_lista}.\")\nexcept (ValueError, SyntaxError):\n    print(f\"FALHA: A saída ('{resultado_str}') não é uma representação de lista Python válida (ex: '[1, 2, 3]'). Verifique a formatação.\")\nexcept Exception as e:\n    print(f\"ERRO: Ocorreu um erro inesperado durante o teste: {str(e)}\")",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-tuplas-1",
+        "lesson_id": "tuplas-python",
+        "title": "Acessando elementos",
+        "description": "Acesse o primeiro e o último elemento de uma tupla.",
+        "difficulty": "Fácil",
+        "order": 4,
+        "instructions": "Use indexação para acessar os elementos.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "tupla = (1, 2, 3, 4, 5)\nprimeiro = tupla[0]\nultimo = tupla[-1]\nprint(primeiro, ultimo)",
+        "test_code": "assert output.strip() == '1 5'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-tuplas-2",
+        "lesson_id": "tuplas-python",
+        "title": "Desempacotamento",
+        "description": "Desempacote uma tupla em variáveis separadas.",
+        "difficulty": "Médio",
+        "order": 5,
+        "instructions": "Use desempacotamento para atribuir os elementos da tupla a variáveis.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "tupla = (1, 2, 3)\na, b, c = tupla\nprint(a, b, c)",
+        "test_code": "assert output.strip() == '1 2 3'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-funcoes-1",
+        "lesson_id": "funcoes-python-definicao-chamada",
+        "title": "Calculadora",
+        "description": "Crie funções para somar, subtrair, multiplicar e dividir dois números.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Crie funções separadas para cada operação.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "def soma(a, b):\n    return a + b\nprint(soma(1, 2))",
+        "test_code": "assert int(output.strip()) == 3",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-strings-1",
+        "lesson_id": "manipulacao-strings",
+        "title": "Inversão de string",
+        "description": "Escreva um programa que inverte uma string.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use slicing para inverter a string.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "string = 'python'\nprint(string[::-1])",
+        "test_code": "assert output.strip() == 'nohtyp'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-modulos-1",
+        "lesson_id": "modulos-python-basico",
+        "title": "Calculadora com Módulo Math",
+        "description": "Crie um programa que usa funções do módulo `math` para calcular a raiz quadrada e o cosseno de um número.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Importe o módulo `math` e use `math.sqrt()` e `math.cos()` (cosseno espera radianos).",
+        "initial_code": "import math\n\nnumero = 9\n# Calcule a raiz quadrada de 'numero'\n# Calcule o cosseno de 'numero' (em radianos)\n\n# print(f'Raiz quadrada de {numero}: {raiz_quadrada}')\n# print(f'Cosseno de {numero} radianos: {cosseno_numero}')",
+        "solution_code": "import math\n\nnumero = 9\nraiz_quadrada = math.sqrt(numero)\ncosseno_numero = math.cos(numero)\n\nprint(f'Raiz quadrada de {numero}: {raiz_quadrada}')\nprint(f'Cosseno de {numero} radianos: {cosseno_numero}')",
+        "test_code": "assert 'Raiz quadrada de 9: 3.0' in output and 'Cosseno de 9 radianos: -0.9111' in output # Aproximação para cosseno",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-intro-prog-1",
+        "lesson_id": "intro-programacao-python",
+        "title": "Conceitos de Programação",
+        "description": "Responda à pergunta: O que é um algoritmo?",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Use a função print() para escrever sua resposta em uma frase.",
+        "initial_code": "# Escreva seu código aqui\n# print(\"Um algoritmo é...\")",
+        "solution_code": "print(\"Um algoritmo é uma sequência finita e bem definida de passos para resolver um problema ou alcançar um objetivo.\")",
+        "test_code": "assert \"algoritmo\" in output.lower() and \"sequência\" in output.lower() and \"passos\" in output.lower() and \"resolver\" in output.lower()",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-config-env-1",
+        "lesson_id": "configurando-ambiente-python",
+        "title": "Verificando a Versão do Python (Simulado)",
+        "description": "Simule a saída do comando que verifica a versão do Python instalada.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Imprima uma string que se pareça com a saída do comando `python --version`, por exemplo, 'Python 3.10.4'.",
+        "initial_code": "# Escreva seu código aqui",
+        "solution_code": "print(\"Python 3.10.4\")",
+        "test_code": "assert \"Python\" in output and len(output.strip().split('.')) == 3 and output.strip().split(' ')[0] == 'Python'",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-precedencia-1",
+        "lesson_id": "precedencia-conversao-tipos",
+        "title": "Cálculo com Precedência",
+        "description": "Calcule e imprima o resultado das expressões: 1) 10 + 5 * 2 e 2) (10 + 5) * 2.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Armazene cada resultado em uma variável e imprima cada um em uma nova linha.",
+        "initial_code": "# Escreva seu código aqui\n# resultado1 = 10 + 5 * 2\n# resultado2 = (10 + 5) * 2\n# print(resultado1)\n# print(resultado2)",
+        "solution_code": "resultado1 = 10 + 5 * 2\nresultado2 = (10 + 5) * 2\nprint(resultado1)\nprint(resultado2)",
+        "test_code": "lines = output.strip().split('\\n')\nassert len(lines) == 2, \"Esperado duas linhas de saída\"\nassert int(lines[0]) == 20, \"Primeiro resultado (10 + 5 * 2) incorreto\"\nassert int(lines[1]) == 30, \"Segundo resultado ((10 + 5) * 2) incorreto\"",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-loop-for-1",
+        "lesson_id": "loop-for",
+        "title": "Imprimindo Números com For",
+        "description": "Use um loop `for` e a função `range()` para imprimir os números de 1 a 5, cada um em uma nova linha.",
+        "difficulty": "Fácil",
+        "order": 1,
+        "instructions": "Utilize `range(1, 6)` no seu loop `for`.",
+        "initial_code": "# Escreva seu código aqui\n# for i in range(1, 6):\n#     print(i)",
+        "solution_code": "for i in range(1, 6):\n    print(i)",
+        "test_code": "expected_output = \"1\\n2\\n3\\n4\\n5\"\nassert output.strip() == expected_output, f\"Saída incorreta. Esperado: {expected_output}, Obtido: {output.strip()}\"",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-controle-loops-1",
+        "lesson_id": "controle-loops-break-continue-pass",
+        "title": "Usando Break em um Loop",
+        "description": "Crie um loop `for` que itera de 1 a 10. Dentro do loop, imprima cada número. Se o número for igual a 5, interrompa o loop usando `break`.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Use uma instrução `if` para verificar se o número é 5 e, então, use `break`.",
+        "initial_code": "# Escreva seu código aqui\n# for i in range(1, 11):\n#     print(i)\n#     if i == 5:\n#         break",
+        "solution_code": "for i in range(1, 11):\n    print(i)\n    if i == 5:\n        break",
+        "test_code": "expected_output = \"1\\n2\\n3\\n4\\n5\"\nassert output.strip() == expected_output, f\"Saída incorreta. Esperado números até 5. Obtido: {output.strip()}\"",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-funcoes-args-1",
+        "lesson_id": "funcoes-python-argumentos-escopo",
+        "title": "Função com Argumentos Padrão",
+        "description": "Crie uma função chamada `detalhes_produto` que aceite `nome_produto` e `categoria` (com valor padrão 'Geral'). A função deve imprimir 'Produto: [nome_produto] - Categoria: [categoria]'. Chame a função duas vezes: uma vez apenas com o nome e outra com nome e categoria.",
+        "difficulty": "Médio",
+        "order": 1,
+        "instructions": "Defina a função com o parâmetro `categoria` tendo um valor padrão. Faça duas chamadas à função.",
+        "initial_code": "# Defina a função detalhes_produto aqui\n\n# Chame a função\n# detalhes_produto(\"Caneta\")\n# detalhes_produto(\"Notebook\", \"Eletrônicos\")",
+        "solution_code": "def detalhes_produto(nome_produto, categoria='Geral'):\n    print(f\"Produto: {nome_produto} - Categoria: {categoria}\")\n\ndetalhes_produto(\"Caneta\")\ndetalhes_produto(\"Notebook\", \"Eletrônicos\")",
+        "test_code": "lines = output.strip().split('\\n')\nassert len(lines) == 2, \"Esperado duas linhas de saída.\"\nassert \"Produto: Caneta - Categoria: Geral\" in lines[0]\nassert \"Produto: Notebook - Categoria: Eletrônicos\" in lines[1]",
+        "level": "básico"
+        
+    },
+    {
+        "id": "ex-projeto-final-basico-1",
+        "lesson_id": "projeto-final-curso-basico",
+        "title": "Projeto Final: Mini Sistema de Gerenciamento de Tarefas",
+        "description": "<p>Crie uma aplicação de linha de comando em Python para gerenciar uma lista de tarefas. Este projeto visa aplicar os conceitos fundamentais aprendidos no curso básico.</p><h3>Funcionalidades Requeridas:</h3><ol><li><strong>Adicionar Tarefa:</strong> Permitir que o usuário adicione uma nova tarefa à lista. Cada tarefa pode ser uma string.</li><li><strong>Listar Tarefas:</strong> Exibir todas as tarefas da lista, numeradas para fácil referência. Indicar se uma tarefa está concluída ou pendente.</li><li><strong>Marcar Tarefa como Concluída:</strong> Permitir que o usuário marque uma tarefa específica (usando seu número na lista) como concluída.</li><li><strong>Remover Tarefa:</strong> Permitir que o usuário remova uma tarefa específica da lista.</li><li><strong>Sair:</strong> Encerrar a aplicação.</li></ol><h3>Requisitos Técnicos:</h3><ul><li><strong>Estrutura de Dados:</strong> Utilize uma lista para armazenar as tarefas. Cada item na lista pode ser um dicionário contendo a descrição da tarefa (string) e seu status (booleano, ex: <code>True</code> para concluída, <code>False</code> para pendente). Exemplo: <code>[{'descricao': 'Estudar Python', 'concluida': False}, {'descricao': 'Fazer compras', 'concluida': True}]</code></li><li><strong>Funções:</strong> Organize seu código em funções para cada funcionalidade principal (<code>adicionar_tarefa()</code>, <code>listar_tarefas()</code>, <code>marcar_concluida()</code>, <code>remover_tarefa()</code>).</li><li><strong>Controle de Fluxo:</strong> Use loops (<code>while</code> para o menu principal, <code>for</code> para listar tarefas) e condicionais (<code>if/elif/else</code> para processar as opções do usuário e verificar o status das tarefas).</li><li><strong>Entrada e Saída:</strong> Utilize <code>input()</code> para obter as escolhas e dados do usuário, e <code>print()</code> para exibir o menu, as tarefas e mensagens de feedback.</li><li><strong>Validação Básica:</strong> Tente adicionar validações simples, como verificar se o número da tarefa fornecido pelo usuário é válido antes de tentar marcá-la como concluída ou removê-la.</li></ul><h3>Exemplo de Interação (Menu):</h3><pre><code>Gerenciador de Tarefas\n-----------------------\n1. Adicionar Tarefa\n2. Listar Tarefas\n3. Marcar como Concluída\n4. Remover Tarefa\n5. Sair\nEscolha uma opção: </code></pre><p><strong>Dica:</strong> Comece criando a lista de tarefas e as funções para adicionar e listar. Depois, implemente as funcionalidades de marcar como concluída e remover. Por fim, crie o loop principal do menu.</p>",
+        "difficulty": "Projeto",
+        "order": 1,
+        "instructions": "Desenvolva este projeto em seu ambiente local, aplicando os conceitos de tipos de dados, operadores, estruturas de controle, listas e funções aprendidos no curso básico. O objetivo é criar uma aplicação de linha de comando funcional.",
+        "initial_code": "# Projeto Final: Mini Sistema de Gerenciamento de Tarefas\n\n# Lista para armazenar as tarefas (ex: lista de dicionários)\ntarefas = []\n\ndef adicionar_tarefa(descricao):\n    # Adicione a lógica para criar uma nova tarefa (dicionário)\n    # e adicioná-la à lista 'tarefas'.\n    # Lembre-se do status inicial (ex: 'concluida': False)\n    print(f'Tarefa \"{descricao}\" adicionada.')\n\ndef listar_tarefas():\n    print(\"\\n--- Minhas Tarefas ---\")\n    if not tarefas:\n        print(\"Nenhuma tarefa na lista.\")\n        return\n    # Adicione a lógica para iterar sobre a lista 'tarefas'\n    # e imprimir cada tarefa com seu número e status.\n    # Ex: 1. [ ] Estudar Python\n    #     2. [X] Fazer compras\n    pass\n\n# Você precisará definir mais funções (marcar_concluida, remover_tarefa)\n# e o loop principal do menu.\n\n# Mensagem de início para o exercício no sistema do curso\nprint(\"Estrutura inicial do Mini Sistema de Gerenciamento de Tarefas definida. Pronto para desenvolvimento!\")",
+        "solution_code": "# A solução completa para este projeto envolve a implementação de todas as funcionalidades\n# descritas, incluindo o menu interativo e as funções para manipular a lista de tarefas.\n# O aluno deve desenvolver este código em seu próprio ambiente.",
+        "test_code": "assert \"Estrutura inicial do Mini Sistema de Gerenciamento de Tarefas definida. Pronto para desenvolvimento!\" in output.strip()",
+        "level": "básico"
+        
+    }
+]

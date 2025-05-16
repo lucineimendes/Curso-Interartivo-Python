@@ -1,0 +1,766 @@
+[
+    {
+        "id": "intro-programacao-python",
+        "course_id": "python-basico",
+        "title": "O que é Programação e Python?",
+        "order": 1,
+        "description": "Entenda os conceitos básicos de programação, algoritmos e conheça a linguagem Python, sua história e filosofia.",
+        "learning_objectives": [
+            "Definir o que é programação e sua importância.",
+            "Explicar o conceito de algoritmo e lógica de programação.",
+            "Descrever a linguagem Python, sua origem e principais características.",
+            "Compreender a filosofia do Python (Zen do Python)."
+        ],
+        "key_concepts": [
+            "Programação",
+            "Algoritmo",
+            "Lógica de Programação",
+            "Linguagem Python",
+            "Linguagem Interpretada",
+            "Zen do Python"
+        ],
+        "content": "<h2>Bem-vindo ao Mundo da Programação!</h2>\n\n<p>Programar é, em essência, dar instruções para um computador realizar uma tarefa. Essas instruções são escritas em uma <strong>linguagem de programação</strong>, e o conjunto de instruções para uma tarefa específica é chamado de <strong>programa</strong> ou <strong>software</strong>.</p>\n\n<h3>Algoritmos e Lógica</h3>\n\n<p>Antes de escrever um programa, geralmente pensamos em um <strong>algoritmo</strong>: uma sequência finita e bem definida de passos para resolver um problema ou alcançar um objetivo. A <strong>lógica de programação</strong> é a habilidade de organizar esses passos de forma clara e eficiente.</p>\n\n<p><strong>Exemplo de Algoritmo (Fazer um café):</strong></p>\n<ol>\n  <li>Pegar a cafeteira.</li>\n  <li>Colocar água no reservatório.</li>\n  <li>Colocar o filtro de papel.</li>\n  <li>Adicionar pó de café no filtro.</li>\n  <li>Ligar a cafeteira.</li>\n  <li>Esperar o café passar.</li>\n  <li>Servir o café.</li>\n</ol>\n\n<h3>Conhecendo o Python</h3>\n\n<p>Python é uma linguagem de programação de alto nível, criada por Guido van Rossum e lançada pela primeira vez em 1991. É conhecida por sua <strong>sintaxe simples e legível</strong>, o que a torna excelente para iniciantes. Apesar da simplicidade, é extremamente poderosa e usada em diversas áreas como:</p>\n\n<ul>\n  <li>Desenvolvimento Web (sites e aplicações web)</li>\n  <li>Ciência de Dados e Inteligência Artificial (análise de dados, machine learning)</li>\n  <li>Automação de Tarefas (scripts para simplificar rotinas)</li>\n  <li>Desenvolvimento de Jogos</li>\n  <li>E muito mais!</li>\n</ul>\n\n<h4>Filosofia do Python</h4>\n\n<p>Python tem uma filosofia de design que enfatiza a legibilidade do código. Alguns dos seus princípios estão resumidos no <strong>Zen do Python</strong>. Para vê-lo, abra um terminal com Python e digite:</p>\n\n<pre><code class=\"language-python\">import this</code></pre>\n\n<p>Alguns pontos chave são: \"Bonito é melhor que feio\", \"Explícito é melhor que implícito\", \"Simples é melhor que complexo\".</p>\n\n<p>Python é uma linguagem <strong>interpretada</strong>, o que significa que o código é executado linha por linha por um programa chamado interpretador, facilitando o desenvolvimento e a depuração, diferente de linguagens compiladas que traduzem todo o código de uma vez antes da execução.</p>",
+        "examples": [
+            {
+                "title": "O Zen do Python",
+                "code": "import this",
+                "explanation": "Este comando, quando executado no interpretador Python, exibe os princípios de design da linguagem, conhecidos como 'O Zen do Python'."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu os conceitos fundamentais de programação e algoritmos, e foi introduzido à linguagem Python, sua história, características e filosofia. Python é uma linguagem versátil e amigável para iniciantes.",
+        "estimated_time_minutes": 20
+    },
+    {
+        "id": "configurando-ambiente-python",
+        "course_id": "python-basico",
+        "title": "Configurando seu Ambiente Python",
+        "order": 2,
+        "description": "Aprenda a instalar Python e configurar um ambiente de desenvolvimento produtivo com IDEs como VS Code.",
+        "learning_objectives": [
+            "Instalar a versão mais recente do Python.",
+            "Verificar a instalação do Python.",
+            "Entender o que é um IDE e sua utilidade.",
+            "Configurar o Visual Studio Code (VS Code) para desenvolvimento Python.",
+            "Utilizar o interpretador Python interativo."
+        ],
+        "key_concepts": [
+            "Instalação do Python",
+            "PIP (Gerenciador de Pacotes)",
+            "IDE (Ambiente de Desenvolvimento Integrado)",
+            "VS Code",
+            "Interpretador Interativo"
+        ],
+        "content": "<h2>Instalando o Python</h2>\n\n<p>O primeiro passo para programar em Python é instalá-lo em seu computador.</p>\n\n<ol>\n  <li><strong>Baixe o Python:</strong> Visite o site oficial <a href=\"https://www.python.org/downloads/\">python.org</a> e baixe o instalador para o seu sistema operacional (Windows, macOS, Linux).</li>\n  <li><strong>Instalação (Windows):</strong> Execute o instalador. <strong>Importante:</strong> Marque a opção \"Add Python X.Y to PATH\" ou \"Adicionar Python X.Y ao PATH\" durante a instalação. Isso facilitará a execução de scripts Python pelo terminal.</li>\n  <li><strong>Instalação (macOS/Linux):</strong> Geralmente, Python já vem pré-instalado ou pode ser instalado facilmente através do gerenciador de pacotes do sistema (ex: <code>apt</code> no Ubuntu, <code>brew</code> no macOS). Siga as instruções do site oficial se necessário.</li>\n</ol>\n\n<h3>Verificando a Instalação</h3>\n\n<p>Abra um novo terminal (Prompt de Comando no Windows, Terminal no macOS/Linux) e digite:</p>\n\n<pre><code class=\"language-bash\">python --version\n# ou, em alguns sistemas, especialmente se você tiver múltiplas versões:\npython3 --version</code></pre>\n\n<p>Você deverá ver a versão do Python que instalou (ex: Python 3.10.4).</p>\n\n<h2>Ambiente de Desenvolvimento (IDE)</h2>\n\n<p>Um Ambiente de Desenvolvimento Integrado (IDE) é um software que fornece ferramentas abrangentes para facilitar o desenvolvimento de software. Para Python, algumas opções populares são:</p>\n\n<ul>\n  <li><strong>Visual Studio Code (VS Code):</strong> Gratuito, leve, poderoso e altamente personalizável com extensões. É uma excelente escolha para iniciantes e profissionais.</li>\n  <li><strong>PyCharm:</strong> Desenvolvido pela JetBrains, possui uma versão Community (gratuita) e uma Profissional (paga). É muito robusto e específico para Python.</li>\n</ul>\n\n<h3>Configurando o VS Code</h3>\n\n<ol>\n  <li>Baixe e instale o VS Code em code.visualstudio.com.</li>\n  <li>Abra o VS Code e vá para a aba de Extensões (ícone de blocos no menu lateral ou CtrlShiftX).</li>\n  <li>Procure por \"Python\" (publicada pela Microsoft) e instale-a. Esta extensão oferece recursos como IntelliSense (autocompletar código), linting (análise de código para erros e estilo), depuração, e mais.</li>\n  <li>O VS Code também pode te ajudar a selecionar o interpretador Python correto se você tiver múltiplas versões instaladas.</li>\n</ol>\n\n<h2>O Interpretador Interativo</h2>\n\n<p>Python vem com um interpretador interativo (também chamado de REPL: Read-Eval-Print Loop) que permite executar comandos Python um por um e ver os resultados imediatamente. Para acessá-lo, abra o terminal e digite <code>python</code> ou <code>python3</code>.</p>\n\n<pre><code class=\"language-bash\">python</code></pre>\n\n<p>Você verá o prompt <code>>>></code>. Experimente digitar <code>2 + 2</code> e pressione Enter. Para sair, digite <code>exit()</code> ou pressione CtrlZ (Windows) / CtrlD (macOS/Linux) e Enter.</p>",
+        "examples": [
+            {
+                "title": "Verificando a versão do Python no terminal",
+                "code": "python --version",
+                "explanation": "Comando para verificar a versão do Python instalada e se o PATH está configurado corretamente."
+            },
+            {
+                "title": "Usando o interpretador interativo",
+                "code": ">>> print(\"Teste direto no interpretador!\")\nTeste direto no interpretador!\n>>> 2 * (3 + 5)\n16\n>>> exit()",
+                "explanation": "Demonstra como usar o interpretador interativo para executar comandos Python e sair."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu a instalar o Python, configurar o VS Code para desenvolvimento e a usar o interpretador interativo. Você está pronto para começar a escrever seus próprios programas!",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "ola-mundo-python",
+        "course_id": "python-basico",
+        "title": "Seu Primeiro Programa: Olá, Mundo!",
+        "order": 3,
+        "description": "Escreva e execute seu primeiro script Python, o tradicional 'Olá, Mundo!', e entenda a função print().",
+        "learning_objectives": [
+            "Criar um arquivo de script Python (.py).",
+            "Escrever um programa simples que imprime uma mensagem.",
+            "Executar um script Python a partir do terminal ou IDE.",
+            "Entender o uso básico da função <code>print()</code>."
+        ],
+        "key_concepts": [
+            "Script Python",
+            "Arquivo <code>.py</code>",
+            "Função <code>print()</code>",
+            "Execução de Script"
+        ],
+        "content": "<h2>Criando seu Primeiro Script Python</h2>\n\n<p>Agora que seu ambiente está configurado, vamos escrever nosso primeiro programa completo em Python. Por tradição, o primeiro programa em uma nova linguagem é o \"Olá, Mundo!\".</p>\n\n<ol>\n  <li><strong>Crie um arquivo:</strong> Abra seu editor de código (como o VS Code). Crie um novo arquivo e salve-o com um nome que termine em <code>.py</code>. Por exemplo, <code>ola_mundo.py</code>.</li>\n\n  <li><strong>Escreva o código:</strong> Dentro do arquivo <code>ola_mundo.py</code>, digite a seguinte linha de código:</li>\n\n    <pre><code class=\"language-python\">print(\"Olá, Mundo Python!\")</code></pre>\n\n</ol>\n\n<h3>Entendendo o Código</h3>\n\n<ul>\n  <li><code>print()</code>: Esta é uma função embutida do Python. Uma <strong>função</strong> é um bloco de código que realiza uma tarefa específica. A função <code>print()</code> é usada para exibir informações (texto, números, etc.) na tela (geralmente no console ou terminal).</li>\n  <li>\"Olá, Mundo Python!\": Este é o <strong>argumento</strong> que passamos para a função <code>print()</code>. É uma string (sequência de caracteres) que queremos que seja exibida. Strings em Python são geralmente delimitadas por aspas duplas (<code>\"</code>) ou aspas simples (<code>'</code>).</li>\n</ul>\n\n<h3>Executando o Script</h3>\n\n<p>Existem algumas maneiras de executar seu script:</p>\n\n<ul>\n  <li><strong>Via Terminal:</strong>\n    <ol>\n      <li>Abra o terminal.</li>\n      <li>Navegue até o diretório onde você salvou o arquivo <code>ola_mundo.py</code> (usando comandos como <code>cd</code>).</li>\n      <li>Digite <code>python ola_mundo.py</code> (ou <code>python3 ola_mundo.py</code>) e pressione Enter.</li>\n    </ol>\n  </li>\n\n  <li><strong>Via IDE (Ex: VS Code):</strong>\n    <ol>\n      <li>Com o arquivo <code>ola_mundo.py</code> aberto no VS Code.</li>\n      <li>Você pode clicar com o botão direito no editor e selecionar \"Run Python File in Terminal\" ou usar o botão de \"play\" (geralmente um triângulo verde) que a extensão Python adiciona.</li>\n    </ol>\n  </li>\n</ul>\n\n<p>Em ambos os casos, você deverá ver a saída:</p>\n\n<pre><code>Olá, Mundo Python!</code></pre>\n\n<p>Parabéns! Você escreveu e executou seu primeiro programa Python!</p>",
+        "examples": [
+            {
+                "title": "Script 'Olá, Mundo!' completo",
+                "code": "# Este é um comentário. Linhas começando com # são ignoradas pelo Python.\n\n# A função print() exibe a mensagem na tela.\nprint(\"Olá, Mundo Python!\")\nprint(\"Este é meu primeiro programa.\")",
+                "explanation": "Um script Python simples que usa a função print() para exibir duas linhas de texto. Inclui um comentário explicativo."
+            }
+        ],
+        "summary": "Você aprendeu a criar um arquivo de script Python, usar a função <code>print()</code> para exibir texto e executar seu programa. Este é o primeiro passo fundamental na sua jornada de programação com Python!",
+        "estimated_time_minutes": 15
+    },
+    {
+        "id": "variaveis-tipos-dados-numericos",
+        "course_id": "python-basico",
+        "title": "Variáveis e Tipos de Dados Numéricos",
+        "order": 4,
+        "description": "Aprenda sobre variáveis, como atribuir valores e os tipos de dados numéricos em Python: inteiros, floats e complexos.",
+        "learning_objectives": [
+            "Entender o conceito de variável e como nomeá-las corretamente.",
+            "Realizar atribuições de valores a variáveis.",
+            "Identificar e utilizar o tipo de dado inteiro (<code>int</code>).",
+            "Identificar e utilizar o tipo de dado ponto flutuante (<code>float</code>).",
+            "Reconhecer o tipo de dado complexo (<code>complex</code>) e seu uso básico."
+        ],
+        "key_concepts": [
+            "Variável",
+            "Atribuição (<code>=</code>)",
+            "Identificadores (Nomes de Variáveis)",
+            "Palavras Reservadas",
+            "Tipo <code>int</code>",
+            "Tipo <code>float</code>",
+            "Tipo <code>complex</code>",
+            "Função <code>type()</code>"
+        ],
+        "content": "<h2>Variáveis: Guardando Informações</h2>\n\n<p>Em programação, uma <strong>variável</strong> é um nome que se refere a um local na memória do computador onde um valor é armazenado. Pense nela como uma etiqueta que você coloca em uma caixa para saber o que tem dentro. Você pode usar variáveis para guardar dados que seu programa precisará usar ou modificar.</p>\n\n<p>Para criar uma variável em Python e guardar um valor nela (processo chamado <strong>atribuição</strong>), usamos o sinal de igual (<code>=</code>):</p>\n\n<pre><code class=\"language-python\">idade = 30\naltura = 1.75</code></pre>\n<p>Aqui, <code>idade</code> é uma variável que armazena o valor <code>30</code>, e <code>altura</code> armazena <code>1.75</code>.</p>\n\n<h3>Nomes de Variáveis (Identificadores)</h3>\n\n<p>Existem algumas regras e convenções para nomear variáveis em Python:</p>\n\n<ul>\n  <li><strong>Regras (Obrigatórias):</strong>\n    <ul>\n      <li>Devem começar com uma letra (a-z, A-Z) ou um underscore (<code>_</code>).</li>\n      <li>O restante do nome pode conter letras, números (0-9) ou underscores.</li>\n      <li>Nomes são sensíveis a maiúsculas e minúsculas (<code>idade</code> é diferente de <code>Idade</code>).</li>\n      <li>Não podem ser <strong>palavras reservadas</strong> do Python (palavras que têm significado especial na linguagem, como <code>if</code>, <code>for</code>, <code>while</code>, <code>def</code>, <code>class</code>, etc.).</li>\n    </ul>\n  </li>\n  <li><strong>Convenções (Boas Práticas - PEP 8):</strong>\n    <ul>\n      <li>Use nomes em minúsculas.</li>\n      <li>Para nomes compostos, separe as palavras com underscores (estilo <code>snake_case</code>). Ex: <code>taxa_juros</code>, <code>nome_completo_usuario</code>.</li>\n      <li>Escolha nomes descritivos que indiquem o propósito da variável.</li>\n    </ul>\n  </li>\n</ul>\n\n<p><strong>Exemplos de nomes válidos:</strong> <code>meu_nome</code>, <code>valor1</code>, <code>_total</code><br><strong>Exemplos de nomes inválidos:</strong> <code>1valor</code> (começa com número), <code>meu-nome</code> (contém hífen), <code>class</code> (palavra reservada)</p>\n\n<h2>Tipos de Dados Numéricos</h2>\n\n<p>Python possui vários tipos de dados embutidos para representar números. Os mais comuns são:</p>\n\n<h3>Inteiros (<code>int</code>)</h3>\n\n<p>Representam números inteiros, positivos ou negativos, sem parte decimal. Não há limite prático para o tamanho de um inteiro em Python (além da memória disponível).</p>\n\n<pre><code class=\"language-python\">numero_alunos = 25\nano_nascimento = 1990\nsaldo_negativo = -100\npopulacao_mundial = 7900000000\n\n# Para verificar o tipo de uma variável, usamos a função type()\nprint(type(numero_alunos)) # Saída: &lt;class 'int'&gt;</code></pre>\n\n<h3>Ponto Flutuante (<code>float</code>)</h3>\n\n<p>Representam números reais, ou seja, números que possuem uma parte decimal. São usados para valores que exigem precisão, como medidas, cálculos financeiros, etc. O nome \"ponto flutuante\" refere-se à maneira como o ponto decimal pode \"flutuar\" para diferentes posições.</p>\n\n<pre><code class=\"language-python\">preco_produto = 19.99\npi = 3.14159\ntemperatura = -5.5\nnota_media = 7.5\n\nprint(type(preco_produto)) # Saída: &lt;class 'float'&gt;</code></pre>\n\n<h3>Complexos (<code>complex</code>)</h3>\n\n<p>Representam números complexos, que têm uma parte real e uma parte imaginária. A parte imaginária é denotada por um <code>j</code> ou <code>J</code> sufixo. São menos comuns em programação básica, mas fundamentais em áreas científicas, engenharia elétrica, e processamento de sinais.</p>\n\n<pre><code class=\"language-python\">numero_complexo1 = 2 + 3j\nnumero_complexo2 = -5j # Parte real é 0\nnumero_complexo3 = complex(4, -1) # Outra forma de criar\n\nprint(type(numero_complexo1)) # Saída: &lt;class 'complex'&gt;\nprint(numero_complexo1.real)  # Saída: 2.0 (parte real)\nprint(numero_complexo1.imag)  # Saída: 3.0 (parte imaginária)</code></pre>\n\n<p>Python é uma linguagem de <strong>tipagem dinâmica</strong>, o que significa que você não precisa declarar explicitamente o tipo de uma variável. O Python infere o tipo com base no valor que você atribui a ela.</p>",
+        "examples": [
+            {
+                "title": "Atribuindo e usando variáveis numéricas",
+                "code": "idade_usuario = 28\npeso_kg = 70.5\n\nprint(f\"Idade: {idade_usuario} anos\")\nprint(f\"Peso: {peso_kg} kg\")\n\n# Verificando os tipos\nprint(f\"Tipo da variável 'idade_usuario': {type(idade_usuario)}\")\nprint(f\"Tipo da variável 'peso_kg': {type(peso_kg)}\")",
+                "explanation": "Este exemplo demonstra a criação de variáveis inteiras e float, e como imprimir seus valores e tipos usando f-strings e a função type()."
+            },
+            {
+                "title": "Número complexo",
+                "code": "c1 = 1.5 + 0.8j\nprint(f\"Número complexo: {c1}\")\nprint(f\"Parte real: {c1.real}\")\nprint(f\"Parte imaginária: {c1.imag}\")",
+                "explanation": "Demonstração da criação de um número complexo e acesso às suas partes real e imaginária."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu o que são variáveis, como nomeá-las e atribuir valores. Também explorou os tipos de dados numéricos básicos do Python: <code>int</code> para inteiros, <code>float</code> para números com decimais, e uma introdução a <code>complex</code> para números complexos. A função <code>type()</code> é útil para descobrir o tipo de uma variável.",
+        "estimated_time_minutes": 25
+    },
+    {
+        "id": "tipos-dados-string-booleano",
+        "course_id": "python-basico",
+        "title": "Tipos de Dado: String e Booleano",
+        "order": 5,
+        "description": "Explore os tipos de dados textuais (strings) e lógicos (booleanos) em Python, incluindo como criá-los e operações básicas.",
+        "learning_objectives": [
+            "Definir e criar strings em Python usando aspas simples e duplas.",
+            "Realizar operações básicas com strings, como concatenação e repetição.",
+            "Entender o conceito de strings como sequências e acessar caracteres individuais.",
+            "Utilizar strings multilinhas.",
+            "Identificar e utilizar o tipo de dado booleano (<code>bool</code>) e seus valores (<code>True</code> e <code>False</code>)."
+        ],
+        "key_concepts": [
+            "Tipo <code>str</code> (String)",
+            "Aspas Simples e Duplas",
+            "Strings Multilinhas",
+            "Concatenação de Strings (<code>+</code>)",
+            "Repetição de Strings (<code>*</code>)",
+            "Indexação de Strings",
+            "Tipo <code>bool</code> (Booleano)",
+            "<code>True</code> e <code>False</code>"
+        ],
+        "content": "<h2>Tipo de Dado Textual: String (<code>str</code>)</h2>\n\n<p>Strings são usadas para representar texto em Python. Uma string é uma sequência de caracteres. Você pode criar strings delimitando o texto com aspas simples (<code>'</code>) ou aspas duplas (<code>\"</code>).</p>\n\n<pre><code class=\"language-python\">frase1 = 'Olá, Python!'\nfrase2 = \"Python é divertido.\"\n\nprint(frase1)\nprint(type(frase2)) # Saída: &lt;class 'str'&gt;</code></pre>\n\n<p><strong>Quando usar aspas simples ou duplas?</strong></p>\n\n<p>A escolha é geralmente uma questão de preferência, mas é útil se você precisar incluir uma aspa dentro da string:</p>\n\n<pre><code class=\"language-python\">citacao1 = \"Ele disse: 'Olá!'\"\ncitacao2 = 'O livro se chama \"Aventuras em Python\".'</code></pre>\n\n<h3>Strings Multilinhas</h3>\n\n<p>Para strings que ocupam várias linhas, você pode usar aspas triplas (três aspas simples <code>'''</code> ou três aspas duplas <code>\"\"\"</code>):</p>\n\n<pre><code class=\"language-python\">poema = \"\"\"Isto é um poema\nque ocupa\nvárias linhas.\"\"\"</code></pre>\n\n<h3>Operações com Strings</h3>\n\n<ul>\n  <li><strong>Concatenação (<code>+</code>):</strong> Junta duas ou more strings.\n    <pre><code class=\"language-python\">nome = \"Maria\"\nsobrenome = \"Silva\"\nnome_completo = nome + \" \" + sobrenome # Adiciona um espaço entre elas\nprint(nome_completo) # Saída: Maria Silva</code></pre>\n  </li>\n  <li><strong>Repetição (<code>*</code>):</strong> Repete uma string um número específico de vezes.\n    <pre><code class=\"language-python\">eco = \"Olá \" * 3\nprint(eco) # Saída: Olá Olá Olá</code></pre>\n  </li>\n</ul>\n\n<h3>Strings como Sequências</h3>\n\n<p>Strings são sequências de caracteres, o que significa que você pode acessar caracteres individuais usando um índice (posição). A indexação em Python começa em 0.</p>\n\n<pre><code class=\"language-python\">palavra = \"Python\"\nprint(palavra[0]) # Saída: P (primeiro caractere)\nprint(palavra[2]) # Saída: t (terceiro caractere)\nprint(palavra[-1]) # Saída: n (último caractere, indexação negativa)</code></pre>\n\n<h2>Tipo de Dado Lógico: Booleano (<code>bool</code>)</h2>\n\n<p>O tipo booleano representa um de dois valores: <strong><code>True</code></strong> (verdadeiro) ou <strong><code>False</code></strong> (falso). Eles são fundamentais para a lógica condicional e controle de fluxo em programas.</p>\n\n<pre><code class=\"language-python\">esta_chovendo = True\ntem_sol = False\n\nprint(esta_chovendo)\nprint(type(tem_sol)) # Saída: &lt;class 'bool'&gt;</code></pre>\n\n<p><strong>Importante:</strong> <code>True</code> e <code>False</code> devem ser escritos com a primeira letra maiúscula.</p>",
+        "examples": [
+            {
+                "title": "Criando e concatenando strings",
+                "code": "saudacao = \"Bem-vindo\"\ncurso = \"Python\"\nmensagem = saudacao + \" ao curso de \" + curso + \"!\"\nprint(mensagem)",
+                "explanation": "Demonstra a criação de strings e sua concatenação para formar uma mensagem completa."
+            },
+            {
+                "title": "Acessando caracteres de uma string",
+                "code": "linguagem = \"Python\"\nprimeira_letra = linguagem[0]\nultima_letra = linguagem[-1]\nprint(f\"Primeira letra: {primeira_letra}, Última letra: {ultima_letra}\")",
+                "explanation": "Mostra como acessar o primeiro e o último caractere de uma string usando indexação."
+            },
+            {
+                "title": "Usando booleanos",
+                "code": "aprovado = True\nnota = 7.5\nreprovado_por_falta = False\n\nprint(f\"Aluno aprovado? {aprovado}\")\nprint(f\"Nota maior que 7? {nota > 7}\")",
+                "explanation": "Exemplifica a declaração de variáveis booleanas e o resultado booleano de uma expressão de comparação."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu sobre strings para representar texto, como criá-las, concatená-las, repeti-las e acessar seus caracteres. Também conheceu o tipo booleano, com seus valores <code>True</code> e <code>False</code>, essenciais para a tomada de decisões em seus programas.",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "operadores-python",
+        "course_id": "python-basico",
+        "title": "Operadores em Python",
+        "order": 6,
+        "description": "Conheça os diferentes tipos de operadores em Python: aritméticos, de atribuição, de comparação e lógicos, e como usá-los em expressões.",
+        "learning_objectives": [
+            "Utilizar operadores aritméticos para realizar cálculos matemáticos.",
+            "Empregar operadores de atribuição para modificar valores de variáveis.",
+            "Usar operadores de comparação para comparar valores e obter resultados booleanos.",
+            "Aplicar operadores lógicos para combinar expressões booleanas."
+        ],
+        "key_concepts": [
+            "Operadores Aritméticos (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>, <code>**</code>)",
+            "Operadores de Atribuição (<code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, etc.)",
+            "Operadores de Comparação (<code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>)",
+            "Operadores Lógicos (<code>and</code>, <code>or</code>, <code>not</code>)"
+        ],
+        "content": "<h2>Operadores em Python</h2>\n\n<p>Operadores são símbolos especiais que realizam operações em valores e variáveis. Python suporta diversos tipos de operadores.</p>\n\n<h3>1. Operadores Aritméticos</h3>\n\n<p>Usados para realizar operações matemáticas:</p>\n\n<ul>\n  <li><code>+</code> : Adição (ex: <code>5 + 2</code> resulta <code>7</code>)</li>\n  <li><code>-</code> : Subtração (ex: <code>5 - 2</code> resulta <code>3</code>)</li>\n  <li><code>*</code> : Multiplicação (ex: <code>5 * 2</code> resulta <code>10</code>)</li>\n  <li><code>/</code> : Divisão (sempre resulta em <code>float</code>, ex: <code>5 / 2</code> resulta <code>2.5</code>)</li>\n  <li><code>//</code>: Divisão Inteira (descarta a parte fracionária, ex: <code>5 // 2</code> resulta <code>2</code>)</li>\n  <li><code>%</code> : Módulo (resto da divisão, ex: <code>5 % 2</code> resulta <code>1</code>)</li>\n  <li><code>**</code>: Exponenciação (ex: <code>5 ** 2</code> resulta <code>25</code>, ou seja, 5²)</li>\n</ul>\n\n<pre><code class=\"language-python\">a = 10\nb = 3\nprint(f\"Soma: {a + b}\")\nprint(f\"Divisão: {a / b}\")\nprint(f\"Divisão Inteira: {a // b}\")\nprint(f\"Resto: {a % b}\")\nprint(f\"Potência: {a ** b}\")</code></pre>\n\n<h3>2. Operadores de Atribuição</h3>\n\n<p>Usados para atribuir valores a variáveis. O principal é <code>=</code>, mas existem formas abreviadas:</p>\n\n<ul>\n  <li><code>=</code>  : Atribuição simples (ex: <code>x = 5</code>)</li>\n  <li><code>+=</code> : Adição e atribuição (ex: <code>x += 2</code> é o mesmo que <code>x = x + 2</code>)</li>\n  <li><code>-=</code> : Subtração e atribuição (ex: <code>x -= 2</code> é o mesmo que <code>x = x - 2</code>)</li>\n  <li><code>*=</code> : Multiplicação e atribuição (ex: <code>x *= 2</code> é o mesmo que <code>x = x * 2</code>)</li>\n  <li><code>/=</code> : Divisão e atribuição</li>\n  <li><code>//=</code> : Divisão inteira e atribuição</li>\n  <li><code>%=</code> : Módulo e atribuição</li>\n  <li><code>**=</code> : Exponenciação e atribuição</li>\n</ul>\n\n<pre><code class=\"language-python\">contador = 0\ncontador += 1  # contador agora é 1\nprint(contador)\n\npreco = 100\npreco *= 0.9 # Aplicando 10% de desconto\nprint(preco) # Saída: 90.0</code></pre>\n\n<h3>3. Operadores de Comparação (Relacionais)</h3>\n\n<p>Usados para comparar dois valores. O resultado de uma comparação é sempre um valor booleano (<code>True</code> ou <code>False</code>).</p>\n\n<ul>\n  <li><code>==</code>: Igual a (ex: <code>5 == 5</code> resulta <code>True</code>)</li>\n  <li><code>!=</code>: Diferente de (ex: <code>5 != 2</code> resulta <code>True</code>)</li>\n  <li><code>></code> : Maior que (ex: <code>5 > 2</code> resulta <code>True</code>)</li>\n  <li><code><</code> : Menor que (ex: <code>5 < 2</code> resulta <code>False</code>)</li>\n  <li><code>>=</code>: Maior ou igual a (ex: <code>5 >= 5</code> resulta <code>True</code>)</li>\n  <li><code><=</code>: Menor ou igual a (ex: <code>5 <= 2</code> resulta <code>False</code>)</li>\n</ul>\n\n<pre><code class=\"language-python\">idade = 18\nprint(f\"Maior de idade? {idade >= 18}\") # True\n\nnome1 = \"Ana\"\nnome2 = \"ana\"\nprint(f\"Nomes iguais? {nome1 == nome2}\") # False (sensível a maiúsculas)</code></pre>\n\n<h3>4. Operadores Lógicos</h3>\n\n<p>Usados para combinar expressões condicionais (booleanas).</p>\n\n<ul>\n  <li><code>and</code>: Retorna <code>True</code> se ambas as expressões forem verdadeiras.\n    <pre><code class=\"language-python\">idade = 25\ntem_cnh = True\npode_dirigir = idade >= 18 and tem_cnh # True\nprint(f\"Pode dirigir? {pode_dirigir}\")</code></pre>\n  </li>\n  <li><code>or</code> : Retorna <code>True</code> se pelo menos uma das expressões for verdadeira.\n    <pre><code class=\"language-python\">fim_de_semana = True\nferiado = False\ndia_de_descanso = fim_de_semana or feriado # True\nprint(f\"Dia de descanso? {dia_de_descanso}\")</code></pre>\n  </li>\n  <li><code>not</code>: Inverte o valor booleano de uma expressão (retorna <code>True</code> se a expressão for falsa, e vice-versa).\n    <pre><code class=\"language-python\">chovendo = False\nnao_chovendo = not chovendo # True\nprint(f\"Não está chovendo? {nao_chovendo}\")</code></pre>\n  </li>\n</ul>\n",
+        "examples": [
+            {
+                "title": "Calculando a média de duas notas",
+                "code": "nota1 = 7.5\nnota2 = 8.0\nmedia = (nota1 + nota2) / 2\nprint(f\"A média é: {media}\")",
+                "explanation": "Uso de operadores aritméticos <code>+</code> e <code>/</code> para calcular uma média."
+            },
+            {
+                "title": "Verificando se um número está em um intervalo",
+                "code": "numero = 15\nesta_no_intervalo = numero >= 10 and numero <= 20\nprint(f\"O número {numero} está entre 10 e 20? {esta_no_intervalo}\")",
+                "explanation": "Uso de operadores de comparação <code>>=</code> e <code><=</code> combinados com o operador lógico <code>and</code>."
+            },
+            {
+                "title": "Incrementando um contador",
+                "code": "pontos = 10\npontos += 5 # Adiciona 5 aos pontos\nprint(f\"Nova pontuação: {pontos}\")",
+                "explanation": "Demonstração do operador de atribuição <code>+=</code>."
+            }
+        ],
+        "summary": "Nesta lição, você explorou os operadores aritméticos para cálculos, de atribuição para definir e atualizar variáveis, de comparação para avaliar relações entre valores, e lógicos para combinar condições. Esses operadores são blocos de construção essenciais para escrever expressões e controlar o fluxo dos seus programas.",
+        "estimated_time_minutes": 35
+    },
+    {
+        "id": "precedencia-conversao-tipos",
+        "course_id": "python-basico",
+        "title": "Precedência de Operadores e Conversão de Tipos",
+        "order": 7,
+        "description": "Entenda a ordem em que os operadores são avaliados (precedência) e como converter valores entre diferentes tipos de dados em Python.",
+        "learning_objectives": [
+            "Compreender a precedência de operadores aritméticos e lógicos.",
+            "Utilizar parênteses para controlar a ordem de avaliação das expressões.",
+            "Realizar a conversão explícita de tipos de dados (type casting) usando <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>."
+        ],
+        "key_concepts": [
+            "Precedência de Operadores",
+            "Parênteses em Expressões",
+            "Conversão de Tipos (Type Casting)",
+            "Função <code>int()</code>",
+            "Função <code>float()</code>",
+            "Função <code>str()</code>",
+            "Função <code>bool()</code>"
+        ],
+        "content": "<h2>Precedência de Operadores</h2>\n\n<p>Quando uma expressão contém múltiplos operadores, o Python segue uma ordem específica para avaliá-los, conhecida como <strong>precedência de operadores</strong>. É semelhante à ordem das operações que você aprendeu em matemática (PEMDAS/BODMAS).</p>\n\n<p><strong>Ordem geral de precedência (do mais alto para o mais baixo):</strong></p>\n\n<ol>\n  <li><code>()</code>: Parênteses (maior precedência, força a avaliação interna primeiro).</li>\n  <li><code>**</code>: Exponenciação.</li>\n  <li><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>: Multiplicação, Divisão, Divisão Inteira, Módulo (avaliados da esquerda para a direita).</li>\n  <li><code>+</code>, <code>-</code>: Adição e Subtração (avaliados da esquerda para a direita).</li>\n  <li><code><</code>, <code><=</code>, <code>></code>, <code>>=</code>, <code>!=</code>, <code>==</code>: Operadores de Comparação.</li>\n  <li><code>not</code>: Operador Lógico NOT.</li>\n  <li><code>and</code>: Operador Lógico AND.</li>\n  <li><code>or</code> : Operador Lógico OR.</li>\n</ol>\n\n<p><strong>Exemplo:</strong></p>\n\n<pre><code class=\"language-python\">resultado = 5 + 2 * 3\nprint(resultado) # Saída: 11 (multiplicação 2*3 é feita antes da soma)</code></pre>\n\n<pre><code class=\"language-python\">resultado_com_parenteses = (5 + 2) * 3\nprint(resultado_com_parenteses) # Saída: 21 (soma 5+2 é feita antes devido aos parênteses)</code></pre>\n\n<p><strong>Dica:</strong> Quando em dúvida sobre a precedência, ou para tornar seu código mais legível, use parênteses <code>()</code> para agrupar explicitamente as partes da expressão que devem ser avaliadas primeiro.</p>\n\n<h2>Conversão de Tipos (Type Casting)</h2>\n\n<p>Às vezes, você precisa converter um valor de um tipo de dado para outro. Esse processo é chamado de <strong>conversão de tipos</strong> ou <strong>type casting</strong>. Python oferece funções embutidas para isso:</p>\n\n<ul>\n  <li><strong><code>int(valor)</code>:</strong> Converte <code>valor</code> para um inteiro. Se <code>valor</code> for um float, a parte decimal é truncada (não arredondada). Se for uma string, a string deve representar um número inteiro válido.\n    <pre><code class=\"language-python\">numero_float = 10.7\nnumero_int = int(numero_float)\nprint(numero_int) # Saída: 10\n\nstring_numero = \"123\"\nnumero_convertido = int(string_numero)\nprint(numero_convertido + 7) # Saída: 130</code></pre>\n  </li>\n\n  <li><strong><code>float(valor)</code>:</strong> Converte <code>valor</code> para um número de ponto flutuante.\n    <pre><code class=\"language-python\">inteiro = 5\nflutuante = float(inteiro)\nprint(flutuante) # Saída: 5.0\n\nstring_decimal = \"23.45\"\ndecimal_convertido = float(string_decimal)\nprint(decimal_convertido)</code></pre>\n  </li>\n\n  <li><strong><code>str(valor)</code>:</strong> Converte <code>valor</code> para uma string.\n    <pre><code class=\"language-python\">idade = 25\nmensagem = \"Minha idade é: \" + str(idade) # Precisa converter int para str para concatenar\nprint(mensagem)</code></pre>\n  </li>\n\n  <li><strong><code>bool(valor)</code>:</strong> Converte <code>valor</code> para um booleano. A maioria dos valores é convertida para <code>True</code>, exceto por alguns considerados \"falsos\" como:\n    <ul>\n      <li><code>False</code> (o próprio booleano)</li>\n      <li><code>None</code> (um tipo especial que representa a ausência de valor)</li>\n      <li><code>0</code> (inteiro zero)</li>\n      <li><code>0.0</code> (float zero)</li>\n      <li><code>\"\"</code> (string vazia)</li>\n      <li><code>[]</code> (lista vazia), <code>()</code> (tupla vazia), <code>{}</code> (dicionário vazio)</li>\n    </ul>\n    <pre><code class=\"language-python\">print(bool(0))      # Saída: False\nprint(bool(10))     # Saída: True\nprint(bool(\"\"))    # Saída: False\nprint(bool(\"Olá\")) # Saída: True</code></pre>\n  </li>\n</ul>\n\n<p><strong>Cuidado:</strong> Tentar converter um valor para um tipo incompatível pode gerar um erro (ex: <code>int(\"texto\")</code> resultará em <code>ValueError</code>).</p>",
+        "examples": [
+            {
+                "title": "Precedência e Parênteses",
+                "code": "calculo1 = 10 - 4 / 2  # Divisão primeiro: 10 - 2 = 8\ncalculo2 = (10 - 4) / 2 # Parênteses primeiro: 6 / 2 = 3\nprint(f\"Cálculo 1: {calculo1}\")\nprint(f\"Cálculo 2: {calculo2}\")",
+                "explanation": "Demonstra como a ordem de avaliação muda com e sem o uso de parênteses."
+            },
+            {
+                "title": "Convertendo entrada do usuário",
+                "code": "# A função input() sempre retorna uma string\nidade_str = input(\"Digite sua idade: \")\nidade_int = int(idade_str) # Converte a string para inteiro\n\nano_que_vem = idade_int + 1\nprint(f\"Ano que vem você terá {ano_que_vem} anos.\")",
+                "explanation": "Mostra a necessidade de converter a string retornada por <code>input()</code> para <code>int</code> antes de realizar operações aritméticas."
+            },
+            {
+                "title": "Convertendo para string para concatenação",
+                "code": "numero_sorte = 7\nmensagem = \"Seu número da sorte é \" + str(numero_sorte) + \".\"\nprint(mensagem)",
+                "explanation": "Converte um inteiro para string para poder concatená-lo com outras strings."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu sobre a precedência de operadores, que determina a ordem de avaliação em expressões complexas, e como usar parênteses para controlar essa ordem. Também viu como realizar conversões explícitas entre tipos de dados usando <code>int()</code>, <code>float()</code>, <code>str()</code> e <code>bool()</code>, uma habilidade crucial para manipular dados de diferentes fontes.",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "condicionais-if-elif-else",
+        "course_id": "python-basico",
+        "title": "Condicionais: if, elif e else",
+        "order": 8,
+        "description": "Aprenda a usar estruturas condicionais <code>if</code>, <code>elif</code> e <code>else</code> para controlar o fluxo de execução do seu programa com base em condições.",
+        "learning_objectives": [
+            "Entender o conceito de controle de fluxo e tomada de decisão em programação.",
+            "Utilizar a estrutura <code>if</code> para executar código condicionalmente.",
+            "Empregar a estrutura <code>elif</code> para testar múltiplas condições sequencialmente.",
+            "Usar a estrutura <code>else</code> para definir um bloco de código a ser executado quando nenhuma condição anterior for verdadeira.",
+            "Aninhar estruturas condicionais.",
+            "Aplicar operadores de comparação e lógicos em condições."
+        ],
+        "key_concepts": [
+            "Controle de Fluxo",
+            "Estrutura Condicional",
+            "<code>if</code>",
+            "<code>elif</code>",
+            "<code>else</code>",
+            "Indentação",
+            "Expressões Booleanas",
+            "Aninhamento"
+        ],
+        "content": "<h2>Controle de Fluxo: Tomando Decisões</h2>\n\n<p>Em programação, o <strong>controle de fluxo</strong> refere-se à ordem em que as instruções do seu programa são executadas. Por padrão, as instruções são executadas sequencialmente, de cima para baixo. No entanto, muitas vezes precisamos que o programa tome decisões e execute diferentes blocos de código dependendo de certas condições. É aí que entram as estruturas condicionais.</p>\n\n<h3>A Estrutura <code>if</code></h3>\n\n<p>A estrutura <code>if</code> é a mais básica para tomada de decisão. Ela executa um bloco de código SOMENTE se uma condição for verdadeira.</p>\n\n<pre><code class=\"language-python\">idade = 20\n\nif idade >= 18:\n  print(\"Você é maior de idade.\")\n  print(\"Pode tirar a carteira de motorista.\")\n\nprint(\"Fim da verificação.\") # Esta linha sempre executa</code></pre>\n\n<p><strong>Pontos importantes:</strong></p>\n\n<ul>\n  <li>A condição (<code>idade >= 18</code>) é uma expressão booleana que avalia para <code>True</code> ou <code>False</code>.</li>\n  <li>A linha <code>if idade >= 18:</code> termina com dois pontos (<code>:</code>).</li>\n  <li>O bloco de código a ser executado se a condição for verdadeira é <strong>indentado</strong> (recuado) em relação à linha <code>if</code>. A indentação é crucial em Python para definir blocos de código.</li>\n</ul>\n\n<h3>A Estrutura <code>else</code></h3>\n\n<p>A estrutura <code>else</code> é usada em conjunto com o <code>if</code>. O bloco de código dentro do <code>else</code> é executado SOMENTE se a condição do <code>if</code> (e de quaisquer <code>elif</code> anteriores) for falsa.</p>\n\n<pre><code class=\"language-python\">idade = 16\n\nif idade >= 18:\n  print(\"Você é maior de idade.\")\nelse:\n  print(\"Você é menor de idade.\")\n  print(\"Ainda não pode tirar a carteira de motorista.\")</code></pre>\n\n<p>Neste caso, como <code>idade >= 18</code> é falso, o bloco dentro do <code>else</code> é executado.</p>\n\n<h3>A Estrutura <code>elif</code> (Else If)</h3>\n\n<p>Quando você tem múltiplas condições para verificar, pode usar a estrutura <code>elif</code>. Ela significa \"senão, se\" e permite testar uma nova condição se a condição do <code>if</code> anterior (e de outros <code>elif</code>) for falsa.</p>\n\n<pre><code class=\"language-python\">nota = 75\n\nif nota >= 90:\n  print(\"Conceito A\")\nelif nota >= 80:\n  print(\"Conceito B\")\nelif nota >= 70:\n  print(\"Conceito C\")\nelif nota >= 60:\n  print(\"Conceito D\")\nelse:\n  print(\"Conceito F\")\n# Saída: Conceito C</code></pre>\n\n<h3>Condições Aninhadas</h3>\n\n<p>Você pode colocar estruturas <code>if</code>/<code>elif</code>/<code>else</code> dentro de outras estruturas <code>if</code>/<code>elif</code>/<code>else</code>. Isso é chamado de aninhamento e permite lógicas mais complexas, mas use com moderação para não tornar o código difícil de ler.</p>\n\n<pre><code class=\"language-python\">idade = 22\ntem_carteira_motorista = True\n\nif idade >= 18:\n  print(\"É maior de idade.\")\n  if tem_carteira_motorista:\n    print(\"Pode dirigir.\")\n  else:\n    print(\"Não pode dirigir pois não tem carteira.\")\nelse:\n  print(\"É menor de idade, não pode dirigir.\")</code></pre>\n",
+        "examples": [
+            {
+                "title": "Verificando se um número é par ou ímpar",
+                "code": "numero = int(input(\"Digite um número inteiro: \"))\n\nif numero % 2 == 0:\n    print(f\"O número {numero} é par.\")\nelse:\n    print(f\"O número {numero} é ímpar.\")",
+                "explanation": "Usa o operador módulo (%) e uma estrutura if-else para determinar se um número é par ou ímpar."
+            },
+            {
+                "title": "Classificando idade",
+                "code": "idade = 15\n\nif idade < 13:\n    print(\"Criança\")\nelif idade < 18:\n    print(\"Adolescente\")\nelse:\n    print(\"Adulto\")",
+                "explanation": "Demonstra o uso de if-elif-else para classificar uma pessoa com base na sua idade."
+            }
+        ],
+        "summary": "Nesta lição, você aprendeu a usar as estruturas condicionais <code>if</code>, <code>elif</code> e <code>else</code> para controlar o fluxo de execução do seu código. Essas declarações permitem que seus programas tomem decisões e executem diferentes ações com base em condições específicas, tornando-os mais dinâmicos e inteligentes. A indentação correta é crucial para definir os blocos de código dessas estruturas.",
+        "estimated_time_minutes": 35
+    },
+    {
+        "id": "loop-for",
+        "course_id": "python-basico",
+        "title": "Laços de Repetição: Loop for",
+        "order": 9,
+        "description": "Aprenda a usar o loop <code>for</code> para iterar sobre sequências como strings, listas, tuplas, e usar a função <code>range()</code> para repetições controladas.",
+        "learning_objectives": [
+            "Entender o conceito de iteração e loops.",
+            "Implementar o loop <code>for</code> para percorrer os itens de uma sequência (strings, listas, tuplas).",
+            "Utilizar a função <code>range()</code> para gerar sequências numéricas e controlar o número de repetições.",
+            "Aplicar loops <code>for</code> em problemas práticos."
+        ],
+        "key_concepts": [
+            "Loop (Laço de Repetição)",
+            "Iteração",
+            "Loop <code>for</code>",
+            "Sequências (Iteráveis)",
+            "Função <code>range()</code>"
+        ],
+        "content": "<h2>Repetindo Tarefas com Loops</h2>\n\n<p>Em programação, frequentemente precisamos executar o mesmo bloco de código várias vezes. Em vez de repetir o código manualmente, usamos <strong>loops</strong> (ou laços de repetição).</p>\n\n<h3>O Loop <code>for</code></h3>\n\n<p>O loop <code>for</code> em Python é usado para <strong>iterar</strong> sobre os itens de qualquer sequência (como uma lista, uma tupla, uma string) ou outros objetos iteráveis, executando um bloco de código para cada item.</p>\n\n<p><strong>Sintaxe:</strong></p>\n<pre><code class=\"language-python\">for variavel_item in sequencia_iteravel:\n    # Bloco de código a ser executado para cada item\n    # Este bloco DEVE ser indentado!\n    statement1\n    statement2\n# Código fora do loop continua aqui</code></pre>\n\n<ul>\n  <li><code>variavel_item</code>: A cada iteração, esta variável recebe o próximo item da <code>sequencia_iteravel</code>.</li>\n  <li><code>sequencia_iteravel</code>: Pode ser uma lista, tupla, string, objeto <code>range</code>, etc.</li>\n</ul>\n\n<p><strong>Iterando sobre uma String:</strong></p>\n<pre><code class=\"language-python\">palavra = \"Python\"\nfor letra in palavra:\n    print(letra)\n# Saída (cada letra em uma nova linha):\n# P\n# y\n# t\n# h\n# o\n# n</code></pre>\n\n<p><strong>Iterando sobre uma Lista:</strong></p>\n<pre><code class=\"language-python\">frutas = [\"maçã\", \"banana\", \"cereja\"]\nfor fruta in frutas:\n    print(f\"Eu gosto de {fruta}\")\n# Saída:\n# Eu gosto de maçã\n# Eu gosto de banana\n# Eu gosto de cereja</code></pre>\n\n<h3>A Função <code>range()</code></h3>\n\n<p>A função <code>range()</code> é frequentemente usada com loops <code>for</code> para executar um bloco de código um número específico de vezes ou para gerar uma sequência de números.</p>\n\n<ul>\n  <li><code>range(fim)</code>: Gera números de 0 até <code>fim-1</code>.\n    <pre><code class=\"language-python\">for i in range(5): # Gera 0, 1, 2, 3, 4\n    print(i)</code></pre>\n  </li>\n  <li><code>range(inicio, fim)</code>: Gera números de <code>inicio</code> até <code>fim-1</code>.\n    <pre><code class=\"language-python\">for i in range(2, 6): # Gera 2, 3, 4, 5\n    print(i)</code></pre>\n  </li>\n  <li><code>range(inicio, fim, passo)</code>: Gera números de <code>inicio</code> até <code>fim-1</code>, incrementando/decrementando pelo <code>passo</code>.\n    <pre><code class=\"language-python\">for i in range(1, 10, 2): # Gera 1, 3, 5, 7, 9\n    print(i)\n\nfor i in range(5, 0, -1): # Contagem regressiva: 5, 4, 3, 2, 1\n    print(i)</code></pre>\n  </li>\n</ul>\n\n<p><strong>Exemplo: Calculando a soma dos números de 1 a 100</strong></p>\n<pre><code class=\"language-python\">soma = 0\nfor numero in range(1, 101): # range(1, 101) vai de 1 a 100\n    soma += numero\nprint(f\"A soma dos números de 1 a 100 é: {soma}\") # Saída: 5050</code></pre>\n",
+        "examples": [
+            {
+                "title": "Imprimindo itens de uma lista de compras",
+                "code": "lista_compras = [\"pão\", \"leite\", \"ovos\", \"frutas\"]\nprint(\"Minha lista de compras:\")\nfor item in lista_compras:\n    print(f\"- {item}\")",
+                "explanation": "Itera sobre uma lista de strings e imprime cada item formatado."
+            },
+            {
+                "title": "Tabuada de um número usando range()",
+                "code": "numero_tabuada = 7\nprint(f\"Tabuada do {numero_tabuada}:\")\nfor i in range(1, 11): # De 1 a 10\n    print(f\"{numero_tabuada} x {i} = {numero_tabuada * i}\")",
+                "explanation": "Usa <code>range()</code> para gerar os multiplicadores de 1 a 10 e calcular a tabuada de um número."
+            },
+            {
+                "title": "Contando vogais em uma frase",
+                "code": "frase = \"Python é uma linguagem poderosa\"\ncontador_vogais = 0\nvogais = \"aeiouAEIOU\"\nfor caractere in frase:\n    if caractere in vogais:\n        contador_vogais += 1\nprint(f\"A frase tem {contador_vogais} vogais.\")",
+                "explanation": "Itera sobre cada caractere de uma string e usa uma condição <code>if</code> para contar as vogais."
+            }
+        ],
+        "summary": "O loop <code>for</code> é uma ferramenta poderosa para iterar sobre itens em sequências (como strings e listas) ou para executar um bloco de código um número fixo de vezes usando a função <code>range()</code>. Ele simplifica tarefas repetitivas e é fundamental para processar coleções de dados.",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "loop-while",
+        "course_id": "python-basico",
+        "title": "Laços de Repetição: Loop while",
+        "order": 10,
+        "description": "Aprenda a usar o loop <code>while</code> para executar um bloco de código repetidamente enquanto uma condição permanecer verdadeira.",
+        "learning_objectives": [
+            "Implementar o loop <code>while</code> para repetições baseadas em uma condição.",
+            "Entender a importância de atualizar a condição dentro do loop <code>while</code> para evitar loops infinitos.",
+            "Aplicar loops <code>while</code> em cenários onde o número de iterações não é conhecido de antemão."
+        ],
+        "key_concepts": [
+            "Loop <code>while</code>",
+            "Condição de Continuação",
+            "Loop Infinito",
+            "Variável de Controle"
+        ],
+        "content": "<h2>O Loop <code>while</code></h2>\n\n<p>O loop <code>while</code> (enquanto) executa um bloco de código repetidamente <strong>enquanto</strong> uma condição especificada for verdadeira. Diferente do loop <code>for</code>, que geralmente itera sobre uma sequência conhecida, o <code>while</code> é ideal quando você não sabe de antemão quantas vezes o loop precisa rodar, mas sabe sob qual condição ele deve continuar.</p>\n\n<p><strong>Sintaxe:</strong></p>\n<pre><code class=\"language-python\">while condicao:\n    # Bloco de código a ser executado\n    # enquanto a condicao for True.\n    # Este bloco DEVE ser indentado!\n    statement1\n    statement2\n    # É crucial que algo dentro do loop possa, eventualmente,\n    # tornar a 'condicao' False, para evitar um loop infinito.\n# Código fora do loop continua aqui</code></pre>\n\n<ul>\n  <li><code>condicao</code>: Uma expressão que avalia para um valor booleano (<code>True</code> ou <code>False</code>). O loop continua enquanto esta condição for <code>True</code>.</li>\n</ul>\n\n<p><strong>Exemplo: Contagem até 5</strong></p>\n<pre><code class=\"language-python\">contador = 1\nwhile contador <= 5:\n    print(contador)\n    contador += 1 # Importante: atualiza a variável de controle\n\nprint(\"Contagem finalizada!\")\n# Saída:\n# 1\n# 2\n# 3\n# 4\n# 5\n# Contagem finalizada!</code></pre>\n<p>Neste exemplo, <code>contador += 1</code> é crucial. Sem isso, <code>contador</code> permaneceria <code>1</code>, a condição <code>contador <= 5</code> seria sempre verdadeira, e teríamos um <strong>loop infinito</strong> (o programa ficaria preso executando o loop para sempre).</p>\n\n<h3>Quando Usar <code>while</code> vs <code>for</code>?</h3>\n\n<ul>\n  <li>Use <code>for</code> quando você sabe o número de iterações ou quer iterar sobre os itens de uma sequência (lista, string, <code>range()</code>).</li>\n  <li>Use <code>while</code> quando a repetição depende de uma condição que pode mudar durante a execução do loop, e o número de iterações não é fixo de antemão (ex: esperar por uma entrada específica do usuário, processar dados até um certo limite ser atingido).</li>\n</ul>\n\n<p><strong>Exemplo: Adivinhe o Número</strong></p>\n<pre><code class=\"language-python\">numero_secreto = 7\ntentativa = 0\n\nwhile tentativa != numero_secreto:\n    tentativa_str = input(\"Adivinhe o número (entre 1 e 10): \")\n    # É importante tratar a entrada do usuário, que vem como string\n    if tentativa_str.isdigit(): # Verifica se a string contém apenas dígitos\n        tentativa = int(tentativa_str)\n        if tentativa < numero_secreto:\n            print(\"Muito baixo!\")\n        elif tentativa > numero_secreto:\n            print(\"Muito alto!\")\n    else:\n        print(\"Por favor, digite um número válido.\")\n\nprint(f\"Parabéns! Você acertou o número {numero_secreto}!\")</code></pre>\n<p>Neste caso, não sabemos quantas tentativas o usuário levará, então <code>while</code> é apropriado.</p>\n",
+        "examples": [
+            {
+                "title": "Somando números até o usuário digitar 0",
+                "code": "soma = 0\nnumero_str = input(\"Digite um número (ou 0 para sair): \")\n\nwhile numero_str != \"0\":\n    if numero_str.isdigit() or (numero_str.startswith('-') and numero_str[1:].isdigit()):\n        soma += int(numero_str)\n    else:\n        print(\"Entrada inválida, não será somada.\")\n    numero_str = input(\"Digite outro número (ou 0 para sair): \")\n\nprint(f\"A soma total dos números digitados é: {soma}\")",
+                "explanation": "Este loop continua pedindo números ao usuário e somando-os até que o usuário digite '0'. Demonstra um caso onde o número de iterações é desconhecido."
+            },
+            {
+                "title": "Simulando o carregamento de uma barra de progresso",
+                "code": "progresso = 0\nwhile progresso <= 100:\n    print(f\"Carregando: {progresso}%\")\n    # Em um programa real, alguma tarefa demorada aconteceria aqui\n    progresso += 10 # Incrementa o progresso\nprint(\"Carregamento completo!\")",
+                "explanation": "Um exemplo simples de como um loop <code>while</code> pode ser usado para simular uma tarefa que progride até uma condição ser atingida."
+            }
+        ],
+        "summary": "O loop <code>while</code> permite executar um bloco de código repetidamente enquanto uma condição específica for verdadeira. É essencial garantir que a condição do loop possa eventualmente se tornar falsa para evitar loops infinitos. O <code>while</code> é particularmente útil quando o número de repetições não é conhecido de antemão.",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "controle-loops-break-continue-pass",
+        "course_id": "python-basico",
+        "title": "Controle de Loops: break, continue, pass",
+        "order": 11,
+        "description": "Aprenda a usar as declarações <code>break</code> para sair de um loop, <code>continue</code> para pular para a próxima iteração, e <code>pass</code> como um placeholder.",
+        "learning_objectives": [
+            "Utilizar a declaração <code>break</code> para interromper a execução de um loop prematuramente.",
+            "Empregar a declaração <code>continue</code> para pular o restante do bloco de código da iteração atual e ir para a próxima.",
+            "Entender o uso da declaração <code>pass</code> como um placeholder em blocos de código vazios."
+        ],
+        "key_concepts": [
+            "Declaração <code>break</code>",
+            "Declaração <code>continue</code>",
+            "Declaração <code>pass</code>",
+            "Controle de Fluxo em Loops"
+        ],
+        "content": "<h2>Alterando o Fluxo Normal dos Loops</h2>\n\n<p>Python oferece declarações que permitem um controle mais fino sobre como seus loops <code>for</code> e <code>while</code> se comportam.</p>\n\n<h3>A Declaração <code>break</code></h3>\n\n<p>A declaração <code>break</code> é usada para <strong>sair imediatamente</strong> do loop mais interno (<code>for</code> ou <code>while</code>) em que ela se encontra, independentemente da condição do loop ou se ainda há itens para iterar.</p>\n\n<pre><code class=\"language-python\"># Exemplo com for: Encontrar o primeiro número divisível por 7\nfor numero in range(1, 21):\n    print(f\"Testando {numero}...\")\n    if numero % 7 == 0:\n        print(f\"Encontrado! {numero} é divisível por 7.\")\n        break # Sai do loop for\nprint(\"Loop encerrado.\")\n# Saída:\n# Testando 1...\n# Testando 2...\n# ...\n# Testando 7...\n# Encontrado! 7 é divisível por 7.\n# Loop encerrado.\n\n# Exemplo com while: Parar quando o usuário digitar 'sair'\nnome = \"\"\nwhile True: # Loop potencialmente infinito\n    nome = input(\"Digite seu nome (ou 'sair' para terminar): \")\n    if nome.lower() == 'sair':\n        break # Sai do while\n    print(f\"Olá, {nome}!\")\nprint(\"Programa finalizado.\")</code></pre>\n\n<h3>A Declaração <code>continue</code></h3>\n\n<p>A declaração <code>continue</code> é usada para <strong>pular o restante do código</strong> dentro do bloco do loop para a iteração atual e <strong>prosseguir para a próxima iteração</strong> do loop.</p>\n\n<pre><code class=\"language-python\"># Exemplo: Imprimir apenas números ímpares de 0 a 9\nfor numero in range(10):\n    if numero % 2 == 0: # Se o número for par\n        continue      # Pula para a próxima iteração, não executa o print abaixo\n    print(numero)     # Este print só executa para números ímpares\n# Saída:\n# 1\n# 3\n# 5\n# 7\n# 9</code></pre>\n\n<h3>A Declaração <code>pass</code></h3>\n\n<p>A declaração <code>pass</code> é uma operação nula — nada acontece quando ela é executada. Ela é útil como um <strong>placeholder</strong> (marcador de lugar) onde código será eventualmente adicionado, ou quando a sintaxe requer uma declaração mas nenhuma ação é necessária.</p>\n\n<p>Isso evita erros de indentação quando você está planejando a estrutura do seu código mas ainda não implementou a lógica.</p>\n\n<pre><code class=\"language-python\">for i in range(5):\n    if i == 3:\n        # TODO: Adicionar lógica especial para i == 3 depois\n        pass # Nenhuma ação por enquanto, mas o bloco if é sintaticamente correto\n    else:\n        print(i)\n\ndef minha_funcao_futura():\n    pass # Implementarei esta função mais tarde\n\nclass MinhaClasseVazia:\n    pass # Classes também precisam de um corpo</code></pre>\n<p>Sem o <code>pass</code>, os exemplos acima causariam um <code>IndentationError</code>.</p>\n",
+        "examples": [
+            {
+                "title": "Usando <code>break</code> para encontrar um item em uma lista",
+                "code": "itens_procurados = [\"chave\", \"carteira\", \"celular\"]\nitem_encontrado = None\n\nfor item in itens_procurados:\n    if item == \"carteira\":\n        item_encontrado = item\n        break # Para de procurar assim que encontrar\n\nif item_encontrado:\n    print(f\"Item '{item_encontrado}' encontrado!\")\nelse:\n    print(\"Item não encontrado.\")",
+                "explanation": "O loop <code>for</code> para assim que a 'carteira' é encontrada, graças ao <code>break</code>."
+            },
+            {
+                "title": "Usando <code>continue</code> para ignorar valores negativos",
+                "code": "numeros = [10, -2, 5, -8, 12, 0, -1]\nsoma_positivos = 0\n\nfor num in numeros:\n    if num <= 0:\n        continue # Ignora números negativos ou zero e vai para o próximo\n    soma_positivos += num\n\nprint(f\"Soma dos números positivos: {soma_positivos}\")",
+                "explanation": "O <code>continue</code> faz com que a soma só seja atualizada para números positivos."
+            }
+        ],
+        "summary": "As declarações <code>break</code>, <code>continue</code> e <code>pass</code> oferecem controle adicional sobre o fluxo de execução dentro dos loops. <code>break</code> interrompe o loop, <code>continue</code> pula para a próxima iteração, e <code>pass</code> serve como um placeholder para código futuro, garantindo a correção sintática.",
+        "estimated_time_minutes": 25
+    },
+    {
+        "id": "listas-python-basico",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Listas (Parte 1)",
+        "order": 12,
+        "description": "Introdução às listas em Python: como criar, acessar elementos, verificar a mutabilidade e usar métodos básicos como append(), insert() e remove().",
+        "learning_objectives": [
+            "Definir o que é uma lista e como criá-la em Python.",
+            "Acessar elementos de uma lista usando índices.",
+            "Compreender que listas são mutáveis (seus elementos podem ser alterados).",
+            "Adicionar elementos a uma lista usando <code>append()</code> e <code>insert()</code>.",
+            "Remover elementos de uma lista usando <code>remove()</code>, <code>pop()</code> e <code>del</code>."
+        ],
+        "key_concepts": [
+            "Lista (<code>list</code>)",
+            "Coleção Ordenada",
+            "Mutabilidade",
+            "Índices",
+            "Método <code>append()</code>",
+            "Método <code>insert()</code>",
+            "Método <code>remove()</code>",
+            "Método <code>pop()</code>",
+            "Declaração <code>del</code>"
+        ],
+        "content": "<h2>Listas: Coleções Ordenadas e Mutáveis</h2>\n\n<p>Uma <strong>lista</strong> em Python é uma coleção ordenada e mutável de itens. Isso significa que os itens têm uma ordem definida (e essa ordem não muda, a menos que você a altere) e você pode modificar a lista após sua criação (adicionar, remover ou alterar itens).</p>\n\n<p>Listas são um dos tipos de dados compostos mais versáteis e usados em Python. Elas podem conter itens de diferentes tipos de dados, incluindo outras listas.</p>\n\n<h3>Criando Listas</h3>\n\n<p>Você cria uma lista colocando os itens separados por vírgulas dentro de colchetes <code>[]</code>.</p>\n\n<pre><code class=\"language-python\"># Lista vazia\nlista_vazia = []\n\n# Lista de números\nnumeros = [1, 2, 3, 4, 5]\n\n# Lista de strings\nfrutas = [\"maçã\", \"banana\", \"laranja\"]\n\n# Lista com tipos mistos\nmista = [1, \"Python\", 3.14, True]\n\nprint(numeros)\nprint(type(frutas)) # Saída: &lt;class 'list'&gt;</code></pre>\n\n<h3>Acessando Elementos (Indexação)</h3>\n\n<p>Você acessa os elementos de uma lista usando seus <strong>índices</strong> (posições), que começam em <code>0</code> para o primeiro elemento. A indexação funciona da mesma forma que para strings.</p>\n\n<pre><code class=\"language-python\">cores = [\"vermelho\", \"verde\", \"azul\", \"amarelo\"]\n\nprint(cores[0])  # Saída: vermelho (primeiro elemento)\nprint(cores[2])  # Saída: azul (terceiro elemento)\nprint(cores[-1]) # Saída: amarelo (último elemento)</code></pre>\n\n<h3>Mutabilidade de Listas</h3>\n\n<p>Listas são <strong>mutáveis</strong>, o que significa que você pode alterar seus elementos após a criação.</p>\n\n<pre><code class=\"language-python\">cores = [\"vermelho\", \"verde\", \"azul\"]\nprint(f\"Lista original: {cores}\")\n\ncores[1] = \"roxo\" # Altera o segundo elemento ('verde' para 'roxo')\nprint(f\"Lista modificada: {cores}\") # Saída: ['vermelho', 'roxo', 'azul']</code></pre>\n\n<h3>Adicionando Elementos</h3>\n\n<ul>\n  <li><strong><code>append(item)</code>:</strong> Adiciona <code>item</code> ao final da lista.\n    <pre><code class=\"language-python\">numeros = [1, 2, 3]\nnumeros.append(4)\nprint(numeros) # Saída: [1, 2, 3, 4]</code></pre>\n  </li>\n  <li><strong><code>insert(indice, item)</code>:</strong> Insere <code>item</code> na posição <code>indice</code> especificada.\n    <pre><code class=\"language-python\">letras = ['a', 'c', 'd']\nletras.insert(1, 'b') # Insere 'b' no índice 1\nprint(letras) # Saída: ['a', 'b', 'c', 'd']</code></pre>\n  </li>\n</ul>\n\n<h3>Removendo Elementos</h3>\n\n<ul>\n  <li><strong><code>remove(item)</code>:</strong> Remove a primeira ocorrência de <code>item</code> da lista. Gera um <code>ValueError</code> se o item não for encontrado.\n    <pre><code class=\"language-python\">animais = [\"gato\", \"cachorro\", \"pássaro\", \"cachorro\"]\nanimais.remove(\"cachorro\") # Remove a primeira ocorrência\nprint(animais) # Saída: ['gato', 'pássaro', 'cachorro']</code></pre>\n  </li>\n  <li><strong><code>pop(indice_opcional)</code>:</strong> Remove e retorna o item na posição <code>indice</code>. Se o índice não for especificado, remove e retorna o último item.\n    <pre><code class=\"language-python\">numeros = [10, 20, 30, 40]\nultimo_removido = numeros.pop() # Remove e retorna 40\nprint(f\"Removido: {ultimo_removido}, Lista: {numeros}\") # Saída: Removido: 40, Lista: [10, 20, 30]\n\nsegundo_removido = numeros.pop(1) # Remove e retorna 20 (item no índice 1)\nprint(f\"Removido: {segundo_removido}, Lista: {numeros}\") # Saída: Removido: 20, Lista: [10, 30]</code></pre>\n  </li>\n  <li><strong><code>del lista[indice]</code>:</strong> Remove o item no <code>indice</code> especificado. Também pode ser usado para remover fatias (slices) da lista.\n    <pre><code class=\"language-python\">letras = ['x', 'y', 'z', 'w']\ndel letras[1] # Remove 'y'\nprint(letras) # Saída: ['x', 'z', 'w']</code></pre>\n  </li>\n</ul>\n\n<p><strong>Nota:</strong> Ao exibir classes Python como <code>&lt;class 'list'&gt;</code>, é importante usar entidades HTML como <code>&lt;</code> e <code>&gt;</code> para evitar que sejam interpretadas como tags HTML.</p>\n",
+        "examples": [
+            {
+                "title": "Criando e modificando uma lista de tarefas",
+                "code": "tarefas = [] # Começa com uma lista vazia\ntarefas.append(\"Lavar a louça\")\ntarefas.append(\"Estudar Python\")\ntarefas.insert(0, \"Comprar pão\") # Adiciona no início\nprint(f\"Tarefas iniciais: {tarefas}\")\n\ntarefas[1] = \"Lavar a louça (urgente)\" # Modifica um item\nprint(f\"Tarefas atualizadas: {tarefas}\")\n\ntarefa_concluida = tarefas.pop(0) # Remove a primeira tarefa\nprint(f\"Tarefa concluída: {tarefa_concluida}\")\nprint(f\"Tarefas restantes: {tarefas}\")",
+                "explanation": "Demonstra a criação, adição (append, insert), modificação e remoção (pop) de itens em uma lista."
+            },
+            {
+                "title": "Verificando se um item existe na lista",
+                "code": "convidados = [\"Ana\", \"Bruno\", \"Carlos\"]\n\nif \"Ana\" in convidados:\n    print(\"Ana está na lista de convidados.\")\n\nif \"Daniel\" not in convidados:\n    print(\"Daniel não está na lista.\")",
+                "explanation": "Usa o operador <code>in</code> e <code>not in</code> para verificar a presença de itens em uma lista."
+            }
+        ],
+        "summary": "Listas são coleções ordenadas e mutáveis de itens, muito flexíveis em Python. Você aprendeu a criar listas, acessar e modificar seus elementos, e usar métodos como <code>append()</code>, <code>insert()</code>, <code>remove()</code> e <code>pop()</code> para adicionar e remover itens. A mutabilidade das listas as torna poderosas para armazenar coleções de dados que podem mudar ao longo da execução do programa.",
+        "estimated_time_minutes": 35
+    },
+    {
+        "id": "listas-python-avancado",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Listas (Parte 2)",
+        "order": 13,
+        "description": "Aprofunde seus conhecimentos em listas: indexação negativa, slicing (fatiamento), métodos úteis como sort(), reverse(), count(), index(), e a poderosa técnica de list comprehensions.",
+        "learning_objectives": [
+            "Utilizar indexação negativa para acessar elementos a partir do final da lista.",
+            "Aplicar slicing para obter sub-listas (fatias) de uma lista.",
+            "Ordenar listas com o método <code>sort()</code> e a função <code>sorted()</code>.",
+            "Inverter a ordem dos elementos com <code>reverse()</code>.",
+            "Contar ocorrências de um item com <code>count()</code> e encontrar o índice de um item com <code>index()</code>.",
+            "Criar listas de forma concisa usando list comprehensions."
+        ],
+        "key_concepts": [
+            "Indexação Negativa",
+            "Slicing (Fatiamento)",
+            "Método <code>sort()</code>",
+            "Função <code>sorted()</code>",
+            "Método <code>reverse()</code>",
+            "Método <code>count()</code>",
+            "Método <code>index()</code>",
+            "List Comprehensions",
+            "Funções <code>len()</code>, <code>min()</code>, <code>max()</code>, <code>sum()</code>"
+        ],
+        "content": "<h2>Aprofundando em Listas</h2>\n\n<p>Continuando nossa exploração das listas, vamos ver mais algumas funcionalidades poderosas.</p>\n\n<h3>Indexação Negativa</h3>\n\n<p>Além da indexação positiva (começando em 0), Python permite indexação negativa, onde <code>-1</code> se refere ao último item, <code>-2</code> ao penúltimo, e assim por diante.</p>\n\n<pre><code class=\"language-python\">letras = ['a', 'b', 'c', 'd', 'e']\nprint(letras[-1]) # Saída: e (último item)\nprint(letras[-3]) # Saída: c (terceiro item de trás para frente)</code></pre>\n\n<h3>Slicing (Fatiamento)</h3>\n\n<p>Slicing permite que você obtenha uma <strong>sub-lista</strong> (uma fatia) de uma lista. A sintaxe é <code>lista[inicio:fim:passo]</code>.</p>\n\n<ul>\n  <li><code>inicio</code>: O índice onde a fatia começa (inclusivo). Se omitido, começa do início da lista.</li>\n  <li><code>fim</code>: O índice onde a fatia termina (exclusivo). Se omitido, vai até o final da lista.</li>\n  <li><code>passo</code>: O intervalo entre os itens selecionados. Se omitido, o padrão é 1.</li>\n</ul>\n\n<pre><code class=\"language-python\">numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n\nprint(numeros[2:5])    # Saída: [2, 3, 4] (do índice 2 até o 4)\nprint(numeros[:4])     # Saída: [0, 1, 2, 3] (do início até o índice 3)\nprint(numeros[6:])     # Saída: [6, 7, 8, 9] (do índice 6 até o final)\nprint(numeros[-3:])    # Saída: [7, 8, 9] (os três últimos itens)\nprint(numeros[::2])    # Saída: [0, 2, 4, 6, 8] (todos os itens, pulando de 2 em 2)\nprint(numeros[::-1])   # Saída: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] (lista invertida)\n\n# Slicing cria uma nova lista (cópia superficial)\numa_copia = numeros[:] \nprint(uma_copia)</code></pre>\n\n<h3>Métodos Úteis de Listas</h3>\n\n<ul>\n  <li><strong><code>sort(reverse=False)</code>:</strong> Ordena os itens da lista <em>in-place</em> (modifica a lista original). Por padrão, ordena em ordem crescente. <code>reverse=True</code> ordena em decrescente.\n    <pre><code class=\"language-python\">numeros_desordenados = [3, 1, 4, 1, 5, 9, 2]\nnumeros_desordenados.sort()\nprint(numeros_desordenados) # Saída: [1, 1, 2, 3, 4, 5, 9]\n\npalavras = [\"banana\", \"abacaxi\", \"laranja\"]\npalavras.sort(reverse=True)\nprint(palavras) # Saída: ['laranja', 'banana', 'abacaxi']</code></pre>\n  </li>\n  <li><strong>Função <code>sorted(iteravel)</code>:</strong> Retorna uma <em>nova lista</em> ordenada a partir dos itens de um iterável, sem modificar o original.\n    <pre><code class=\"language-python\">numeros_originais = [3, 1, 4]\nnumeros_ordenados_nova_lista = sorted(numeros_originais)\nprint(numeros_ordenados_nova_lista) # Saída: [1, 3, 4]\nprint(numeros_originais)            # Saída: [3, 1, 4] (original não mudou)</code></pre>\n  </li>\n  <li><strong><code>reverse()</code>:</strong> Inverte a ordem dos elementos da lista <em>in-place</em>.\n    <pre><code class=\"language-python\">minha_lista = [1, 2, 3, 4]\nminha_lista.reverse()\nprint(minha_lista) # Saída: [4, 3, 2, 1]</code></pre>\n  </li>\n  <li><strong><code>count(item)</code>:</strong> Retorna o número de vezes que <code>item</code> aparece na lista.\n    <pre><code class=\"language-python\">ocorrencias = [1, 2, 3, 2, 4, 2, 5]\nprint(ocorrencias.count(2)) # Saída: 3</code></pre>\n  </li>\n  <li><strong><code>index(item, inicio_opcional, fim_opcional)</code>:</strong> Retorna o índice da primeira ocorrência de <code>item</code>. Gera <code>ValueError</code> se o item não for encontrado. Você pode especificar um intervalo de busca.\n    <pre><code class=\"language-python\">letras = ['p', 'y', 't', 'h', 'o', 'n']\nprint(letras.index('t')) # Saída: 2</code></pre>\n  </li>\n</ul>\n\n<h3>Funções Úteis com Listas</h3>\n\n<ul>\n  <li><code>len(lista)</code>: Retorna o número de itens na lista.</li>\n  <li><code>min(lista_numerica)</code>: Retorna o menor item.</li>\n  <li><code>max(lista_numerica)</code>: Retorna o maior item.</li>\n  <li><code>sum(lista_numerica)</code>: Retorna a soma de todos os itens.</li>\n</ul>\n\n<h3>List Comprehensions (Compreensões de Lista)</h3>\n\n<p>List comprehensions oferecem uma maneira concisa e elegante de criar listas. A sintaxe básica é: <code>[expressao for item in iteravel if condicao]</code>.</p>\n\n<pre><code class=\"language-python\"># Criar uma lista dos quadrados dos números de 0 a 9\nquadrados = []\nfor x in range(10):\n    quadrados.append(x**2)\nprint(quadrados) # Saída: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]\n\n# Fazendo o mesmo com list comprehension:\nquadrados_lc = [x**2 for x in range(10)]\nprint(quadrados_lc)\n\n# Criar uma lista de números pares de 0 a 19\npares_lc = [x for x in range(20) if x % 2 == 0]\nprint(pares_lc) # Saída: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</code></pre>\n<p>List comprehensions são frequentemente mais legíveis e eficientes para criar listas baseadas em outras sequências ou com condições.</p>\n\n<p><strong>Nota:</strong> Certifique-se de que todas as tags HTML dentro do campo <code>content</code> estejam corretamente fechadas e aninhadas.</p>\n",
+        "examples": [
+            {
+                "title": "Slicing e cópia de lista",
+                "code": "numeros = [10, 20, 30, 40, 50, 60]\nprimeiros_tres = numeros[0:3]\nultimos_dois = numeros[-2:]\nprint(f\"Primeiros três: {primeiros_tres}\")\nprint(f\"Últimos dois: {ultimos_dois}\")\n\n# Copiando uma lista\nlista_original = [1, 2, 3]\nlista_copia = lista_original[:] # Cria uma cópia superficial\nlista_copia.append(4)\nprint(f\"Original: {lista_original}\") # Não é afetada\nprint(f\"Cópia: {lista_copia}\")",
+                "explanation": "Demonstra o uso de slicing para obter partes de uma lista e para criar uma cópia superficial."
+            },
+            {
+                "title": "Ordenando e invertendo uma lista de palavras",
+                "code": "palavras = [\"Python\", \"é\", \"legal\", \"aprender\"]\npalavras.sort() # Ordena alfabeticamente in-place\nprint(f\"Ordenado: {palavras}\")\npalavras.reverse() # Inverte in-place\nprint(f\"Invertido: {palavras}\")",
+                "explanation": "Mostra como usar <code>sort()</code> para ordenar e <code>reverse()</code> para inverter a ordem dos itens de uma lista."
+            },
+            {
+                "title": "List comprehension para filtrar e transformar",
+                "code": "numeros = [1, 2, 3, 4, 5, 6]\n# Dobrar apenas os números pares\ndobro_dos_pares = [n * 2 for n in numeros if n % 2 == 0]\nprint(f\"Dobro dos pares: {dobro_dos_pares}\") # Saída: [4, 8, 12]",
+                "explanation": "Usa list comprehension para criar uma nova lista contendo o dobro dos números pares de uma lista original."
+            }
+        ],
+        "summary": "Nesta lição, você aprofundou seus conhecimentos em listas, aprendendo sobre indexação negativa, slicing para obter sub-listas, e métodos úteis como <code>sort()</code>, <code>reverse()</code>, <code>count()</code> e <code>index()</code>. Além disso, você foi introduzido às poderosas list comprehensions para criar listas de forma concisa. Essas ferramentas expandem significativamente suas capacidades de manipulação de dados em Python.",
+        "estimated_time_minutes": 35
+    },
+  
+    {
+        "id": "tuplas-python",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Tuplas",
+        "order": 14,
+        "description": "Aprenda sobre tuplas: coleções ordenadas e imutáveis de itens em Python, como criá-las, acessá-las e quando usá-las.",
+        "learning_objectives": [
+            "Definir o que é uma tupla e como criá-la em Python.",
+            "Acessar elementos de uma tupla usando índices e slicing.",
+            "Compreender a imutabilidade das tuplas e suas implicações.",
+            "Identificar cenários onde tuplas são preferíveis em relação a listas.",
+            "Utilizar métodos básicos de tuplas como `count()` e `index()`."
+        ],
+        "key_concepts": [
+            "Tupla (`tuple`)",
+            "Coleção Ordenada",
+            "Imutabilidade",
+            "Criação de Tuplas (parênteses, vírgula)",
+            "Indexação e Slicing em Tuplas",
+            "Desempacotamento de Tuplas",
+            "Método `count()`",
+            "Método `index()`"
+        ],
+        "content": "<h2>Tuplas: Coleções Ordenadas e Imutáveis</h2>\n\n<p>Uma <strong>tupla</strong> (<code>tuple</code>) em Python é uma coleção ordenada de itens, muito semelhante a uma lista. A principal diferença é que as tuplas são <strong>imutáveis</strong>, o que significa que, uma vez criadas, seus elementos não podem ser alterados, adicionados ou removidos.</p>\n\n<h3>Criando Tuplas</h3>\n\n<p>Tuplas são geralmente criadas envolvendo os itens separados por vírgulas com parênteses <code>()</code>. Os parênteses são opcionais em muitos casos, mas é uma boa prática usá-los para clareza.</p>\n\n<pre><code class=\"language-python\"># Tupla com parênteses\ncoordenadas = (10, 20)\ncores_rgb = ('vermelho', 'verde', 'azul')\n\n# Tupla sem parênteses (packing)\nponto = 30, 40\nprint(type(ponto))  # Saída: &lt;class 'tuple'&gt;\n\n# Tupla vazia\ntupla_vazia = ()\n\n# Tupla com um único elemento (requer uma vírgula no final)\ntupla_um_elemento = (5,)\nprint(type(tupla_um_elemento)) # Saída: &lt;class 'tuple'&gt;\nsem_virgula = (5) # Isso seria interpretado como um inteiro, não uma tupla\nprint(type(sem_virgula))    # Saída: &lt;class 'int'&gt;</code></pre>\n\n<h3>Acessando Elementos</h3>\n\n<p>O acesso a elementos em tuplas funciona exatamente como em listas, usando índices (começando em 0) e slicing.</p>\n\n<pre><code class=\"language-python\">minha_tupla = ('a', 'b', 'c', 'd', 'e')\n\nprint(minha_tupla[0])    # Saída: a\nprint(minha_tupla[-1])   # Saída: e\nprint(minha_tupla[1:3])  # Saída: ('b', 'c')</code></pre>\n\n<h3>Imutabilidade</h3>\n\n<p>A característica definidora das tuplas é sua imutabilidade. Tentar modificar um elemento de uma tupla resultará em um <code>TypeError</code>.</p>\n\n<pre><code class=\"language-python\">numeros = (1, 2, 3)\n# numeros[0] = 10  # Isso causaria um TypeError: 'tuple' object does not support item assignment\n\n# Embora a tupla seja imutável, se ela contiver um objeto mutável (como uma lista),\n# esse objeto interno pode ser modificado.\nlista_interna = [1, 2]\ntupla_com_lista = (10, lista_interna, 30)\nprint(tupla_com_lista)  # Saída: (10, [1, 2], 30)\n\ntupla_com_lista[1].append(3)\nprint(tupla_com_lista)  # Saída: (10, [1, 2, 3], 30) - A lista interna foi modificada</code></pre>\n\n<h3>Quando Usar Tuplas vs. Listas?</h3>\n\n<ul>\n  <li><strong>Use tuplas quando:</strong>\n    <ul>\n      <li>Você tem uma coleção de itens que não deve mudar (ex: coordenadas, registros fixos, cores RGB).</li>\n      <li>Você quer garantir a integridade dos dados contra modificações acidentais.</li>\n      <li>Você precisa de uma chave para um dicionário (listas não podem ser chaves porque são mutáveis, mas tuplas contendo apenas itens imutáveis podem).</li>\n      <li>Para otimizações de desempenho em alguns casos (tuplas podem ser ligeiramente mais rápidas para iterar do que listas, embora isso raramente seja um fator crítico).</li>\n    </ul>\n  </li>\n  <li><strong>Use listas quando:</strong>\n    <ul>\n      <li>Você tem uma coleção de itens que precisa ser modificada (adicionar, remover, alterar elementos).</li>\n      <li>A ordem dos itens é importante e pode mudar, ou o tamanho da coleção é dinâmico.</li>\n    </ul>\n  </li>\n</ul>\n\n<h3>Desempacotamento de Tuplas (Tuple Unpacking)</h3>\n\n<p>Você pode atribuir os valores de uma tupla a múltiplas variáveis de uma vez.</p>\n\n<pre><code class=\"language-python\">ponto_xy = (100, 200)\nx, y = ponto_xy\n\nprint(f\"x: {x}, y: {y}\")  # Saída: x: 100, y: 200</code></pre>\n\n<h3>Métodos de Tuplas</h3>\n\n<p>Devido à imutabilidade, tuplas têm poucos métodos. Os principais são:</p>\n<ul>\n  <li><strong><code>count(valor)</code>:</strong> Retorna o número de vezes que <code>valor</code> aparece na tupla.</li>\n  <li><strong><code>index(valor)</code>:</strong> Retorna o índice da primeira ocorrência de <code>valor</code>. Gera um <code>ValueError</code> se o valor não for encontrado.</li>\n</ul>\n\n<pre><code class=\"language-python\">minha_tupla = (1, 2, 2, 3, 4, 2)\nprint(minha_tupla.count(2))    # Saída: 3\nprint(minha_tupla.index(3))    # Saída: 3</code></pre>\n\n<p>Funções como <code>len()</code>, <code>min()</code>, <code>max()</code>, e <code>sum()</code> também funcionam com tuplas (quando aplicável aos tipos de dados contidos).</p>",
+        "examples": [
+            {
+                "title": "Criando e Acessando Tuplas",
+                "code": "dados_pessoais = ('Ana', 28, 'Engenheira')\nnome = dados_pessoais[0]\nidade = dados_pessoais[1]\nprint(f\"{nome} tem {idade} anos.\")\n\n# Tentativa de modificação (resultará em erro)\n# dados_pessoais[1] = 29",
+                "explanation": "<p>Demonstra a criação de uma tupla e o acesso aos seus elementos por índice. A linha comentada mostra uma tentativa de modificação que causaria um erro devido à imutabilidade da tupla.</p>"
+            },
+            {
+                "title": "Desempacotamento e Métodos",
+                "code": "coordenadas_3d = (10, 20, 5)\nx, y, z = coordenadas_3d\nprint(f\"X={x}, Y={y}, Z={z}\")\n\nrepeticoes = (1, 'a', 1, 'b', 1, 'a', 1)\nprint(f\"O número 1 aparece {repeticoes.count(1)} vezes.\")\nprint(f\"O primeiro 'a' está no índice {repeticoes.index('a')}.\")",
+                "explanation": "<p>Mostra como desempacotar uma tupla em variáveis individuais e como usar os métodos <code>count()</code> e <code>index()</code>.</p>"
+            }
+        ],
+        "summary": "<p>Tuplas são coleções ordenadas e imutáveis, úteis para representar dados fixos e garantir sua integridade. Elas são criadas com parênteses (ou apenas vírgulas), acessadas por índices e suportam desempacotamento. Sua imutabilidade as distingue das listas e as torna adequadas para certos usos, como chaves de dicionário.</p>",
+        "estimated_time_minutes": 25
+    },
+    {
+        "id": "dicionarios-python-basico",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Dicionários (Parte 1)",
+        "order": 15,
+        "description": "Introdução aos dicionários em Python: coleções não ordenadas (ordenadas por inserção a partir do Python 3.7) de pares chave-valor.",
+        "learning_objectives": [
+            "Definir o que é um dicionário e como criá-lo em Python.",
+            "Entender o conceito de pares chave-valor.",
+            "Acessar valores em um dicionário usando chaves.",
+            "Adicionar novos pares chave-valor e modificar valores existentes.",
+            "Remover pares chave-valor de um dicionário.",
+            "Utilizar métodos básicos como `keys()`, `values()`, `items()`, e `get()`."
+        ],
+        "key_concepts": [
+            "Dicionário (`dict`)",
+            "Pares Chave-Valor",
+            "Chaves (Imutáveis e Únicas)",
+            "Valores (Qualquer Tipo)",
+            "Criação de Dicionários (chaves `{}`)",
+            "Acesso a Valores",
+            "Modificação de Valores",
+            "Adição e Remoção de Itens",
+            "Método `keys()`",
+            "Método `values()`",
+            "Método `items()`",
+            "Método `get()`",
+            "Operador `in` (para chaves)"
+        ],
+        "content": "<h2>Dicionários: Coleções de Pares Chave-Valor</h2>\n\n<p>Um <strong>dicionário</strong> (<code>dict</code>) em Python é uma coleção de itens onde cada item é um par <strong>chave-valor</strong>. Dicionários são mutáveis e, a partir do Python 3.7, mantêm a ordem de inserção dos itens (em versões anteriores, eram considerados não ordenados).</p>\n\n<p>As chaves em um dicionário devem ser únicas e de um tipo imutável (como strings, números ou tuplas que contenham apenas tipos imutáveis). Os valores podem ser de qualquer tipo e podem ser duplicados.</p>\n\n<h3>Criando Dicionários</h3>\n\n<p>Dicionários são criados usando chaves <code>{}</code>, com os pares chave-valor separados por dois pontos <code>:</code>, e os pares separados por vírgulas.</p>\n\n<pre><code class=\"language-python\"># Dicionário vazio\ndicionario_vazio = {}\n\n# Dicionário de informações de uma pessoa\npessoa = {\n    \"nome\": \"Carlos\",\n    \"idade\": 30,\n    \"cidade\": \"São Paulo\",\n    \"ativo\": True\n}\nprint(pessoa)\nprint(type(pessoa))  # Saída: &lt;class 'dict'&gt;\n\n# Outra forma de criar dicionários (usando a função dict())\nconfiguracoes = dict(usuario=\"admin\", tema=\"escuro\", notificacoes=False)\nprint(configuracoes)</code></pre>\n\n<h3>Acessando Valores</h3>\n\n<p>Você acessa o valor associado a uma chave usando colchetes <code>[]</code> com a chave dentro.</p>\n\n<pre><code class=\"language-python\">aluno = {\"nome\": \"Beatriz\", \"curso\": \"Ciência da Computação\", \"matricula\": 12345}\n\nprint(aluno[\"nome\"])       # Saída: Beatriz\nprint(aluno[\"matricula\"])  # Saída: 12345\n\n# Tentar acessar uma chave que não existe usando [] resultará em um KeyError\n# print(aluno[\"email\"])  # Isso causaria um KeyError</code></pre>\n\n<p>Uma forma mais segura de acessar valores é usando o método <strong><code>get(chave, valor_padrao_opcional)</code></strong>. Se a chave não existir, ele retorna <code>None</code> (ou o valor padrão especificado) em vez de um erro.</p>\n\n<pre><code class=\"language-python\">print(aluno.get(\"curso\"))        # Saída: Ciência da Computação\nprint(aluno.get(\"email\"))        # Saída: None\nprint(aluno.get(\"email\", \"não informado\")) # Saída: não informado</code></pre>\n\n<h3>Adicionando e Modificando Itens</h3>\n\n<p>Você pode adicionar um novo par chave-valor ou modificar o valor de uma chave existente simplesmente atribuindo um valor a uma chave:</p>\n\n<pre><code class=\"language-python\">contato = {\"nome\": \"Juliana\", \"telefone\": \"9999-8888\"}\n\n# Modificando um valor existente\ncontato[\"telefone\"] = \"7777-6666\"\nprint(contato)  # Saída: {'nome': 'Juliana', 'telefone': '7777-6666'}\n\n# Adicionando um novo par chave-valor\ncontato[\"email\"] = \"juliana@email.com\"\nprint(contato)  # Saída: {'nome': 'Juliana', 'telefone': '7777-6666', 'email': 'juliana@email.com'}</code></pre>\n\n<h3>Removendo Itens</h3>\n\n<ul>\n  <li><strong><code>pop(chave, valor_padrao_opcional)</code>:</strong> Remove o item com a <code>chave</code> especificada e retorna seu valor. Se a chave não for encontrada e <code>valor_padrao</code> não for fornecido, gera um <code>KeyError</code>.</li>\n  <li><strong><code>popitem()</code>:</strong> Remove e retorna o último par chave-valor inserido (a partir do Python 3.7). Em versões anteriores, remove um par arbitrário.</li>\n  <li><strong><code>del dicionario[chave]</code>:</strong> Remove o item com a <code>chave</code> especificada. Gera um <code>KeyError</code> se a chave não for encontrada.</li>\n  <li><strong><code>clear()</code>:</strong> Remove todos os itens do dicionário.</li>\n</ul>\n\n<pre><code class=\"language-python\">produto = {\"id\": 101, \"nome\": \"Notebook\", \"preco\": 3500.00, \"estoque\": 15}\n\npreco_removido = produto.pop(\"preco\")\nprint(f\"Preço removido: {preco_removido}, Dicionário: {produto}\")\n# Saída: Preço removido: 3500.0, Dicionário: {'id': 101, 'nome': 'Notebook', 'estoque': 15}\n\ndel produto[\"estoque\"]\nprint(produto)  # Saída: {'id': 101, 'nome': 'Notebook'}\n\nultimo_item = produto.popitem() # Remove e retorna ('nome', 'Notebook') ou ('id', 101)\nprint(f\"Último item removido: {ultimo_item}, Dicionário: {produto}\")\n\nproduto.clear()\nprint(produto)  # Saída: {}</code></pre>\n\n<h3>Verificando a Existência de Chaves</h3>\n\n<p>Você pode usar o operador <code>in</code> para verificar se uma chave existe em um dicionário.</p>\n<pre><code class=\"language-python\">config = {\"host\": \"localhost\", \"porta\": 8080}\nprint(\"host\" in config)    # Saída: True\nprint(\"usuario\" in config) # Saída: False</code></pre>\n\n<h3>Iterando sobre Dicionários</h3>\n\n<p>Por padrão, iterar sobre um dicionário itera sobre suas chaves.</p>\n<pre><code class=\"language-python\">notas = {\"Matemática\": 8.5, \"Português\": 9.0, \"História\": 7.0}\n\nfor disciplina in notas:\n    print(f\"{disciplina}: {notas[disciplina]}\")\n\n# Métodos para iterar:\n# .keys() - retorna uma visualização das chaves\n# .values() - retorna uma visualização dos valores\n# .items() - retorna uma visualização dos pares (chave, valor)\n\nprint(\"\\nDisciplinas:\")\nfor chave in notas.keys():\n    print(chave)\n\nprint(\"\\nNotas:\")\nfor valor in notas.values():\n    print(valor)\n\nprint(\"\\nDisciplinas e Notas:\")\nfor chave, valor in notas.items():\n    print(f\"{chave} -> {valor}\")</code></pre>",
+        "examples": [
+            {
+                "title": "Criando e Acessando Dicionário",
+                "code": "carro = {\n    \"marca\": \"Fiat\",\n    \"modelo\": \"Mobi\",\n    \"ano\": 2022,\n    \"cor\": \"Vermelho\"\n}\n\nprint(f\"Marca do carro: {carro['marca']}\")\nprint(f\"Ano do carro: {carro.get('ano')}\")\nprint(f\"Portas: {carro.get('portas', 4)} (valor padrão)\")",
+                "explanation": "<p>Demonstra a criação de um dicionário representando um carro e o acesso aos seus valores usando colchetes e o método <code>get()</code>, incluindo o uso de um valor padrão com <code>get()</code>.</p>"
+            },
+            {
+                "title": "Modificando e Iterando",
+                "code": "usuario = {\"id\": 1, \"username\": \"ana_dev\"}\n\n# Adicionando email\nusuario[\"email\"] = \"ana@example.com\"\n\n# Modificando username\nusuario[\"username\"] = \"ana_python_dev\"\n\nprint(\"Dados do usuário:\")\nfor chave, valor in usuario.items():\n    print(f\"  {chave.capitalize()}: {valor}\")",
+                "explanation": "<p>Mostra como adicionar um novo par chave-valor, modificar um valor existente e iterar sobre os itens (pares chave-valor) de um dicionário usando o método <code>items()</code>.</p>"
+            }
+        ],
+        "summary": "<p>Dicionários são estruturas de dados flexíveis e poderosas em Python para armazenar dados como pares chave-valor. Eles são mutáveis, e a partir do Python 3.7, mantêm a ordem de inserção. Aprender a criar, acessar, modificar e iterar sobre dicionários é fundamental para muitas tarefas de programação.</p>",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "dicionarios-python-avancado",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Dicionários (Parte 2)",
+        "order": 16,
+        "description": "Aprofunde seus conhecimentos em dicionários: métodos úteis, iteração avançada, dicionários aninhados e compreensões de dicionário.",
+        "learning_objectives": [
+            "Utilizar métodos adicionais de dicionários como `update()`, `setdefault()`.",
+            "Iterar sobre chaves, valores e pares chave-valor de forma eficiente.",
+            "Trabalhar com dicionários aninhados para representar estruturas de dados mais complexas.",
+            "Criar dicionários de forma concisa usando compreensões de dicionário (dict comprehensions)."
+        ],
+        "key_concepts": [
+            "Método `update()`",
+            "Método `setdefault()`",
+            "Iteração em Dicionários (`keys()`, `values()`, `items()`)",
+            "Dicionários Aninhados",
+            "Compreensões de Dicionário (Dict Comprehensions)"
+        ],
+        "content": "<h2>Aprofundando em Dicionários</h2>\n\n<p>Na lição anterior, cobrimos os fundamentos dos dicionários. Agora, vamos explorar alguns métodos mais avançados e técnicas para trabalhar com eles.</p>\n\n<h3>Métodos Adicionais Úteis</h3>\n\n<ul>\n  <li><strong><code>update(outro_dicionario_ou_iteravel_de_pares)</code>:</strong> Atualiza o dicionário com os pares chave-valor de outro dicionário ou de um iterável de pares chave-valor. Se uma chave já existir, seu valor é sobrescrito.\n    <pre><code class=\"language-python\">perfil = {'nome': 'Lucas', 'idade': 28}\nnovos_dados = {'idade': 29, 'cidade': 'Recife', 'profissao': 'Engenheiro'}\n\nperfil.update(novos_dados)\nprint(perfil)\n# Saída: {'nome': 'Lucas', 'idade': 29, 'cidade': 'Recife', 'profissao': 'Engenheiro'}</code></pre>\n  </li>\n  <li><strong><code>setdefault(chave, valor_padrao)</code>:</strong> Se a <code>chave</code> existir no dicionário, retorna seu valor. Se não existir, insere a <code>chave</code> com o <code>valor_padrao</code> especificado e retorna o <code>valor_padrao</code>.\n    <pre><code class=\"language-python\">configuracoes = {'tema': 'claro'}\n\n# Chave 'tema' existe, retorna seu valor\ntema_atual = configuracoes.setdefault('tema', 'escuro')\nprint(f\"Tema atual: {tema_atual}, Configurações: {configuracoes}\")\n# Saída: Tema atual: claro, Configurações: {'tema': 'claro'}\n\n# Chave 'idioma' não existe, insere com valor padrão e retorna o padrão\nidioma_atual = configuracoes.setdefault('idioma', 'pt-br')\nprint(f\"Idioma atual: {idioma_atual}, Configurações: {configuracoes}\")\n# Saída: Idioma atual: pt-br, Configurações: {'tema': 'claro', 'idioma': 'pt-br'}</code></pre>\n    Este método é útil para inicializar chaves em um dicionário apenas se elas ainda não existirem.\n  </li>\n</ul>\n\n<h3>Dicionários Aninhados</h3>\n\n<p>Dicionários podem conter outros dicionários como valores. Isso permite criar estruturas de dados hierárquicas e complexas.</p>\n\n<pre><code class=\"language-python\">alunos = {\n    'aluno1': {\n        'nome': 'Ana Silva',\n        'matricula': '2023001',\n        'notas': {'matematica': 8.5, 'historia': 9.0}\n    },\n    'aluno2': {\n        'nome': 'Bruno Costa',\n        'matricula': '2023002',\n        'notas': {'matematica': 7.0, 'historia': 7.5}\n    }\n}\n\n# Acessando dados aninhados\nprint(alunos['aluno1']['nome'])  # Saída: Ana Silva\nprint(alunos['aluno2']['notas']['matematica']) # Saída: 7.0\n\n# Adicionando uma nova nota para aluno1\nalunos['aluno1']['notas']['ciencias'] = 8.0\nprint(alunos['aluno1'])</code></pre>\n\n<h3>Compreensões de Dicionário (Dict Comprehensions)</h3>\n\n<p>Assim como as list comprehensions, as dict comprehensions oferecem uma maneira concisa e elegante de criar dicionários. A sintaxe básica é: <code>{chave_expr: valor_expr for item in iteravel if condicao}</code>.</p>\n\n<pre><code class=\"language-python\"># Criar um dicionário com números e seus quadrados\nquadrados_dict = {x: x**2 for x in range(1, 6)}\nprint(quadrados_dict)  # Saída: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}\n\n# Criar um dicionário a partir de uma lista de palavras e seus comprimentos\npalavras = ['python', 'curso', 'legal']\ncomprimentos = {palavra: len(palavra) for palavra in palavras}\nprint(comprimentos)  # Saída: {'python': 6, 'curso': 5, 'legal': 5}\n\n# Com condição: apenas palavras com mais de 5 letras\ncomprimentos_filtrado = {palavra: len(palavra) for palavra in palavras if len(palavra) > 5}\nprint(comprimentos_filtrado) # Saída: {'python': 6}</code></pre>\n\n<p>Dict comprehensions são úteis para transformar ou filtrar dados de outros iteráveis em um novo dicionário.</p>",
+        "examples": [
+            {
+                "title": "Usando `update()` e `setdefault()`",
+                "code": "contatos = {'Ana': 'ana@email.com'}\nnovos_contatos = {'Bruno': 'bruno@email.com', 'Ana': 'ana.nova@email.com'}\n\ncontatos.update(novos_contatos)\nprint(f\"Contatos atualizados: {contatos}\")\n\n# Tentando adicionar Carlos, se não existir\nemail_carlos = contatos.setdefault('Carlos', 'carlos@email.com')\nprint(f\"Email de Carlos: {email_carlos}\")\nprint(f\"Contatos finais: {contatos}\")",
+                "explanation": "<p>Demonstra como o método <code>update()</code> pode mesclar dicionários (atualizando valores de chaves existentes e adicionando novas) e como <code>setdefault()</code> adiciona um par chave-valor apenas se a chave ainda não existir.</p>"
+            },
+            {
+                "title": "Dict Comprehension para Inverter Chaves e Valores",
+                "code": "dicionario_original = {'a': 1, 'b': 2, 'c': 3}\n# Assume que os valores são únicos e imutáveis para serem chaves\ndicionario_invertido = {valor: chave for chave, valor in dicionario_original.items()}\nprint(f\"Original: {dicionario_original}\")\nprint(f\"Invertido: {dicionario_invertido}\")",
+                "explanation": "<p>Mostra um exemplo prático de dict comprehension para criar um novo dicionário onde as chaves e valores do dicionário original são trocados. Isso só funciona corretamente se os valores originais forem únicos e adequados para serem chaves (imutáveis).</p>"
+            }
+        ],
+        "summary": "<p>Nesta lição, você explorou funcionalidades mais avançadas dos dicionários, incluindo os métodos <code>update()</code> e <code>setdefault()</code>, como trabalhar com dicionários aninhados para estruturas de dados complexas, e a sintaxe elegante das compreensões de dicionário para criar dicionários de forma programática.</p>",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "conjuntos-python",
+        "course_id": "python-basico",
+        "title": "Tipos de Dados Compostos: Conjuntos (Sets)",
+        "order": 17,
+        "description": "Aprenda sobre conjuntos (sets) em Python: coleções não ordenadas de itens únicos, e suas operações matemáticas.",
+        "learning_objectives": [
+            "Definir o que é um conjunto (set) e como criá-lo em Python.",
+            "Entender que conjuntos armazenam apenas itens únicos e não têm uma ordem específica.",
+            "Adicionar e remover itens de um conjunto.",
+            "Realizar operações de conjuntos: união, interseção, diferença e diferença simétrica.",
+            "Utilizar conjuntos para remover duplicatas de outras coleções."
+        ],
+        "key_concepts": [
+            "Conjunto (`set`)",
+            "Coleção Não Ordenada",
+            "Itens Únicos (Sem Duplicatas)",
+            "Criação de Conjuntos (chaves `{}`, função `set()`)",
+            "Adição de Itens (`add()`, `update()`)",
+            "Remoção de Itens (`remove()`, `discard()`, `pop()`, `clear()`)",
+            "Operações de Conjuntos (União `|`, Interseção `&`, Diferença `-`, Diferença Simétrica `^`)",
+            "Métodos de Operações (`union()`, `intersection()`, `difference()`, `symmetric_difference()`)"
+        ],
+        "content": "<h2>Conjuntos (Sets): Coleções de Itens Únicos</h2>\n\n<p>Um <strong>conjunto</strong> (<code>set</code>) em Python é uma coleção não ordenada de itens <strong>únicos</strong>. Isso significa que um conjunto não pode conter elementos duplicados e a ordem dos elementos não é garantida (e não deve ser relevante para o seu uso).</p>\n\n<p>Conjuntos são mutáveis, mas os próprios elementos de um conjunto devem ser de tipos imutáveis.</p>\n\n<h3>Criando Conjuntos</h3>\n\n<p>Você pode criar um conjunto usando chaves <code>{}</code> com itens separados por vírgulas, ou usando a função <code>set()</code> com um iterável (como uma lista ou string).</p>\n\n<pre><code class=\"language-python\"># Criando com chaves {}\nnumeros_set = {1, 2, 3, 4, 4, 5} # Duplicatas são ignoradas\nprint(numeros_set)  # Saída: {1, 2, 3, 4, 5} (a ordem pode variar)\n\nletras_set = {'a', 'b', 'c'}\n\n# Criando com a função set()\nlista_frutas = ['maçã', 'banana', 'laranja', 'maçã']\nfrutas_set = set(lista_frutas)\nprint(frutas_set)  # Saída: {'laranja', 'banana', 'maçã'} (ordem pode variar)\n\nstring_set = set('abracadabra')\nprint(string_set) # Saída: {'b', 'r', 'c', 'a', 'd'} (ordem pode variar)\n\n# Para criar um conjunto vazio, você DEVE usar set(), pois {} cria um dicionário vazio.\nconjunto_vazio = set()\nprint(type(conjunto_vazio)) # Saída: &lt;class 'set'&gt;\n\ndicionario_vazio = {}\nprint(type(dicionario_vazio)) # Saída: &lt;class 'dict'&gt;</code></pre>\n\n<h3>Adicionando Itens</h3>\n\n<ul>\n  <li><strong><code>add(elemento)</code>:</strong> Adiciona um único elemento ao conjunto. Se o elemento já existir, o conjunto não é alterado.</li>\n  <li><strong><code>update(iteravel)</code>:</strong> Adiciona todos os elementos de um iterável (como outra lista ou conjunto) ao conjunto.</li>\n</ul>\n\n<pre><code class=\"language-python\">meu_set = {1, 2}\nmeu_set.add(3)\nprint(meu_set)  # Saída: {1, 2, 3}\n\nmeu_set.add(2) # Adicionar um elemento existente não muda o conjunto\nprint(meu_set)  # Saída: {1, 2, 3}\n\nmeu_set.update([3, 4, 5], {5, 6})\nprint(meu_set)  # Saída: {1, 2, 3, 4, 5, 6}</code></pre>\n\n<h3>Removendo Itens</h3>\n\n<ul>\n  <li><strong><code>remove(elemento)</code>:</strong> Remove o elemento especificado. Gera um <code>KeyError</code> se o elemento não estiver no conjunto.</li>\n  <li><strong><code>discard(elemento)</code>:</strong> Remove o elemento especificado se ele estiver presente. Não gera erro se o elemento não existir.</li>\n  <li><strong><code>pop()</code>:</strong> Remove e retorna um elemento arbitrário do conjunto (já que conjuntos não são ordenados). Gera um <code>KeyError</code> se o conjunto estiver vazio.</li>\n  <li><strong><code>clear()</code>:</strong> Remove todos os elementos do conjunto.</li>\n</ul>\n\n<pre><code class=\"language-python\">numeros = {10, 20, 30, 40, 50}\n\nnumeros.remove(30)\nprint(numeros)  # Saída: {10, 20, 40, 50} (a ordem pode variar)\n# numeros.remove(100) # Isso causaria um KeyError\n\nnumeros.discard(40)\nprint(numeros)  # Saída: {10, 20, 50}\nnumeros.discard(100) # Não faz nada, sem erro\n\nitem_removido = numeros.pop()\nprint(f\"Item removido com pop(): {item_removido}, Conjunto: {numeros}\")\n\nnumeros.clear()\nprint(numeros)  # Saída: set()</code></pre>\n\n<h3>Operações de Conjuntos</h3>\n\n<p>Conjuntos suportam operações matemáticas comuns em teoria dos conjuntos:</p>\n\n<ul>\n  <li><strong>União (<code>|</code> ou <code>union()</code>):</strong> Retorna um novo conjunto contendo todos os itens de ambos os conjuntos.</li>\n  <li><strong>Interseção (<code>&</code> ou <code>intersection()</code>):</strong> Retorna um novo conjunto contendo apenas os itens presentes em ambos os conjuntos.</li>\n  <li><strong>Diferença (<code>-</code> ou <code>difference()</code>):</strong> Retorna um novo conjunto contendo itens do primeiro conjunto que não estão no segundo.</li>\n  <li><strong>Diferença Simétrica (<code>^</code> ou <code>symmetric_difference()</code>):</strong> Retorna um novo conjunto contendo todos os itens que estão em um dos conjuntos, mas não em ambos.</li>\n</ul>\n\n<pre><code class=\"language-python\">set_a = {1, 2, 3, 4}\nset_b = {3, 4, 5, 6}\n\n# União\nuniao = set_a | set_b\nprint(f\"União: {uniao}\")  # Saída: {1, 2, 3, 4, 5, 6}\n\n# Interseção\nintersecao = set_a & set_b\nprint(f\"Interseção: {intersecao}\")  # Saída: {3, 4}\n\n# Diferença (A - B)\ndiferenca_ab = set_a - set_b\nprint(f\"Diferença A-B: {diferenca_ab}\")  # Saída: {1, 2}\n\n# Diferença (B - A)\ndiferenca_ba = set_b - set_a\nprint(f\"Diferença B-A: {diferenca_ba}\")  # Saída: {5, 6}\n\n# Diferença Simétrica\ndif_simetrica = set_a ^ set_b\nprint(f\"Diferença Simétrica: {dif_simetrica}\")  # Saída: {1, 2, 5, 6}</code></pre>\n\n<h3>Uso Comum: Remover Duplicatas</h3>\n\n<p>Uma aplicação muito comum de conjuntos é remover elementos duplicados de uma lista (ou outro iterável) e obter apenas os itens únicos.</p>\n\n<pre><code class=\"language-python\">lista_com_duplicatas = [1, 2, 2, 3, 4, 4, 4, 5, 1]\nlista_sem_duplicatas = list(set(lista_com_duplicatas))\nprint(lista_sem_duplicatas) # Saída: [1, 2, 3, 4, 5] (a ordem pode não ser a original)</code></pre>",
+        "examples": [
+            {
+                "title": "Criando e Modificando Conjuntos",
+                "code": "cores_primarias = set(['vermelho', 'amarelo', 'azul'])\nprint(f\"Cores primárias: {cores_primarias}\")\n\ncores_primarias.add('verde') # Verde não é primária, mas adicionamos ao conjunto\nprint(f\"Após add('verde'): {cores_primarias}\")\n\ncores_primarias.discard('amarelo')\nprint(f\"Após discard('amarelo'): {cores_primarias}\")",
+                "explanation": "<p>Demonstra a criação de um conjunto a partir de uma lista, a adição de um novo elemento com <code>add()</code> e a remoção de um elemento com <code>discard()</code>.</p>"
+            },
+            {
+                "title": "Operações de Conjuntos",
+                "code": "grupo1 = {'Ana', 'Bruno', 'Carlos', 'Daniela'}\ngrupo2 = {'Carlos', 'Daniela', 'Eduardo', 'Fernanda'}\n\ntodos_os_membros = grupo1.union(grupo2)\nprint(f\"Todos os membros (união): {todos_os_membros}\")\n\nmembros_em_comum = grupo1.intersection(grupo2)\nprint(f\"Membros em comum (interseção): {membros_em_comum}\")\n\nmembros_apenas_grupo1 = grupo1.difference(grupo2)\nprint(f\"Membros apenas no Grupo 1: {membros_apenas_grupo1}\")",
+                "explanation": "<p>Mostra como realizar operações de união, interseção e diferença entre dois conjuntos usando os métodos correspondentes.</p>"
+            }
+        ],
+        "summary": "<p>Conjuntos (sets) são coleções não ordenadas de itens únicos, ideais para verificar a presença de elementos, remover duplicatas e realizar operações matemáticas de teoria dos conjuntos como união, interseção e diferença. Lembre-se de usar <code>set()</code> para criar um conjunto vazio.</p>",
+        "estimated_time_minutes": 30
+    },
+    {
+        "id": "funcoes-python-definicao-chamada",
+        "course_id": "python-basico",
+        "title": "Funções (Parte 1): Definição e Chamada",
+        "order": 18,
+        "description": "Aprenda os fundamentos da criação de funções em Python usando 'def', como chamá-las e o conceito de retorno de valores.",
+        "learning_objectives": [
+            "Entender a importância e os benefícios de usar funções.",
+            "Definir uma função simples em Python usando a palavra-chave `def`.",
+            "Chamar (executar) uma função definida.",
+            "Criar funções que recebem argumentos (parâmetros).",
+            "Criar funções que retornam valores usando a instrução `return`.",
+            "Compreender o que acontece quando uma função não tem `return` explícito."
+        ],
+        "key_concepts": [
+            "Função",
+            "Reutilização de Código",
+            "Modularidade",
+            "Palavra-chave `def`",
+            "Nome da Função",
+            "Parâmetros (na definição)",
+            "Argumentos (na chamada)",
+            "Corpo da Função (Indentado)",
+            "Chamada de Função",
+            "Instrução `return`",
+            "Valor de Retorno",
+            "Funções sem `return` (retornam `None`)"
+        ],
+        "content": "<h2>Funções: Blocos de Código Reutilizáveis</h2>\n\n<p>Em programação, uma <strong>função</strong> é um bloco de código nomeado que realiza uma tarefa específica. Funções são um dos pilares da programação estruturada e modular, pois permitem organizar o código de forma lógica, evitar repetição e facilitar a manutenção.</p>\n\n<h3>Por que Usar Funções?</h3>\n<ul>\n  <li><strong>Reutilização de Código (DRY - Don't Repeat Yourself):</strong> Se você tem um trecho de código que precisa ser executado várias vezes em diferentes partes do seu programa, você pode colocá-lo em uma função e chamá-la sempre que necessário.</li>\n  <li><strong>Modularidade:</strong> Funções ajudam a quebrar um programa complexo em partes menores e mais gerenciáveis. Cada função lida com uma pequena parte do problema geral.</li>\n  <li><strong>Legibilidade:</strong> Um programa bem estruturado com funções é mais fácil de ler e entender, pois cada função tem um nome descritivo que indica sua finalidade.</li>\n  <li><strong>Manutenção:</strong> Se você precisar corrigir um bug ou fazer uma alteração em uma funcionalidade específica, só precisará modificar o código dentro da função correspondente.</li>\n</ul>\n\n<h3>Definindo uma Função</h3>\n\n<p>Em Python, você define uma função usando a palavra-chave <code>def</code>, seguida pelo nome da função, parênteses <code>()</code> e dois pontos <code>:</code>. O corpo da função, que contém as instruções a serem executadas, deve ser indentado.</p>\n\n<pre><code class=\"language-python\"># Sintaxe básica\ndef nome_da_funcao():\n    # Corpo da função (código indentado)\n    print(\"Esta função foi chamada!\")\n    # Mais instruções aqui...</code></pre>\n\n<h3>Chamando uma Função</h3>\n\n<p>Depois de definir uma função, você pode \"chamá-la\" (ou \"invocá-la\" ou \"executá-la\") pelo seu nome, seguido de parênteses.</p>\n\n<pre><code class=\"language-python\">def cumprimentar():\n    print(\"Olá, seja bem-vindo(a)!\")\n\n# Chamando a função\ncumprimentar()  # Saída: Olá, seja bem-vindo(a)!\ncumprimentar()  # Pode ser chamada várias vezes</code></pre>\n\n<h3>Parâmetros e Argumentos</h3>\n\n<p>Funções podem receber dados para trabalhar. Esses dados são passados como <strong>argumentos</strong> quando a função é chamada. Na definição da função, você especifica <strong>parâmetros</strong>, que são como variáveis locais que recebem os valores dos argumentos.</p>\n\n<pre><code class=\"language-python\"># 'nome' e 'idade' são parâmetros\ndef apresentar_pessoa(nome, idade):\n    print(f\"Olá, meu nome é {nome} e eu tenho {idade} anos.\")\n\n# \"Alice\" e 30 são argumentos\napresentar_pessoa(\"Alice\", 30)\n# Saída: Olá, meu nome é Alice e eu tenho 30 anos.\n\napresentar_pessoa(\"Bob\", 25)\n# Saída: Olá, meu nome é Bob e eu tenho 25 anos.</code></pre>\n\n<h3>Retornando Valores com <code>return</code></h3>\n\n<p>Muitas vezes, uma função precisa calcular um valor e enviá-lo de volta para o local onde foi chamada. Isso é feito usando a instrução <code>return</code>.</p>\n\n<pre><code class=\"language-python\">def somar(a, b):\n    resultado = a + b\n    return resultado  # A função 'envia de volta' o valor de resultado\n\n# Chamando a função e armazenando o valor retornado\nsoma_numeros = somar(5, 3)\nprint(f\"A soma é: {soma_numeros}\")  # Saída: A soma é: 8\n\nprint(f\"O resultado de 10 + 20 é: {somar(10, 20)}\") # Saída: O resultado de 10 + 20 é: 30</code></pre>\n\n<p>Uma função pode ter múltiplas instruções <code>return</code> (por exemplo, dentro de diferentes blocos <code>if</code>/<code>else</code>), mas assim que uma instrução <code>return</code> é executada, a função termina imediatamente e retorna o valor especificado.</p>\n\n<h3>Funções Sem <code>return</code> Explícito</h3>\n\n<p>Se uma função não tiver uma instrução <code>return</code> explícita, ou se tiver uma instrução <code>return</code> sem nenhum valor (apenas <code>return</code>), ela retorna automaticamente o valor especial <code>None</code>.</p>\n\n<pre><code class=\"language-python\">def exibir_mensagem(mensagem):\n    print(mensagem)\n    # Nenhum return explícito aqui\n\nretorno_da_funcao = exibir_mensagem(\"Testando...\")\nprint(f\"Valor retornado: {retorno_da_funcao}\")  # Saída: Valor retornado: None</code></pre>",
+        "examples": [
+            {
+                "title": "Função Simples de Saudação",
+                "code": "def saudar_usuario(nome_usuario):\n    \"\"\"Esta função exibe uma saudação personalizada.\"\"\"\n    print(f\"Olá, {nome_usuario}! Tudo bem?\")\n\nsaudar_usuario(\"Maria\")\nsaudar_usuario(\"João\")",
+                "explanation": "<p>Define uma função <code>saudar_usuario</code> que recebe um parâmetro <code>nome_usuario</code> e imprime uma saudação. A função é então chamada duas vezes com diferentes argumentos.</p>"
+            },
+            {
+                "title": "Função para Calcular Área de um Retângulo",
+                "code": "def calcular_area_retangulo(largura, altura):\n    \"\"\"Calcula e retorna a área de um retângulo.\"\"\"\n    area = largura * altura\n    return area\n\n# Chamando a função e usando o valor retornado\narea1 = calcular_area_retangulo(5, 10)\nprint(f\"A área do primeiro retângulo é: {area1}\")\n\narea2 = calcular_area_retangulo(7, 3)\nprint(f\"A área do segundo retângulo é: {area2}\")",
+                "explanation": "<p>Define uma função <code>calcular_area_retangulo</code> que recebe dois parâmetros (largura e altura), calcula a área e a retorna. O valor retornado é então armazenado em variáveis e impresso.</p>"
+            }
+        ],
+        "summary": "<p>Funções são blocos de código reutilizáveis definidos com <code>def</code>. Elas podem aceitar dados através de parâmetros e retornar resultados usando <code>return</code>. Usar funções torna o código mais organizado, legível e fácil de manter, sendo um conceito fundamental em Python e na programação em geral.</p>",
+        "estimated_time_minutes": 30
+    },
+    
+    {
+        "id": "funcoes-python-argumentos-escopo",
+        "course_id": "python-basico",
+        "title": "Funções (Parte 2): Tipos de Argumentos e Escopo",
+        "order": 19,
+        "description": "Aprofunde-se em funções Python: argumentos posicionais e nomeados, valores padrão, `*args` e `**kwargs` para argumentos variáveis, e o conceito de escopo de variáveis (local vs. global).",
+        "learning_objectives": [
+            "Diferenciar e utilizar argumentos posicionais e nomeados (keyword arguments).",
+            "Definir parâmetros com valores padrão.",
+            "Criar funções que aceitam um número variável de argumentos posicionais usando `*args`.",
+            "Criar funções que aceitam um número variável de argumentos nomeados usando `**kwargs`.",
+            "Entender o conceito de escopo local e global de variáveis.",
+            "Saber como acessar e modificar variáveis globais dentro de uma função (usando a palavra-chave `global`)."
+        ],
+        "key_concepts": [
+            "Argumentos Posicionais",
+            "Argumentos Nomeados (Keyword Arguments)",
+            "Parâmetros com Valores Padrão",
+            "`*args` (Argumentos Posicionais Variáveis)",
+            "`**kwargs` (Argumentos Nomeados Variáveis)",
+            "Escopo Local",
+            "Escopo Global",
+            "Palavra-chave `global`"
+        ],
+        "content": "<h2>Funções (Parte 2): Tipos de Argumentos e Escopo</h2>\n\n<p>Na lição anterior, introduzimos a definição e chamada básica de funções. Agora, vamos explorar maneiras mais flexíveis de passar argumentos e entender como as variáveis são acessadas dentro e fora das funções.</p>\n\n<h3>Tipos de Argumentos</h3>\n\n<p>Python oferece várias formas de definir e passar argumentos para funções:</p>\n\n<ol>\n  <li><strong>Argumentos Posicionais:</strong> São os argumentos mais comuns. Sua posição na chamada da função determina a qual parâmetro eles correspondem. A ordem importa.\n    <pre><code class=\"language-python\">def descrever_pet(tipo_animal, nome_animal):\n    print(f\"Eu tenho um {tipo_animal} chamado {nome_animal}.\")\n\ndescrever_pet(\"cachorro\", \"Rex\") # \"cachorro\" é tipo_animal, \"Rex\" é nome_animal</code></pre>\n  </li>\n  <li><strong>Argumentos Nomeados (Keyword Arguments):</strong> Você pode especificar explicitamente a qual parâmetro cada argumento corresponde usando o nome do parâmetro seguido por <code>=</code> e o valor. A ordem dos argumentos nomeados não importa.\n    <pre><code class=\"language-python\">descrever_pet(nome_animal=\"Totó\", tipo_animal=\"gato\")</code></pre>\n    <p>Você pode misturar argumentos posicionais e nomeados, mas os posicionais devem vir sempre antes dos nomeados.</p>\n    <pre><code class=\"language-python\">descrever_pet(\"pássaro\", nome_animal=\"Piu-piu\") # Válido\n# descrever_pet(nome_animal=\"Piu-piu\", \"pássaro\") # Inválido: posicional após nomeado</code></pre>\n  </li>\n  <li><strong>Parâmetros com Valores Padrão:</strong> Você pode definir um valor padrão para um ou mais parâmetros na definição da função. Se um argumento para esse parâmetro não for fornecido na chamada, o valor padrão será usado.\n    <pre><code class=\"language-python\">def potencia(base, expoente=2): # expoente tem valor padrão 2\n    return base ** expoente\n\nprint(potencia(5))      # Usa expoente=2 por padrão. Saída: 25\nprint(potencia(5, 3))   # Sobrescreve o padrão. Saída: 125</code></pre>\n    <p>Parâmetros com valores padrão devem vir após os parâmetros sem valores padrão na definição da função.</p>\n  </li>\n  <li><strong>Argumentos de Comprimento Variável (`*args` e `**kwargs`):</strong>\n    <ul>\n      <li><strong><code>*args</code> (Argumentos Posicionais Variáveis):</strong> Permite que uma função aceite um número arbitrário de argumentos posicionais. Dentro da função, <code>args</code> será uma tupla contendo todos os argumentos posicionais extras.\n        <pre><code class=\"language-python\">def somar_todos(*numeros):\n    soma = 0\n    for num in numeros:\n        soma += num\n    return soma\n\nprint(somar_todos(1, 2, 3))       # Saída: 6\nprint(somar_todos(10, 20, 30, 40)) # Saída: 100</code></pre>\n      </li>\n      <li><strong><code>**kwargs</code> (Argumentos Nomeados Variáveis):</strong> Permite que uma função aceite um número arbitrário de argumentos nomeados. Dentro da função, <code>kwargs</code> será um dicionário contendo todos os argumentos nomeados extras.\n        <pre><code class=\"language-python\">def exibir_info_usuario(**dados_usuario):\n    print(\"Informações do Usuário:\")\n    for chave, valor in dados_usuario.items():\n        print(f\"  {chave.capitalize()}: {valor}\")\n\nexibir_info_usuario(nome=\"Carla\", idade=35, cidade=\"Salvador\")\n# Saída:\n# Informações do Usuário:\n#   Nome: Carla\n#   Idade: 35\n#   Cidade: Salvador</code></pre>\n      </li>\n    </ul>\n    <p>Uma função pode ter parâmetros normais, <code>*args</code>, e <code>**kwargs</code>, geralmente nessa ordem: <code>def func(param1, param2, *args, **kwargs):</code></p>\n  </li>\n</ol>\n\n<h3>Escopo de Variáveis (Local vs. Global)</h3>\n\n<p>O <strong>escopo</strong> de uma variável determina onde ela pode ser acessada ou modificada em seu programa.</p>\n\n<ul>\n  <li><strong>Escopo Local:</strong> Variáveis definidas <em>dentro</em> de uma função têm escopo local. Elas só existem e podem ser acessadas de dentro dessa função. Quando a função termina, essas variáveis são destruídas. Parâmetros de função também têm escopo local.\n    <pre><code class=\"language-python\">def minha_funcao_local():\n    variavel_x = 10 # Escopo local\n    print(f\"Dentro da função, x = {variavel_x}\")\n\nminha_funcao_local()\n# print(variavel_x) # Isso causaria um NameError, pois variavel_x não existe aqui fora</code></pre>\n  </li>\n  <li><strong>Escopo Global:</strong> Variáveis definidas <em>fora</em> de todas as funções (no nível principal do script) têm escopo global. Elas podem ser acessadas de qualquer lugar no script, incluindo de dentro das funções (para leitura).\n    <pre><code class=\"language-python\">variavel_global_y = 100 # Escopo global\n\ndef outra_funcao():\n    print(f\"Dentro da função, y = {variavel_global_y}\") # Acessando variável global\n\noutra_funcao()\nprint(f\"Fora da função, y = {variavel_global_y}\")</code></pre>\n  </li>\n</ul>\n\n<h4>Modificando Variáveis Globais Dentro de Funções</h4>\n\n<p>Se você tentar atribuir um novo valor a uma variável global dentro de uma função, o Python, por padrão, criará uma nova variável local com o mesmo nome, sem afetar a global. Para modificar explicitamente uma variável global de dentro de uma função, você deve usar a palavra-chave <code>global</code>.</p>\n\n<pre><code class=\"language-python\">contador_global = 0\n\ndef incrementar_contador():\n    global contador_global # Indica que queremos usar a variável global\n    contador_global += 1\n    print(f\"Contador dentro da função: {contador_global}\")\n\nincrementar_contador()\nincrementar_contador()\nprint(f\"Contador fora da função: {contador_global}\") # Saída: Contador fora da função: 2</code></pre>\n<p><strong>Cuidado:</strong> O uso excessivo da palavra-chave <code>global</code> pode tornar o código mais difícil de entender e depurar, pois dificulta o rastreamento de onde as variáveis estão sendo modificadas. Geralmente, é preferível que funções recebam dados como argumentos e retornem resultados.</p>",
+        "examples": [
+            {
+                "title": "Função com Argumentos Padrão e Nomeados",
+                "code": "def criar_mensagem(texto, remetente=\"Sistema\", urgente=False):\n    prefixo = \"[URGENTE] \" if urgente else \"\"\n    return f\"{prefixo}De: {remetente}\\n{texto}\"\n\nprint(criar_mensagem(\"Backup concluído.\"))\nprint(\"-\"*20)\nprint(criar_mensagem(\"Falha crítica no servidor!\", urgente=True, remetente=\"Monitor\"))",
+                "explanation": "<p>Demonstra uma função com parâmetros que têm valores padrão (<code>remetente</code> e <code>urgente</code>). A primeira chamada usa os padrões, enquanto a segunda sobrescreve-os usando argumentos nomeados.</p>"
+            },
+            {
+                "title": "Usando `*args` e `**kwargs`",
+                "code": "def processar_dados(id_processo, *valores, **opcoes):\n    print(f\"Processando ID: {id_processo}\")\n    print(f\"Valores recebidos (*args): {valores}\")\n    print(\"Opções recebidas (**kwargs):\")\n    for chave, valor_opcao in opcoes.items():\n        print(f\"  - {chave}: {valor_opcao}\")\n    print(\"-\"*20)\n\nprocessar_dados(101, 'A', 'B', 'C', status=\"ativo\", prioridade=\"alta\")\nprocessar_dados(102, 10, 20, modo=\"teste\")",
+                "explanation": "<p>Mostra uma função que aceita um argumento posicional obrigatório (<code>id_processo</code>), um número variável de outros argumentos posicionais (coletados em <code>*valores</code> como uma tupla), e um número variável de argumentos nomeados (coletados em <code>**opcoes</code> como um dicionário).</p>"
+            },
+            {
+                "title": "Escopo Local vs. Global",
+                "code": "saldo = 500 # Variável global\n\ndef realizar_compra(valor_compra):\n    # saldo = saldo - valor_compra # Isso causaria UnboundLocalError sem 'global saldo'\n    # Para modificar a global, precisaríamos de 'global saldo'\n    # No entanto, é melhor retornar o novo saldo:\n    if saldo >= valor_compra:\n        print(f\"Compra de R${valor_compra} aprovada.\")\n        return saldo - valor_compra\n    else:\n        print(\"Saldo insuficiente.\")\n        return saldo\n\nsaldo_inicial = saldo\nnovo_saldo = realizar_compra(100)\nif novo_saldo != saldo_inicial:\n    saldo = novo_saldo # Atualiza a global com o valor retornado\n\nprint(f\"Saldo final: R${saldo}\")\n\nnovo_saldo = realizar_compra(600)\nprint(f\"Saldo final: R${saldo}\")",
+                "explanation": "<p>Ilustra o escopo de variáveis. A função <code>realizar_compra</code> acessa a variável global <code>saldo</code> para leitura. Para modificar uma global, a palavra-chave <code>global</code> seria necessária, mas o exemplo mostra uma prática melhor: retornar o novo valor e atualizar a global fora da função.</p>"
+            }
+        ],
+        "summary": "<p>Nesta lição, você aprendeu sobre as diferentes formas de passar argumentos para funções em Python, incluindo argumentos posicionais, nomeados, com valores padrão, e os versáteis <code>*args</code> e <code>**kwargs</code> para lidar com um número variável de argumentos. Também explorou o fundamental conceito de escopo de variáveis (local e global) e como a palavra-chave <code>global</code> pode ser usada (com cautela).</p>",
+        "estimated_time_minutes": 40
+    }
+,
+    {
+        "id": "projeto-final-curso-basico",
+        "course_id": "python-basico",
+        "title": "Projeto Final do Curso de Python Básico",
+        "order": 20,
+        "description": "Aplique todos os conceitos fundamentais de Python aprendidos ao longo do curso básico para desenvolver um projeto prático do início ao fim.",
+        "learning_objectives": [
+            "Consolidar o aprendizado sobre tipos de dados, operadores, controle de fluxo, listas e funções.",
+            "Desenvolver um programa Python funcional e interativo.",
+            "Praticar a lógica de programação na resolução de um problema definido.",
+            "Estruturar um pequeno projeto de forma organizada."
+        ],
+        "key_concepts": [
+            "Projeto Prático",
+            "Aplicação de Conceitos Básicos",
+            "Lógica de Programação",
+            "Desenvolvimento de Aplicação de Linha de Comando"
+        ],
+        "content": "<h2>Projeto Final do Curso Básico de Python</h2><p>Parabéns por chegar até aqui! Este é o momento de colocar em prática tudo o que você aprendeu no curso básico de Python. O exercício listado nesta página detalha os requisitos para o seu projeto final: um Mini Sistema de Gerenciamento de Tarefas.</p><p>Este projeto foi desenhado para que você possa utilizar variáveis, tipos de dados, operadores, estruturas condicionais, loops, listas e funções para criar uma aplicação útil e interativa. Siga as instruções do exercício para desenvolver seu projeto. Este é um passo importante para solidificar seu conhecimento e ganhar confiança na programação com Python.</p><p>Boa sorte e divirta-se programando!</p>",
+        "examples": [],
+        "summary": "O projeto final do curso básico consiste em desenvolver um Mini Sistema de Gerenciamento de Tarefas, aplicando todos os conceitos fundamentais de Python aprendidos.",
+        "estimated_time_minutes": 0
+    }
+]

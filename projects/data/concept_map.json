@@ -1,0 +1,57 @@
+{
+    "concepts": {
+        "introducao": {
+            "basic": {
+                "course": "python-basico",
+                "module": "introducao",
+                "topics": ["ambiente-python", "primeiro-programa"],
+                "next_concepts": ["variaveis"]
+            }
+        },
+        "variaveis": {
+            "basic": {
+                "course": "python-basico",
+                "module": "variaveis-tipos",
+                "topics": ["declaracao", "tipos-basicos", "operacoes"],
+                "prerequisites": ["introducao"],
+                "next_concepts": ["estruturas-controle"]
+            },
+            "intermediate": {
+                "course": "python-intermediario",
+                "module": "poo-fundamentos",
+                "topics": ["atributos", "encapsulamento", "properties"]
+            },
+            "advanced": {
+                "course": "python-avancado",
+                "module": "metaclasses",
+                "topics": ["descriptors", "slots", "dynamic attributes"]
+            }
+        },
+        "estruturas-controle": {
+            "basic": {
+                "course": "python-basico",
+                "module": "estruturas-controle",
+                "topics": ["if-else", "loops", "break-continue"],
+                "prerequisites": ["variaveis"],
+                "next_concepts": ["funcoes"]
+            }
+        },
+        "funcoes": {
+            "basic": {
+                "course": "python-basico",
+                "module": "funcoes-basicas",
+                "topics": ["definição", "parâmetros", "retorno"]
+            },
+            "intermediate": {
+                "course": "python-intermediario",
+                "module": "funcoes-avancadas",
+                "topics": ["decoradores", "generators", "closures"]
+            },
+            "advanced": {
+                "course": "python-avancado",
+                "module": "functional-programming",
+                "topics": ["map/reduce", "partial functions", "monads"]
+            }
+        }
+    }
+}

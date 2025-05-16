@@ -1,0 +1,23 @@
+[
+  {
+    "id": "basico",
+    "name": "Python Básico - Fundamentos",
+    "description": "Introdução à linguagem Python, cobrindo sintaxe, variáveis, tipos de dados e estruturas de controle fundamentais.",
+    "lessons_file": "basic/lessons.json",
+    "exercises_file": "basic/exercises.json"
+  },
+  {
+    "id": "intermediario",
+    "name": "Python Intermediário - POO e Módulos",
+    "description": "Aprofundamento em Programação Orientada a Objetos (POO), manipulação de arquivos, módulos e bibliotecas essenciais.",
+    "lessons_file": "intermediate/lessons.json",
+    "exercises_file": "intermediate/exercises.json"
+  },
+  {
+    "id": "avancado",
+    "name": "Python Avançado - Tópicos Especiais",
+    "description": "Exploração de Design Patterns, metaclasses, programação concorrente, e introdução a frameworks web.",
+    "lessons_file": "advanced/lessons.json",
+    "exercises_file": "advanced/exercises.json"
+  }
+]

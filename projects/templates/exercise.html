@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ exercise.title if exercise else 'Exercício não encontrado' }} - {{ course.name if course else 'Curso' }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css">
+<style>
+    .CodeMirror {
+        border: 1px solid #ddd;
+        height: auto;
+        min-height: 200px;
+    }
+    .output-area {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        white-space: pre-wrap; /* Mantém quebras de linha e espaços */
+        font-family: monospace;
+    }
+    .output-area.success { background-color: #d4edda; color: #155724; border-color: #c3e6cb;}
+    .output-area.error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb;}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if course and exercise %}
+<div class="mb-4">
+    <a href="{{ url_for('get_specific_lesson', course_id=course.id, lesson_id_str=exercise.lesson_id) }}" class="btn btn-outline-secondary">← Voltar para a Lição</a>
+</div>
+
+<h1 class="mb-3">{{ exercise.title }}</h1>
+<p class="lead">{{ exercise.description }}</p>
+
+{% if exercise.instructions %}
+<div class="card mb-4">
+    <div class="card-header">Instruções</div>
+    <div class="card-body">
+        <p>{{ exercise.instructions }}</p>
+    </div>
+</div>
+{% endif %}
+
+<div class="mb-3">
+    <label for="codeEditor" class="form-label">Seu Código:</label>
+    <textarea id="codeEditor" name="code">{{ exercise.initial_code if exercise.initial_code else '' }}</textarea>
+</div>
+
+<button id="submitCodeBtn" class="btn btn-primary">Executar Código</button>
+
+<div id="outputArea" class="output-area" style="display: none;">
+    <h4>Saída:</h4>
+    <pre id="outputContent"></pre>
+    <div id="outputDetails" style="margin-top: 10px; font-style: italic;"></div>
+</div>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Não foi possível carregar os detalhes deste exercício.
+    <a href="{{ url_for('index') }}" class="alert-link">Voltar para a página inicial</a>.
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+<script src="{{ url_for('static', filename='js/exercise_handler.js') }}"></script>
+<script>
+    // Passa os IDs para o JavaScript
+    const currentCourseId = "{{ course.id if course else '' }}";
+    const currentExerciseId = "{{ exercise.id if exercise else '' }}";
+    initializeExercisePage(currentCourseId, currentExerciseId);
+</script>
+{% endblock %}

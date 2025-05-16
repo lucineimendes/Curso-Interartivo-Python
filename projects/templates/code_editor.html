@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block title %}Editor de Código - {{ exercise.title if exercise else "Genérico" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+<style>
+    .CodeMirror {
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        height: auto; /* Ou defina uma altura específica, ex: 300px */
+    }
+    #output-area {
+        background-color: #f8f9fa; /* Cor de fundo suave */
+        font-family: monospace;
+        white-space: pre-wrap; /* Para quebrar linhas longas na saída */
+        word-wrap: break-word; /* Para quebrar palavras longas */
+    }
+    .text-success {
+        color: #198754 !important; /* Verde para sucesso */
+    }
+    .text-danger {
+        color: #dc3545 !important; /* Vermelho para erro */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {% if exercise %}
+                        Editor de Código: {{ exercise.title }}
+                    {% else %}
+                        Editor de Código Python
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        {% if exercise %}
+                            <h4>{{ exercise.title }}</h4>
+                            <p>{{ exercise.description | safe }}</p> {# Usar |safe se a descrição puder conter HTML formatado #}
+                        {% else %}
+                            <h4>Editor de Código Genérico</h4>
+                            <p>Escreva seu código Python abaixo e execute-o.</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <textarea id="code-editor">{% if exercise and exercise.initial_code %}{{ exercise.initial_code }}{% elif not exercise %}print("Olá, mundo!"){% endif %}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <button id="run-code" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Executar Código
+                        </button>
+                        {% if exercise %}
+                        <button id="check-exercise" class="btn btn-success" 
+                                data-course-id="{{ course.id if course else '' }}" 
+                                data-exercise-id="{{ exercise.id }}">
+                            <i class="fas fa-check"></i> Verificar Solução
+                        </button>
+                        {% endif %}
+                    </div>
+
+                    <h5>Saída:</h5>
+                    <div id="output-area" class="border rounded p-3" style="min-height: 150px;">
+                        <pre id="output">A saída do seu código aparecerá aqui.</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> {# Para ícones, opcional #}
+
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+        mode: "python",
+        theme: "monokai",
+        lineNumbers: true,
+        indentUnit: 4,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        autofocus: true,
+        extraKeys: {"Ctrl-Space": "autocomplete"} // Exemplo de tecla extra
+    });
+
+    const outputPre = document.getElementById("output"); // Elemento <pre>
+    const outputContainer = document.getElementById("output-area"); // Div que contém o <pre>
+
+    document.getElementById("run-code").addEventListener("click", async () => {
+        const code = editor.getValue();
+        outputPre.textContent = "Executando..."; // Feedback imediato
+        outputContainer.className = "border rounded p-3 bg-light"; // Reset class
+
+        try {
+            const response = await fetch('/api/execute-code', { // Endpoint para execução genérica
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) { // Checa se a resposta HTTP foi bem sucedida (status 2xx)
+                outputPre.textContent = data.output || (data.success ? "Código executado sem erros, mas sem saída." : "Falha na execução.");
+                if (data.success) {
+                    outputContainer.className = "border rounded p-3 bg-light text-success";
+                } else {
+                    // Se data.success é false, mas a requisição foi ok, pode ser um erro pego pelo executor
+                    outputPre.textContent = data.details || data.output || "Erro durante a execução do código.";
+                    outputContainer.className = "border rounded p-3 bg-light text-danger";
+                }
+            } else {
+                // Erros de HTTP (4xx, 5xx)
+                outputPre.textContent = `Erro do servidor: ${response.status}. ${data.error || data.details || "Detalhes não disponíveis."}`;
+                outputContainer.className = "border rounded p-3 bg-light text-danger";
+            }
+        } catch (error) {
+            console.error("Erro no fetch /api/execute-code:", error);
+            outputPre.textContent = "Erro de comunicação ao tentar executar o código.";
+            outputContainer.className = "border rounded p-3 bg-light text-danger";
+        }
+    });
+
+    {% if exercise %}
+    const checkExerciseButton = document.getElementById("check-exercise");
+    if (checkExerciseButton) {
+        checkExerciseButton.addEventListener("click", async () => {
+            const code = editor.getValue();
+            const courseId = checkExerciseButton.dataset.courseId;
+            const exerciseId = checkExerciseButton.dataset.exerciseId;
+
+            outputPre.textContent = "Verificando..."; // Feedback imediato
+            outputContainer.className = "border rounded p-3 bg-light"; // Reset class
+
+            if (!courseId) {
+                outputPre.textContent = "Erro: ID do curso não encontrado. Não é possível verificar o exercício.";
+                outputContainer.className = "border rounded p-3 bg-light text-danger";
+                console.error("Course ID is missing from the button's data attribute.");
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/check-exercise', { // Novo endpoint para verificação
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        course_id: courseId,
+                        exercise_id: exerciseId,
+                        code: code
+                    })
+                });
+                
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.success) {
+                        outputPre.textContent = data.output ? `Saída:\n${data.output}\n\nDetalhes: ${data.details}` : data.details;
+                        outputContainer.className = "border rounded p-3 bg-light text-success";
+                    } else {
+                        outputPre.textContent = data.output ? `Saída:\n${data.output}\n\nDetalhes: ${data.details}` : data.details;
+                        outputContainer.className = "border rounded p-3 bg-light text-danger";
+                    }
+                } else {
+                     outputPre.textContent = `Erro do servidor: ${response.status}. ${data.error || data.details || "Detalhes não disponíveis."}`;
+                     outputContainer.className = "border rounded p-3 bg-light text-danger";
+                }
+            } catch (error) {
+                console.error("Erro no fetch /api/check-exercise:", error);
+                outputPre.textContent = "Erro de comunicação ao tentar verificar o exercício.";
+                outputContainer.className = "border rounded p-3 bg-light text-danger";
+            }
+        });
+    }
+    {% endif %}
+});
+</script>
+{% endblock %}

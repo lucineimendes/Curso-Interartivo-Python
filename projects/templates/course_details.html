@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ course.name | default('Detalhes do Curso') }} - Curso de Python{% endblock %}
+
+{% block extra_js %}
+    <!-- Alpine.js para interatividade leve -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Início</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('get_courses_list') }}">Cursos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ course.name | default('Detalhes do Curso') }}</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ course.name | default('Nome do Curso Indisponível') }}</h1>
+        </div>
+        <div class="card-body">
+            <p class="lead">{{ course.description | default('Descrição não disponível.') }}</p>
+            <p><strong>Nível:</strong> <span class="badge 
+                {% if course.level == 'Iniciante' %}bg-success
+                {% elif course.level == 'Intermediário' %}bg-warning text-dark
+                {% elif course.level == 'Avançado' %}bg-danger
+                {% else %}bg-secondary
+                {% endif %}
+                ">{{ course.level | default('Não definido') }}</span></p>
+            <p><strong>Duração Estimada:</strong> {{ course.duration | default('Não especificada') }}</p>
+            
+            <hr>
+
+            <div x-data="{ lessons: [], isLoading: true, error: '' }" 
+                 x-init="fetch('{{ url_for('get_lessons_for_course', course_id=course.id) }}')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Falha ao carregar lições: ' + response.statusText);
+                        return response.json();
+                    })
+                    .then(data => { lessons = data; isLoading = false; })
+                    .catch(err => { error = err.message; isLoading = false; console.error(err); })">
+                
+                <h3 class="mt-4 mb-3">Lições do Curso</h3>
+                <div x-show="isLoading" class="text-center"><p>Carregando lições...</p><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>
+                <div x-show="error" x-text="error" class="alert alert-danger"></div>
+
+                <ul class="list-group" x-show="!isLoading && !error && lessons.length > 0">
+                    <template x-for="lesson in lessons" :key="lesson.id">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a :href="'{{ url_for('get_specific_lesson', course_id=course.id, lesson_id_str='LESSON_ID_PLACEHOLDER') }}'.replace('LESSON_ID_PLACEHOLDER', lesson.id)" x-text="lesson.title || 'Lição sem título'"></a>
+                            <span class="badge bg-primary rounded-pill" x-text="lesson.exercises_count ? lesson.exercises_count + ' exercícios' : ''"></span>
+                        </li>
+                    </template>
+                </ul>
+                <p x-show="!isLoading && !error && lessons.length === 0" class="alert alert-info">Nenhuma lição disponível para este curso no momento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

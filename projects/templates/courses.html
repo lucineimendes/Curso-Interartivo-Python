@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Cursos - Curso de Python{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Nossos Cursos de Python</h1>
+
+    {% if courses %}
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <p class="card-text flex-grow-1">{{ course.short_description }}</p>
+                        <p><span class="badge 
+                            {% if course.level == 'Iniciante' %}bg-success
+                            {% elif course.level == 'Intermediário' %}bg-warning text-dark
+                            {% elif course.level == 'Avançado' %}bg-danger
+                            {% else %}bg-secondary
+                            {% endif %}
+                            ">{{ course.level }}</span></p>
+                        <p class="card-text"><small class="text-muted">Duração: {{ course.duration }}</small></p>
+                        <a href="{{ url_for('get_course_details', course_id=course.id) }}" class="btn btn-primary mt-auto">Ver Detalhes do Curso</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Nenhum curso disponível no momento. Por favor, volte mais tarde!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

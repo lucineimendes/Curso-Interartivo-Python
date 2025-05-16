@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Curso{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="mb-4">
+        <a href="{{ url_for('course_list') }}" class="btn btn-outline-secondary">← Voltar para Cursos</a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ course.name }}</h2>
+            <span class="badge bg-primary mb-2">{{ course.level }}</span>
+            <p class="card-text">{{ course.description }}</p>
+
+            {% if course.duration %}
+            <p><strong>Duração estimada:</strong> {{ course.duration }}</p>
+            {% endif %}
+
+            {% if course.prerequisites %}
+            <p><strong>Pré-requisitos:</strong> {{ course.prerequisites }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Objetivos do Curso</h3>
+            <ul class="list-group list-group-flush">
+                {% for objective in course.objectives %}
+                    <li class="list-group-item">{{ objective }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <h3>Lições:</h3>
+    {% if lessons %}
+        <ul class="list-unstyled">
+            {% for lesson in lessons %}
+                <li class="mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ url_for('lesson_detail', lesson_id=lesson.id) }}" class="text-decoration-none">{{ lesson.title }}</a>
+                            </h5>
+                           {% set exercises_for_lesson = exercise_manager.get_exercises_by_lesson(lesson.id, course.id) %}
+                            {% if exercises %}
+                                <ul class="list-unstyled">
+                                    {% for exercise in exercises %}
+                                        <li>
+                                            <a href="{{ url_for('exercise_detail', exercise_id=exercise.id) }}" class="text-decoration-none">{{ exercise.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma lição encontrada para este curso.</p>
+    {% endif %}
+</div>
+{% endblock %}

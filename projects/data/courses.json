@@ -1,0 +1,176 @@
+[
+    {
+        "id": "python-basico",
+        "name": "Python Básico",
+        "short_description": "Aprenda os fundamentos da programação com Python, incluindo sintaxe básica, tipos de dados e estruturas de controle.",
+        "description": "Este nível inicial tem como objetivo fornecer uma base sólida em programação utilizando a linguagem Python. Os alunos aprenderão os conceitos fundamentais da programação, a sintaxe básica do Python, os tipos de dados, estruturas de controle de fluxo e funções. Ao final deste nível, os alunos estarão aptos a escrever programas simples em Python e compreender os princípios básicos da lógica de programação.",
+        "level": "Iniciante",
+        "duration": "20 horas",
+        "prerequisites": "Nenhum conhecimento prévio necessário",
+        "objectives": [
+            "Compreender os princípios fundamentais da programação e lógica computacional.",
+            "Instalar e configurar o ambiente de desenvolvimento Python.",
+            "Escrever e executar programas simples em Python utilizando um IDE.",
+            "Utilizar os tipos de dados básicos do Python (inteiros, floats, strings, booleanos).",
+            "Empregar operadores aritméticos, lógicos e de comparação em Python.",
+            "Implementar estruturas de controle de fluxo (condicionais e loops) em programas Python.",
+            "Trabalhar com tipos de dados compostos como listas, tuplas, dicionários e conjuntos.",
+            "Definir e utilizar funções em Python, compreendendo o conceito de escopo de variáveis.",
+            "Aplicar os conceitos aprendidos em pequenos projetos práticos, como calculadoras simples, jogos de adivinhação e manipulação de listas."
+        ],
+        "learning_path": {
+            "stage1": {
+                "name": "Fundamentos",
+                "modules": [
+                    {
+                        "id": "ambiente-desenvolvimento",
+                        "title": "Ambiente de Desenvolvimento",
+                        "concepts": [
+                            "instalação",
+                            "IDE",
+                            "primeiro programa"
+                        ],
+                        "revisited_in": [
+                            "python-intermediario.ambientes-virtuais"
+                        ]
+                    },
+                    {
+                        "id": "variaveis-tipos",
+                        "title": "Variáveis e Tipos de Dados",
+                        "concepts": [
+                            "números",
+                            "strings",
+                            "booleanos"
+                        ],
+                        "revisited_in": [
+                            "python-intermediario.poo",
+                            "python-avancado.metaclasses"
+                        ]
+                    }
+                ]
+            },
+            "stage2": {
+                "name": "Estruturas Básicas",
+                "modules": [
+                    {
+                        "id": "estruturas-controle",
+                        "title": "Estruturas de Controle",
+                        "concepts": [
+                            "if/else",
+                            "loops básicos"
+                        ],
+                        "revisited_in": [
+                            "python-intermediario.funcoes-avancadas",
+                            "python-avancado.generators"
+                        ]
+                    },
+                    {
+                        "id": "funcoes-basicas",
+                        "title": "Funções Básicas",
+                        "concepts": [
+                            "definição",
+                            "parâmetros",
+                            "retorno"
+                        ],
+                        "revisited_in": [
+                            "python-intermediario.decoradores",
+                            "python-avancado.functional"
+                        ]
+                    }
+                ]
+            }
+        },
+        "projects": {
+            "mini": [
+                {
+                    "id": "calculadora",
+                    "title": "Calculadora Simples",
+                    "concepts": [
+                        "variaveis-tipos",
+                        "funcoes-basicas"
+                    ],
+                    "difficulty": "🐍"
+                }
+            ],
+            "final": {
+                "id": "jogo-adivinhacao",
+                "title": "Jogo de Adivinhação",
+                "concepts": [
+                    "estruturas-controle",
+                    "funcoes-basicas"
+                ],
+                "difficulty": "🐍🐍"
+            }
+        },
+        "lessons_file": "basic/lessons.json",
+        "exercises_file": "basic/exercises.json"
+    },
+    {
+        "id": "python-intermediario",
+        "name": "Python Intermediário",
+        "short_description": "Aprofunde seus conhecimentos em Python com POO, manipulação de arquivos e bibliotecas essenciais.",
+        "description": "Neste nível, os alunos aprofundarão seus conhecimentos em Python, explorando conceitos avançados da linguagem e bibliotecas essenciais para diversas aplicações. Serão introduzidos os pilares da Programação Orientada a Objetos (POO) em Python, manipulação de arquivos e dados em diferentes formatos, expressões regulares, requisições web e introdução a bancos de dados. O foco estará na aplicação prática do Python para resolver problemas mais complexos e preparar os alunos para o desenvolvimento de projetos maiores.",
+        "level": "Intermediário",
+        "duration": "40 horas",
+        "prerequisites": "Conhecimentos básicos de Python",
+        "objectives": [
+            "Aplicar os princípios da Programação Orientada a Objetos (POO) em Python.",
+            "Criar e organizar módulos e pacotes Python para estruturar projetos maiores.",
+            "Realizar operações avançadas com arquivos e pastas, incluindo manipulação de diferentes formatos de arquivos (CSV, JSON).",
+            "Utilizar expressões regulares para busca e manipulação avançada de strings.",
+            "Realizar requisições web e interagir com APIs REST utilizando bibliotecas Python.",
+            "Conectar e interagir com bancos de dados utilizando Python.",
+            "Implementar testes unitários para garantir a qualidade e robustez do código.",
+            "Utilizar ambientes virtuais para gerenciar dependências de projetos Python."
+        ],
+        "learning_path": {
+            "stage1": {
+                "name": "POO e Estruturas Avançadas",
+                "modules": [
+                    {
+                        "id": "poo-fundamentos",
+                        "title": "POO Fundamentos",
+                        "concepts": [
+                            "classes",
+                            "objetos",
+                            "herança"
+                        ],
+                        "builds_on": [
+                            "python-basico.variaveis-tipos"
+                        ],
+                        "revisited_in": [
+                            "python-avancado.design-patterns"
+                        ]
+                    }
+                ]
+            }
+        },
+        "lessons_file": "intermediate/lessons.json",
+        "exercises_file": "intermediate/exercises.json"
+    },
+    {
+        "id": "python-avancado",
+        "name": "Python Avançado",
+        "short_description": "Domine tópicos avançados como Design Patterns, metaclasses, programação concorrente e frameworks web.",
+        "description": "O nível avançado do curso de Python visa aprofundar o conhecimento dos alunos em tópicos especializados e prepará-los para áreas de atuação mais específicas dentro do ecossistema Python. Serão abordados temas como Design Patterns, metaclasses, decoradores, geradores, programação concorrente e paralela, desenvolvimento web com frameworks, ciência de dados, e outras áreas de especialização como automação, segurança, desenvolvimento de jogos ou computação científica. Os alunos irão desenvolver projetos complexos e abrangentes, aplicando o conhecimento adquirido nos níveis anteriores e demonstrando proficiência em Python para resolver problemas de alta complexidade",
+        "level": "Avançado",
+        "duration": "80 horas",
+        "prerequisites": "Conhecimentos intermediários de Python",
+        "objectives": [
+            "Compreender e aplicar Design Patterns comuns em Python.",
+            "Utilizar metaclasses, decorators e geradores para otimizar o código.",
+            "Implantar programação concorrente e paralela em Python.",
+            "Aplicar os princípios da Programação Orientada a Objetos (POO) em Python.",
+            "Criar e organizar módulos e pacotes Python para estruturar projetos maiores.",
+            "Realizar operações avançadas com arquivos e pastas, incluindo manipulação de diferentes formatos de arquivos (CSV, JSON).",
+            "Utilizar expressões regulares para busca e manipulação avançada de strings.",
+            "Realizar requisições web e interagir com APIs REST utilizando bibliotecas Python.",
+            "Conectar e interagir com bancos de dados utilizando Python.",
+            "Implementar testes unitários para garantir a qualidade e robustez do código.",
+            "Utilizar ambientes virtuais para gerenciar dependências de projetos Python.",
+            "Desenvolver projetos práticos avançados e projetos finais de curso que demonstrem a integração e aplicação de conhecimentos avançados de Python."
+        ],
+        "lessons_file": "advanced/lessons.json",
+        "exercises_file": "advanced/exercises.json"
+    }
+]
