@@ -28,7 +28,8 @@
 {% block content %}
 {% if course and exercise %}
 <div class="mb-4">
-    <a href="{{ url_for('get_specific_lesson', course_id=course.id, lesson_id_str=exercise.lesson_id) }}" class="btn btn-outline-secondary">← Voltar para a Lição</a>
+    {# A rota para a página de detalhes da lição é 'lesson_detail_page' #}
+    <a href="{{ url_for('lesson_detail_page', course_id=course.id, lesson_id_str=exercise.lesson_id) }}" class="btn btn-outline-secondary">← Voltar para a Lição</a>
 </div>
 
 <h1 class="mb-3">{{ exercise.title }}</h1>
@@ -59,7 +60,8 @@
 {% else %}
 <div class="alert alert-warning" role="alert">
     Não foi possível carregar os detalhes deste exercício.
-    <a href="{{ url_for('index') }}" class="alert-link">Voltar para a página inicial</a>.
+    {# A rota para a página inicial é 'home' #}
+    <a href="{{ url_for('home') }}" class="alert-link">Voltar para a página inicial</a>.
 </div>
 {% endif %}
 {% endblock %}

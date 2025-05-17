@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [ano] [nome completo do proprietário dos direitos autorais]
+Copyright (c) 2023 Lucineia Mendes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -3,9 +3,10 @@ import sys
 from pathlib import Path
 import logging
 
-# Adiciona o diretório raiz do projeto ao sys.path
-# Isso garante que o pacote 'projects' possa ser importado corretamente.
-PROJECT_ROOT = Path(__file__).resolve().parent
+# O arquivo run.py está DENTRO da pasta 'projects'.
+# Para importar 'projects.app', precisamos adicionar a pasta PAI de 'projects' ao sys.path.
+# Pasta pai de 'projects' é 'Curso-Interartivo-Python'
+PROJECT_ROOT = Path(__file__).resolve().parent.parent # Sobe um nível para a raiz do projeto
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 

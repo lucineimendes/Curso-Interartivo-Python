@@ -4,7 +4,7 @@
         "name": "Python Básico",
         "short_description": "Aprenda os fundamentos da programação com Python, incluindo sintaxe básica, tipos de dados e estruturas de controle.",
         "description": "Este nível inicial tem como objetivo fornecer uma base sólida em programação utilizando a linguagem Python. Os alunos aprenderão os conceitos fundamentais da programação, a sintaxe básica do Python, os tipos de dados, estruturas de controle de fluxo e funções. Ao final deste nível, os alunos estarão aptos a escrever programas simples em Python e compreender os princípios básicos da lógica de programação.",
-        "level": "Iniciante",
+        "level": "Básico",
         "duration": "20 horas",
         "prerequisites": "Nenhum conhecimento prévio necessário",
         "objectives": [

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <div class="mb-4">
-        <a href="{{ url_for('course_list') }}" class="btn btn-outline-secondary">← Voltar para Cursos</a>
+        <a href="{{ url_for('list_courses_page') }}" class="btn btn-outline-secondary">← Voltar para Cursos</a>
     </div>
 
     <div class="card mb-4">
@@ -43,18 +43,23 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="{{ url_for('lesson_detail', lesson_id=lesson.id) }}" class="text-decoration-none">{{ lesson.title }}</a>
+                                <a href="{{ url_for('lesson_detail_page', course_id=course.id, lesson_id_str=lesson.id) }}" class="text-decoration-none">{{ lesson.title }}</a>
                             </h5>
-                           {% set exercises_for_lesson = exercise_manager.get_exercises_by_lesson(lesson.id, course.id) %}
-                            {% if exercises %}
+                            {# Nota: A variável 'exercises' aqui parece ser a lista de todos os exercícios do curso,
+                               não filtrada por lição. A lógica para obter exercícios específicos da lição
+                               está em app.py para a rota lesson_detail_page.
+                               Se você quiser listar exercícios aqui, precisaria de uma lógica diferente
+                               ou passar os exercícios já filtrados para este template.
+                               Por enquanto, vamos assumir que você quer linkar para a página do editor do exercício.
+                               A rota para o editor é 'exercise_code_editor_page'.
+                            #}
+                            {# Exemplo de como listar exercícios se 'lesson.exercises' fosse uma lista de IDs de exercícios associados à lição:
                                 <ul class="list-unstyled">
-                                    {% for exercise in exercises %}
-                                        <li>
-                                            <a href="{{ url_for('exercise_detail', exercise_id=exercise.id) }}" class="text-decoration-none">{{ exercise.title }}</a>
-                                        </li>
+                                    {% for ex_id in lesson.exercises %}
+                                        <a href="{{ url_for('exercise_code_editor_page', course_id=course.id, exercise_id_str=ex_id) }}">Exercício {{ ex_id }}</a>
                                     {% endfor %}
                                 </ul>
-                            {% endif %}
+                            #}
                         </div>
                     </div>
                 </li>
