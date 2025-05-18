@@ -83,7 +83,7 @@ A documentação detalhada da API, gerada a partir das docstrings do código, po
 
 Este documento detalha a estrutura e o funcionamento do projeto de sistema de curso interativo desenvolvido em Python, utilizando o framework Flask. O projeto foi concebido com foco em modularidade, separação de responsabilidades e uma estratégia robusta de testes automáticos.
 **Visão Geral e Estrutura Principal:**
-[![Estrutura do Projeto](\images\Estrutura_projeto.png)](Estrutura_projeto.png)
+[![Estrutura do Projeto](\images\Estrutura_projeto.png)](\images\Estrutura_projeto.png)
 *(Clique na imagem para ampliar)*
 
 O projeto é um sistema de curso interativo que permite a apresentação de conteúdos de cursos e lições, e a execução e verificação de código Python submetido pelo usuário para exercícios práticos.
