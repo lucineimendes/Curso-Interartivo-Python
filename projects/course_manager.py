@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Módulo para gerenciamento de dados de cursos.
+
+Este módulo define a classe `CourseManager`, responsável por carregar,
+salvar, e manipular informações sobre os cursos disponíveis na aplicação.
+Os dados dos cursos são armazenados em formato JSON.
+"""
 import json
 import logging
 from pathlib import Path
@@ -8,12 +16,26 @@ import uuid # Para gerar IDs únicos para novos cursos
 logger = logging.getLogger(__name__)
 
 class CourseManager:
+    """
+    Gerencia o carregamento, salvamento e manipulação de dados de cursos.
+
+    Os cursos são armazenados em um arquivo JSON principal (`courses.json`)
+    localizado no diretório de dados. Cada curso pode ter arquivos associados
+    para lições e exercícios, cujos caminhos são referenciados nos dados do curso.
+
+    Attributes:
+        base_dir (Path): O diretório base onde este script está localizado (pasta 'projects').
+        data_dir (Path): O caminho completo para o diretório 'data' dentro de 'projects'.
+        courses_file (Path): O caminho completo para o arquivo 'courses.json'.
+        courses (list): Uma lista de dicionários, onde cada dicionário representa um curso.
+    """
     # data_dir_path_str é relativo ao diretório do script (projects/)
     def __init__(self, data_dir_path_str="data"):
         """
-        Inicializa o CourseManager.
+        Inicializa o CourseManager, configurando os caminhos e carregando os cursos.
+
         Args:
-            data_dir_path_str (str): O nome do diretório de dados, relativo ao diretório deste script.
+            data_dir_path_str (str): O nome do subdiretório de dados (relativo à pasta 'projects').
                                      Padrão é "data".
         """
         # base_dir é a pasta 'projects'
@@ -27,7 +49,12 @@ class CourseManager:
         logger.info(f"CourseManager inicializado. Dados carregados de: {self.courses_file}")
 
     def _ensure_data_files_exist(self):
-        """Garante que o diretório de dados e o arquivo principal de cursos existam."""
+        """
+        Garante que o diretório de dados e o arquivo JSON principal de cursos existam.
+
+        Cria o diretório de dados e o arquivo `courses.json` (com uma lista vazia)
+        se eles não existirem.
+        """
         try:
             if not self.data_dir.exists():
                 self.data_dir.mkdir(parents=True, exist_ok=True)
@@ -42,7 +69,14 @@ class CourseManager:
             # Considerar levantar uma exceção aqui se a criação falhar e for crítica.
 
     def _load_courses(self):
-        """Carrega os cursos do arquivo JSON principal."""
+        """
+        Carrega os dados dos cursos a partir do arquivo JSON principal (`courses.json`).
+
+        Returns:
+            list: Uma lista de dicionários representando os cursos. Retorna uma lista
+                  vazia se o arquivo não existir, estiver mal formatado, ou ocorrer
+                  um erro de I/O.
+        """
         if not self.courses_file.exists():
             logger.warning(f"Arquivo de cursos '{self.courses_file}' não encontrado. Retornando lista vazia.")
             return []
@@ -62,7 +96,11 @@ class CourseManager:
             return []
 
     def _save_courses(self):
-        """Salva a lista atual de cursos no arquivo JSON principal."""
+        """
+        Salva a lista atual de cursos (atributo `self.courses`) no arquivo JSON principal.
+
+        Os dados são serializados para JSON com indentação para melhor legibilidade.
+        """
         try:
             with open(self.courses_file, 'w', encoding='utf-8') as f:
                 json.dump(self.courses, f, indent=4, ensure_ascii=False)
@@ -74,11 +112,23 @@ class CourseManager:
 
 
     def get_courses(self):
-        """Retorna todos os cursos carregados."""
+        """
+        Retorna uma lista de todos os cursos carregados.
+
+        Returns:
+            list: A lista de dicionários de cursos.
+        """
         return self.courses
 
     def get_course_by_id(self, course_id):
-        """Retorna um curso específico pelo seu ID."""
+        """
+        Retorna um curso específico pelo seu ID.
+
+        Args:
+            course_id (str): O ID do curso a ser procurado.
+        Returns:
+            dict | None: O dicionário do curso se encontrado, caso contrário None.
+        """
         if not course_id:
             logger.warning("get_course_by_id: Tentativa de buscar curso com ID nulo ou vazio.")
             return None
@@ -98,9 +148,20 @@ class CourseManager:
 
     def add_course(self, new_course_data):
         """
-        Adiciona um novo curso.
-        Gera um ID se não fornecido.
+        Adiciona um novo curso à lista de cursos e salva as alterações.
+
+        Se um ID não for fornecido em `new_course_data`, um UUID é gerado.
         Cria automaticamente o subdiretório do curso e arquivos JSON vazios para lições e exercícios.
+        Os caminhos para `lessons_file` e `exercises_file` são padronizados se não fornecidos.
+
+        Args:
+            new_course_data (dict): Um dicionário contendo os dados do novo curso.
+                                    Campos esperados incluem 'name', 'level', etc.
+                                    'id', 'lessons_file', 'exercises_file' podem ser
+                                    gerados/padronizados.
+        Returns:
+            dict | None: O dicionário do curso adicionado (com ID e caminhos de arquivo
+                         atualizados) se bem-sucedido, caso contrário None.
         """
         if not isinstance(new_course_data, dict):
             logger.error(f"Dados inválidos para adicionar curso (não é um dicionário): {new_course_data}")
@@ -142,7 +203,19 @@ class CourseManager:
         return new_course_data
 
     def update_course(self, course_id, updated_data):
-        """Atualiza um curso existente. O ID do curso não pode ser alterado."""
+        """
+        Atualiza os dados de um curso existente e salva as alterações.
+
+        O ID do curso não pode ser alterado através deste método. Se `updated_data`
+        contiver uma chave 'id' diferente do `course_id` fornecido, ela será ignorada.
+
+        Args:
+            course_id (str): O ID do curso a ser atualizado.
+            updated_data (dict): Um dicionário contendo os campos a serem atualizados.
+        Returns:
+            dict | None: O dicionário do curso atualizado se encontrado e atualizado,
+                         caso contrário None.
+        """
         if not course_id or not isinstance(updated_data, dict):
             logger.error(f"ID ou dados inválidos para atualizar curso. ID: {course_id}, Dados: {updated_data}")
             return None
@@ -182,7 +255,17 @@ class CourseManager:
         return None
 
     def delete_course(self, course_id):
-        """Deleta um curso pelo seu ID."""
+        """
+        Deleta um curso da lista de cursos pelo seu ID e salva as alterações.
+
+        Nota: Esta função atualmente não deleta o subdiretório de dados associado
+        ao curso (contendo lições e exercícios).
+
+        Args:
+            course_id (str): O ID do curso a ser deletado.
+        Returns:
+            bool: True se o curso foi deletado com sucesso, False caso contrário.
+        """
         if not course_id:
             logger.warning("delete_course: Tentativa de deletar curso com ID nulo ou vazio.")
             return False

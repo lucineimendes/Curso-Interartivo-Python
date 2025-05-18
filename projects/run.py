@@ -1,4 +1,16 @@
-# c:\Users\lucin\OneDrive\Dev_Python\Projetos Python\Curso-Interartivo-Python\run.py
+# c:\Users\lucin\OneDrive\Dev_Python\Projetos Python\Curso-Interartivo-Python\projects\run.py
+"""
+Script de inicialização para a aplicação Curso Interativo Python.
+
+Este script é responsável por configurar o ambiente de execução,
+adicionando o diretório raiz do projeto ao `sys.path` para permitir
+a importação correta do pacote `projects`. Em seguida, importa a
+instância da aplicação Flask (`app`) do módulo `projects.app` e
+inicia o servidor de desenvolvimento Flask.
+
+Para executar a aplicação, execute este script diretamente:
+    python projects/run.py
+"""
 import sys
 from pathlib import Path
 import logging

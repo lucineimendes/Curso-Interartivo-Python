@@ -40,29 +40,70 @@ def execute_code(code_string, execution_globals=None, input_prompts_and_values=N
     if execution_globals is None:
         execution_globals = {}
     execution_globals['__name__'] = 'solution_module' # Tenta fornecer um __name__ mais razoável para Flask
-
-    # Tenta importar módulos comuns e adicioná-los ao escopo de execução
-    # para que os solution_code que os utilizam possam encontrá-los.
-    common_imports = {
+    
+    # Módulos/Objetos comuns a serem disponibilizados no escopo de execução.
+    # O formato é "caminho.do.modulo_ou_objeto_a_importar": "nome_no_escopo_de_execucao"
+    # Se o nome_no_escopo for o mesmo que o último componente do caminho, pode ser omitido implicitamente.
+    common_modules_to_import = {
         "numpy": "np",
         "pandas": "pd",
         "matplotlib.pyplot": "plt",
-        "flask": "Flask", # Apenas o objeto Flask, não a instância app
+        "flask.Flask": "Flask", # Importa a classe Flask
+        "flask.request": "request",
+        "flask.render_template": "render_template",
+        "flask.jsonify": "jsonify",
+        "flask.abort": "abort",
         "sqlalchemy": "sqlalchemy", # O módulo em si
-        "django.db.models": "models", # Exemplo para models do Django
-        "sklearn.linear_model": "LinearRegression", # Exemplo
-        "sklearn.tree": "DecisionTreeClassifier" # Exemplo
+        "sqlalchemy.orm": "orm",
+        "sqlalchemy.ext.declarative.declarative_base": "declarative_base_sa", # Evitar conflito com Base do abc
+        "sqlalchemy.Column": "Column",
+        "sqlalchemy.Integer": "Integer",
+        "sqlalchemy.String": "String",
+        "sqlalchemy.Text": "Text", # Adicionando Text
+        "sqlalchemy.Float": "Float", # Adicionando Float
+        "sqlalchemy.Boolean": "Boolean", # Adicionando Boolean
+        "sklearn.linear_model.LinearRegression": "LinearRegression",
+        "sklearn.neighbors.KNeighborsClassifier": "KNeighborsClassifier",
+        "django.db.models": "models_django", # Renomeado para evitar conflito se 'models' for usado genericamente
+        "django.http.HttpResponse": "HttpResponse",
+        "django.urls.path": "path_django",
+        "django.contrib.admin": "admin_django",
+        "requests": "requests",
+        "json": "json",
+        "math": "math",
+        "random": "random",
+        "re": "re",
+        "datetime": "datetime",
+        "collections": "collections",
+        "collections.deque": "deque", # Importar deque especificamente
+        "os": "os",
+        "sys": "sys",
+        "abc.ABC": "ABC",
+        "abc.abstractmethod": "abstractmethod",
+        "functools": "functools",
+        "threading": "threading",
+        "multiprocessing": "multiprocessing",
+        "asyncio": "asyncio",
+        "tkinter": "tk",
+        "io": "io" # Adicionando io
     }
 
-    for module_name, alias in common_imports.items():
+    for import_path, name_in_scope in common_modules_to_import.items():
         try:
-            module = __import__(module_name, fromlist=[alias if '.' not in module_name else module_name.split('.')[-1]])
-            if alias == module_name.split('.')[-1] or alias == module_name: # Se o alias é o nome do módulo ou submodulo
-                execution_globals[alias] = module
-            else: # Se é um alias customizado como 'np' para 'numpy'
-                execution_globals[alias] = module
-        except ImportError:
-            logger.debug(f"Módulo {module_name} não encontrado para adicionar ao escopo de exec().")
+            module_parts = import_path.split('.')
+            obj_to_import = module_parts[-1]
+            module_str = '.'.join(module_parts[:-1]) if len(module_parts) > 1 else module_parts[0]
+
+            if len(module_parts) == 1: # Ex: "numpy"
+                imported_module = __import__(module_str)
+                execution_globals[name_in_scope] = imported_module
+            else: # Ex: "flask.Flask"
+                module = __import__(module_str, fromlist=[obj_to_import])
+                execution_globals[name_in_scope] = getattr(module, obj_to_import)
+        except ImportError as e:
+            logger.debug(f"Módulo/Objeto '{import_path}' como '{name_in_scope}' não encontrado para importação: {e}")
+        except Exception as e:
+            logger.error(f"Erro inesperado ao tentar importar '{import_path}' como '{name_in_scope}': {e}")
 
     if 'ast' not in execution_globals:
         import ast
@@ -162,6 +203,9 @@ def test_single_exercise_logic(exercise_data):
 
     mock_inputs_for_solution = None
     # Adapte esta lógica se você tiver inputs específicos por exercício
+    # Idealmente, esta informação viria do JSON do exercício, ex:
+    # "expected_inputs": [ {"prompt_contains": "Adivinhe o número:", "value": "7"} ]
+    # E a função mock_input_function seria ajustada para usar isso.
     if course_id == "python-basico" and exercise_id == "ex-estruturas-3":
          mock_inputs_for_solution = [("Adivinhe o número: ", "7")] 
 
